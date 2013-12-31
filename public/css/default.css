@@ -1,0 +1,60 @@
+html,
+body
+{
+  min-height: 100%;
+}
+
+body
+{
+  color: #666;
+  font-family: Calibri, sans-serif;
+  padding-bottom: 100px;
+  /*background: url('/img/pattern.gif') repeat fixed;*/
+}
+
+body *
+{
+  word-wrap:break-word;
+}
+
+.navbar-wrapper
+{
+  font-size: 16px;
+  padding: 0;
+}
+
+.navbar-collapse
+{
+  max-height: inherit;
+}
+
+.navbar-brand
+{
+  line-height: 0;
+}
+
+.row
+{
+  margin-right: 0;
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  .navbar-wrapper
+  {
+  margin-top:20px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container
+  {
+    padding: 0;
+  }
+}
+
+.article a
+{
+  text-decoration: none;
+  color: #666;
+}
