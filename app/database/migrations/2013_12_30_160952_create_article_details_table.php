@@ -23,7 +23,6 @@ class CreateArticleDetailsTable extends Migration
 			$table->text('desc', 10000);
 			$table->string('lang', 5)->default('kg');
 			$table->timestamps();
-			$table->timestamp('ended_at');
 
 			$table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade')->onUpdate('cascade');
 		});

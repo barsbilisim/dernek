@@ -4,8 +4,10 @@ class AdminController extends BaseController
 {
 	public function __construct()
 	{
+		$this->beforeFilter('csrf', ['on' => 'post']);
+		$this->beforeFilter('auth', ['on' => 'post', 'except' => ['Login', 'pLogin']]);
+
 		$this->layout = 'layouts.simple';
-		$this->beforeFilter('auth|csrf', ['on' => 'post']);
 	}
 	
 	public function Login()

@@ -1,4 +1,4 @@
-@section('main')
+@section('content')
 
 <p>{{ link_to_route('categories.index', 'Return to all categories') }}</p>
 

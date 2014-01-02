@@ -1,5 +1,5 @@
 @extends('layouts.default')
-@section('main')
+@section('content')
 <div class="container">
 
 index

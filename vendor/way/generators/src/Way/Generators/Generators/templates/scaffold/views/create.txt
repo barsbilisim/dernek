@@ -1,24 +1,18 @@
-@extends('layouts.scaffold')
+@section('content')
+@include('partial.errors')
 
-@section('main')
-
-<h1>Create {{Model}}</h1>
-
-{{ Form::open(array('route' => '{{models}}.store')) }}
-	<ul>
-{{formElements}}
-		<li>
-			{{ Form::submit('Submit', array('class' => 'btn btn-info')) }}
-		</li>
-	</ul>
+{{ Form::open(['route' => '{{models}}.store', 'role' => 'form', 'class' => 'form-horizontal']) }}
+<div class="form-group">
+	<div class="col-sm-12">
+		{{formElements}}
+	</div>
+</div>
+<div class="form-group">
+	<div class="col-sm-12">
+		<button type="submit" class="btn btn-primary">create</button> | 
+		<a href="{{ route('{{models}}.index') }}" class="btn btn-warning">cancel</a>
+	</div>
+</div>
 {{ Form::close() }}
 
-@if ($errors->any())
-	<ul>
-		{{ implode('', $errors->all('<li class="error">:message</li>')) }}
-	</ul>
-@endif
-
 @stop
-
-

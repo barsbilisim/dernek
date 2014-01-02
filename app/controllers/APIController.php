@@ -2,26 +2,51 @@
 
 class APIController extends BaseController
 {
-
-	protected $article;
-
-	public function __construct(Article $article)
+	public function __construct()
 	{
-		$this->beforeFilter('auth|csrf', ['on' => 'post', 'on' => 'put']);
-
-		$this->article  = $article;
-	}
-
-	public function getArticleStatus($id)
-	{
-		return $this->article->findOrFail($id)->status;
+		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
+		$this->beforeFilter('auth', ['on' => ['post', 'put', 'delete']]);
 	}
 
 	public function putArticleStatus($id)
 	{
-		$article = $this->article->findOrFail($id);
+		$article = Article::findOrFail($id);
 		$article->status = ($article->status == 1)?0:1;
 		$article->save();
 		return Response::json($article->status);
+
+
+		return Response::json('error');
+	}
+
+	public function putImageDesc($id)
+	{
+		$image = Image::findOrFail($id);
+		$image[Config::get('app.locale')] = Input::json('desc');
+		
+		if($image->save())
+		return Response::json('success');
+		
+		return Response::json('error');
+	}
+
+	public function putImageStatus($id)
+	{
+		$image = Image::findOrFail($id);
+		$image->status = ($image->status == 1)?0:1;
+		$image->save();
+		return Response::json($image->status);
+		
+		return Response::json('error');
+	}
+
+	public function putImageMain($id)
+	{
+		$image = Image::findOrFail($id);
+		$image->main = ($image->main == 1)?0:1;
+		$image->save();
+		return Response::json($image->main);
+		
+		return Response::json('error');
 	}
 }

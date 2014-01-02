@@ -1,35 +1,33 @@
-@section('main')
+@section('content')
 
 @if ($articles->count())
 <div class="article">
 	@foreach($articles as $key => $art)
+	@if($img = $art->link())@endif
+	<hr class="featurette-divider" @if($key == 0) style="display:none" @endif>
+	<div class="row featurette">
 		@if($key % 2)
-		<hr class="featurette-divider">
-		<div class="row featurette">
-			<div class="col-md-5" style="margin-right: -5px; text-align: center">
-				<a href="http://placehold.it/900x600" rel="prettyPhoto[front-page]" title="aa">
-					<img class="img-responsive visible-md visible-lg img-thumbnail" src="http://placehold.it/500x300">
-				</a>
-			</div>
-			<div class="col-md-7">
-				<h2 class="featurette-heading"><a href="/categories/{{{ $cat }}}/articles/{{{ $art->id }}}" class="news-box-content">{{{ $art->title }}}</a></h2>
-				<p>@if($art->desc == ""){{ $art->content }} @else {{ $art->desc }} @endif</p>
-			</div>
+		<div class="col-md-5" style="margin-right: -5px; text-align: center">
+			<a href="{{{ $img->big }}}" rel="prettyPhoto[front-page]" title="{{{ $img->desc }}}">
+				<img class="img-responsive visible-md visible-lg img-thumbnail" src="{{{ $img->thumb }}}">
+			</a>
+		</div>
+		<div class="col-md-7">
+			<h2 class="featurette-heading"><a href="/categories/{{{ $cat }}}/articles/{{{ $art->id }}}" class="news-box-content">{{{ $art->title }}}</a></h2>
+			<p class="lead">@if($art->desc == ""){{ $art->content }} @else {{ $art->desc }} @endif</p>
 		</div>
 		@else
-		<hr class="featurette-divider" @if($key == 0) style="visibility:hidden; margin: 30px 0" @endif>
-		<div class="row featurette">
-			<div class="col-md-7">
-				<h2 class="featurette-heading"><a href="/categories/{{{ $cat }}}/articles/{{{ $art->id }}}" class="news-box-content">{{{ $art->title }}}</a></h2>
-				<p>@if($art->desc == ""){{ $art->content }} @else {{ $art->desc }} @endif</p>
-			</div>
-			<div class="col-md-5" style="margin-left: -5px; text-align: center">
-				<a href="http://placehold.it/900x600" rel="prettyPhoto[front-page]" title="aa">
-					<img class="img-responsive visible-md visible-lg img-thumbnail" src="http://placehold.it/500x300">
-				</a>
-			</div>
+		<div class="col-md-7">
+			<h2 class="featurette-heading"><a href="/categories/{{{ $cat }}}/articles/{{{ $art->id }}}" class="news-box-content">{{{ $art->title }}}</a></h2>
+			<p>@if($art->desc == ""){{ $art->content }} @else {{ $art->desc }} @endif</p>
+		</div>
+		<div class="col-md-5" style="margin-left: -5px; text-align: center">
+			<a href="{{{ $img->big }}}" rel="prettyPhoto[front-page]" title="{{{ $img->desc }}}">
+				<img class="img-responsive visible-md visible-lg img-thumbnail" src="{{{ $img->thumb }}}">
+			</a>
 		</div>
 		@endif
+	</div>
 	@endforeach
 </div>
 @else
@@ -48,6 +46,7 @@
 	.featurette-divider { margin: 60px 0; border-color:#ddd; }
 	.featurette-heading { font-size: 30px; }
 	.featurette div { float: none; display: inline-block; vertical-align: middle; }
+	.featurette img {width: 100%;}
 }
 </style>
 @stop

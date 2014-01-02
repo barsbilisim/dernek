@@ -126,10 +126,10 @@ class FormDumperGenerator {
 
         if (preg_match('/edit|update|put|patch/i', $method))
         {
-            return "{{ Form::model(\${$model}, array('method' => 'PATCH', 'route' => array('{$models}.update', \${$model}->id))) }}";
+            return "{{ Form::model(\${$model}, ['method' => 'PATCH', 'route' => ['{$models}.update', \${$model}->id]]) }}";
         }
 
-        return "{{ Form::open(array('route' => '{$models}.store')) }}";
+        return "{{ Form::open(['route' => '{$models}.store']) }}";
     }
 
     /**

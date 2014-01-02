@@ -1,4 +1,4 @@
-@section('main')
+@section('content')
 
 {{ Form::open(['route' => 'categories.store']) }}
 	<ul>

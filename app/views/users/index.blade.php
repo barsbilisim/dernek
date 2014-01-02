@@ -1,4 +1,4 @@
-@section('main')
+@section('content')
 
 <p><a href="{{ route('users.create') }}" style="color: #666; margin-left: 10px;">NEW USER</a></p>
 

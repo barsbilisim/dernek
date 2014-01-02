@@ -1,4 +1,4 @@
-@section('main')
+@section('content')
 
 <table class="table">
 	<thead>

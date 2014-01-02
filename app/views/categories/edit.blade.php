@@ -1,4 +1,4 @@
-@section('main')
+@section('content')
 
 {{ Form::model($category, ['method' => 'PATCH', 'route' => ['categories.update', $category->id]]) }}
 	<ul>

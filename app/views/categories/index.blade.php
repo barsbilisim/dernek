@@ -1,4 +1,4 @@
-@section('main')
+@section('content')
 
 <a href="{{ route('categories.create') }}" style="color: #666; margin-left: 10px;">NEW CATEGORY</a>
 

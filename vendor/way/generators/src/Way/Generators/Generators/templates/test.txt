@@ -1,6 +1,7 @@
 <?php
 
-class {{className}} extends TestCase {
+class {{className}} extends TestCase
+{
 
 	public function test()
 	{

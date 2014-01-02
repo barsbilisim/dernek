@@ -1,4 +1,4 @@
-@section('main')
+@section('content')
 <div class="login">
 	<a href="/" class="logo"><img src="/img/logo.png"></a>
 	<form method="post" action="/login" role="form">

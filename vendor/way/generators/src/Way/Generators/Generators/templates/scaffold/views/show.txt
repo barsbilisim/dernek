@@ -1,12 +1,7 @@
-@extends('layouts.scaffold')
+@section('content')
+<a href="{{ route('{{models}}.index') }}" class="btn btn-lg pull-right" title="return to all {{models}}"><span class="glyphicon glyphicon-new-window"></span></a>
 
-@section('main')
-
-<h1>Show {{Model}}</h1>
-
-<p>{{ link_to_route('{{models}}.index', 'Return to all {{models}}') }}</p>
-
-<table class="table table-striped table-bordered">
+<table class="table">
 	<thead>
 		<tr>
 			{{headings}}

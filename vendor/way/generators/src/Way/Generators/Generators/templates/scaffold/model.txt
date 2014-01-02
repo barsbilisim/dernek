@@ -1,7 +1,10 @@
 <?php
 
-class {{className}} extends Eloquent {
-	protected $guarded = array();
-
-	public static $rules = array({{rules}});
+class {{className}} extends Eloquent
+{
+	//protected $table      = '';
+	protected $guarded    = array();
+	protected $fillable   = array();
+	//protected $softDelete = true;
+	//public    $timestamps = false;
 }

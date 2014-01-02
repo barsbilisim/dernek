@@ -1,22 +1,20 @@
-@extends('layouts.scaffold')
+@section('content')
+@include('partial.errors')
 
-@section('main')
+{{ Form::model(${{model}}, ['method' => 'PATCH', 'route' => ['{{models}}.update', ${{model}}->id], 'role' => 'form', 'class' => 'form-horizontal']) }}
 
-<h1>Edit {{Model}}</h1>
-{{ Form::model(${{model}}, array('method' => 'PATCH', 'route' => array('{{models}}.update', ${{model}}->id))) }}
-	<ul>
-{{formElements}}
-		<li>
-			{{ Form::submit('Update', array('class' => 'btn btn-info')) }}
-			{{ link_to_route('{{models}}.show', 'Cancel', ${{model}}->id, array('class' => 'btn')) }}
-		</li>
-	</ul>
+<div class="form-group">
+	<div class="col-sm-12">
+		{{formElements}}
+	</div>
+</div>
+<div class="form-group">
+	<div class="col-sm-12">
+		<button type="submit" class="btn btn-primary">update</button> | 
+		<a href="{{ route('{{models}}.show', ${{model}}->id) }}" class="btn btn-warning">cancel</a>
+	</div>
+</div>
+
 {{ Form::close() }}
-
-@if ($errors->any())
-	<ul>
-		{{ implode('', $errors->all('<li class="error">:message</li>')) }}
-	</ul>
-@endif
 
 @stop

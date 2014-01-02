@@ -3,6 +3,7 @@
 		Schema::create('{{tableName}}', function(Blueprint $table) {
 			$table->increments('id');
 			{{methods}}
+			$table->softDeletes();
 			$table->timestamps();
 		});
 	}
