@@ -7,8 +7,8 @@
 
 <div class="row">
 	@foreach($article->getImages() as $image)
-	<a href="{{{ $image->big }}}" rel="prettyPhoto[front-page]" title="{{{ $image->desc }}}" class="col-sm-3">
-		<img class="img-thumbnail" src="{{{ $image->thumb }}}">
+	<a href="{{{ $image->big() }}}" rel="prettyPhoto[front-page]" title="{{{ $image->desc() }}}" class="col-sm-3">
+		<img class="img-thumbnail" src="{{{ $image->thumb() }}}">
 	</a>
 	@endforeach
 </div>

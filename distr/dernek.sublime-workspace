@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"t",
+				"t_path"
+			],
+			[
+				"b",
+				"b_path"
+			],
+			[
+				"img",
+				"img-preview"
+			],
+			[
+				"te",
+				"text-decoration"
+			],
+			[
+				"ar",
+				"art"
+			],
+			[
+				"art",
+				"article_id"
+			],
+			[
+				"un",
+				"uniqid"
+			],
+			[
 				"creat",
 				"create-link"
 			],
@@ -36,20 +64,8 @@
 				"json_encode"
 			],
 			[
-				"ar",
-				"articles"
-			],
-			[
-				"te",
-				"text-align"
-			],
-			[
 				"unse",
 				"unset"
-			],
-			[
-				"art",
-				"article"
 			],
 			[
 				"cat",
@@ -192,10 +208,6 @@
 				"datepicker"
 			],
 			[
-				"un",
-				"unpublished-image"
-			],
-			[
 				"remo",
 				"removeClass"
 			],
@@ -238,10 +250,6 @@
 			[
 				"imagecreatefrom",
 				"imagecreatefromjpeg"
-			],
-			[
-				"img",
-				"img-box"
 			],
 			[
 				"up",
@@ -391,78 +399,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "/D/PHPServers/UniServerZ/vhosts/dernek/app/views/articles/show.blade.php",
-			"settings":
-			{
-				"buffer_size": 3698,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/D/PHPServers/UniServerZ/vhosts/dernek/app/routes.php",
-			"settings":
-			{
-				"buffer_size": 2106,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/D/PHPServers/UniServerZ/vhosts/dernek/app/views/images/index.blade.php",
-			"settings":
-			{
-				"buffer_size": 6394,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/D/PHPServers/UniServerZ/vhosts/dernek_backup/app/views/news/images.blade.php",
-			"settings":
-			{
-				"buffer_size": 10341,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/PHPServers/UniServerZ/vhosts/dernek/app/controllers/APIController.php",
-			"settings":
-			{
-				"buffer_size": 1128,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/D/PHPServers/UniServerZ/vhosts/dernek/app/controllers/ImagesController.php",
-			"settings":
-			{
-				"buffer_size": 2799,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/D/PHPServers/UniServerZ/vhosts/dernek/app/views/images/create.blade.php",
-			"settings":
-			{
-				"buffer_size": 1197,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/D/PHPServers/UniServerZ/vhosts/dernek/app/views/images/edit.blade.php",
-			"settings":
-			{
-				"buffer_size": 1242,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/D/PHPServers/UniServerZ/vhosts/dernek/app/views/images/show.blade.php",
-			"settings":
-			{
-				"buffer_size": 1293,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -488,16 +424,30 @@
 	},
 	"file_history":
 	[
-		"/C/Users/Django/Documents/iMacros/Macros/10som.js",
+		"/C/Users/Django/Documents/iMacros/Macros/#Current.iim",
+		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/images/index.blade.php",
+		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/images/show.blade.php",
+		"/D/PHPServers/UniServerZ/vhosts/dernek/app/controllers/ImagesController.php",
+		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/images/edit.blade.php",
+		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/articles/show.blade.php",
+		"/D/PHPServers/UniServerZ/vhosts/dernek/app/models/Image.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/models/ArticleJoin.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/articles/index.blade.php",
-		"/D/PHPServers/UniServerZ/vhosts/dernek_backup/app/views/news/details.blade.php",
-		"/D/PHPServers/UniServerZ/vhosts/dernek/app/controllers/ImagesController.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/database/migrations/2014_01_02_075334_create_images_table.php",
-		"/D/PHPServers/UniServerZ/vhosts/dernek/app/database/seeds/ImagesTableSeeder.php",
-		"/D/PHPServers/UniServerZ/vhosts/dernek/app/models/Image.php",
-		"/D/PHPServers/UniServerZ/vhosts/dernek/app/controllers/ArticlesController.php",
+		"/D/PHPServers/UniServerZ/vhosts/dernek/app/routes.php",
+		"/D/PHPServers/UniServerZ/vhosts/dernek_backup/app/views/news/images.blade.php",
+		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/images/create.blade.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek_backup/app/controllers/NewsController.php",
+		"/C/Users/Django/Downloads/tapmodo-Jcrop-1902fbc/demos/tutorial5.html",
+		"/D/PHPServers/UniServerZ/vhosts/dernek/app/controllers/BaseController.php",
+		"/D/PHPServers/UniServerZ/vhosts/dernek_backup/app/controllers/BaseController.php",
+		"/D/PHPServers/UniServerZ/vhosts/dernek/app/controllers/APIController.php",
+		"/D/PHPServers/UniServerZ/vhosts/dernek/app/controllers/ArticlesController.php",
+		"/C/Users/Django/Documents/iMacros/Macros/Auto.js",
+		"/D/Programs/ABBY Lingvo x5 15.0.775.0/ABBYY Lingvo x5 v15.0.775.0_patch/info!!.txt",
+		"/C/Users/Django/Documents/iMacros/Macros/10som.js",
+		"/D/PHPServers/UniServerZ/vhosts/dernek_backup/app/views/news/details.blade.php",
+		"/D/PHPServers/UniServerZ/vhosts/dernek/app/database/seeds/ImagesTableSeeder.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/filters.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/controllers/AdminController.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek_backup/app/filters.php",
@@ -514,7 +464,6 @@
 		"/D/PHPServers/UniServerZ/vhosts/dernek/public/css/default.css",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/models/ArticleDetail.php",
 		"/C/Users/Django/Documents/iMacros/Macros/Test.js",
-		"/C/Users/Django/Documents/iMacros/Macros/Auto.js",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/index.blade.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/users/show.blade.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/users/index.blade.php",
@@ -525,7 +474,6 @@
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/pages/edit.blade.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/pages/create.blade.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/admin/login.blade.php",
-		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/articles/show.blade.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/articles/edit.blade.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/articles/create.blade.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/layouts/default.blade.php",
@@ -535,8 +483,6 @@
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/categories/create.blade.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/layouts/simple.blade.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/layouts/scaffold.blade.php",
-		"/C/Users/Django/Documents/iMacros/Macros/#Current.iim",
-		"/D/PHPServers/UniServerZ/vhosts/dernek/app/routes.php",
 		"/C/Users/Django/Documents/iMacros/Macros/Bilet.js",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/controllers/UsersController.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/controllers/CategoriesController.php",
@@ -551,7 +497,6 @@
 		"/D/PHPServers/UniServerZ/vhosts/dernek_backup/app/views/shared/menu.blade.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek_backup/app/views/news/create.blade.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/database/seeds/PagesTableSeeder.php",
-		"/D/PHPServers/UniServerZ/vhosts/dernek/app/controllers/APIController.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek_backup/app/controllers/PageController.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/config/app.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek_backup/app/views/page/edit.blade.php",
@@ -569,9 +514,7 @@
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/views/articles/ajax/show.blade.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek_backup/app/views/payments/index.blade.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek_backup/app/views/payments/payments.blade.php",
-		"/D/PHPServers/UniServerZ/vhosts/dernek_backup/app/views/news/images.blade.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/vendor/laravel/framework/src/Illuminate/Support/Facades/Lang.php",
-		"/D/PHPServers/UniServerZ/vhosts/dernek/app/controllers/BaseController.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/commands/Helpers.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/app/start/global.php",
 		"/D/PHPServers/UniServerZ/vhosts/dernek/vendor/laravel/framework/src/Illuminate/Support/helpers.php",
@@ -608,14 +551,7 @@
 		"/D/PHPServers/UniServerZ/vhosts/footy/app/database/migrations/2013_12_21_143031_create_users_table.php",
 		"/D/PHPServers/UniServerZ/www/test/mongo.php",
 		"/D/PHPServers/UniServerZ/vhosts/footy/vendor/jenssegers/mongodb/README.md",
-		"/D/mongodb/mongo.config",
-		"/D/PHPServers/UniServerZ/vhosts/footy/vendor/jenssegers/mongodb/src/Jenssegers/Mongodb/Connection.php",
-		"/D/PHPServers/UniServerZ/vhosts/footy/app/config/app.php",
-		"/D/PHPServers/UniServerZ/vhosts/footy/app/config/production/app.php",
-		"/D/PHPServers/UniServerZ/vhosts/footy/composer.json",
-		"/D/mongodb/log/mongo.log.2013-12-21T14-01-36",
-		"/D/mongodb/data/mongod.lock",
-		"/D/mongodb/THIRD-PARTY-NOTICES"
+		"/D/mongodb/mongo.config"
 	],
 	"find":
 	{
@@ -636,6 +572,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"img->",
+			"str",
 			"Lang::get",
 			"name",
 			"desc",
@@ -746,6 +684,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"image->",
 			"trans",
 			"image",
 			"art->images[0]",
@@ -772,252 +711,8 @@
 	"groups":
 	[
 		{
-			"selected": 8,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "/D/PHPServers/UniServerZ/vhosts/dernek/app/views/articles/show.blade.php",
-					"settings":
-					{
-						"buffer_size": 3698,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								907,
-								907
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/D/PHPServers/UniServerZ/vhosts/dernek/app/routes.php",
-					"settings":
-					{
-						"buffer_size": 2106,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1972,
-								1972
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/D/PHPServers/UniServerZ/vhosts/dernek/app/views/images/index.blade.php",
-					"settings":
-					{
-						"buffer_size": 6394,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3571,
-								3571
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 432.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/D/PHPServers/UniServerZ/vhosts/dernek_backup/app/views/news/images.blade.php",
-					"settings":
-					{
-						"buffer_size": 10341,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9652,
-								9718
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/D/PHPServers/UniServerZ/vhosts/dernek/app/controllers/APIController.php",
-					"settings":
-					{
-						"buffer_size": 1128,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1088,
-								1088
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 216.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "/D/PHPServers/UniServerZ/vhosts/dernek/app/controllers/ImagesController.php",
-					"settings":
-					{
-						"buffer_size": 2799,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2705,
-								2705
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1512.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "/D/PHPServers/UniServerZ/vhosts/dernek/app/views/images/create.blade.php",
-					"settings":
-					{
-						"buffer_size": 1197,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								85,
-								85
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "/D/PHPServers/UniServerZ/vhosts/dernek/app/views/images/edit.blade.php",
-					"settings":
-					{
-						"buffer_size": 1242,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								147,
-								147
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "/D/PHPServers/UniServerZ/vhosts/dernek/app/views/images/show.blade.php",
-					"settings":
-					{
-						"buffer_size": 1293,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								399,
-								399
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],

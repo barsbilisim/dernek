@@ -3,6 +3,7 @@
 class ArticleJoin extends Eloquent
 {
 	protected $table = 'j_articles';
+	protected $softDelete = true;
 
 	public function images()
 	{
@@ -19,9 +20,9 @@ class ArticleJoin extends Eloquent
 		{
 			$image = $image[rand(0, $count - 1)];
 
-			$img->big   = $image->big;
-			$img->thumb = $image->thumb;
-			$img->desc  = $image[Config::get('app.locale')];
+			$img->big   = $image->big();
+			$img->thumb = $image->thumb();
+			$img->desc  = $image->desc();
 		}
 		else
 		{
@@ -31,14 +32,14 @@ class ArticleJoin extends Eloquent
 			{
 				$image = $image[rand(0, $count - 1)];
 
-				$img->big   = $image->big;
-				$img->thumb = $image->thumb;
-				$img->desc  = $image[Config::get('app.locale')];
+				$img->big   = $image->big();
+				$img->thumb = $image->thumb();
+				$img->desc  = $image->desc();
 			}
 		}
 		
-		if($img->big   == "") $img->big   = 'http://placehold.it/1200x900';
-		if($img->thumb == "") $img->thumb = 'http://placehold.it/400x300';
+		if($img->big   == "") $img->big   = 'http://placehold.it/1200x800';
+		if($img->thumb == "") $img->thumb = 'http://placehold.it/300x200';
 		if($img->desc  == "") $img->desc  = $this->title;
 
 		return $img;

@@ -1,17 +1,19 @@
 @section('content')
-<div class="tooltip-div" style="position:relative">
-	<h3><a href="{{ route('categories.articles.show', [$article->category->name, $article->id]) }}" class="format-link">{{{ $article->detail()->title }}}</a></h3>
-	<a href="{{ route('articles.images.create', $article->id) }}" class="btn btn-lg create-link" data-placement="left" title="new image"><span class="glyphicon glyphicon-plus"></span></a>
+<div class="tooltip-div">
+	<a href="{{ route('articles.images.create', $article->id) }}" class="btn btn-lg pull-left" data-placement="right" title="add image"><span class="glyphicon glyphicon-plus"></a>
+	<a href="{{ route('categories.articles.show', [$article->category->name, $article->id]) }}" class="btn btn-lg pull-right" data-placement="left" title="back"><span class="glyphicon glyphicon-share"></span></a>
 </div>
+<div style="clear:both"></div>
+
 @if ($images->count())
 <div class="row">
 	@foreach($images as $img)
 	<div class="col-sm-6 col-md-4 col-lg-3">
-		<a href="{{{ $img->big }}}" rel="prettyPhoto" id="title-{{ $img->id }}" title="{{{ $img[Config::get('app.locale')] }}}">
-			<img src="{{{ $img->thumb }}}" class="img-responsive img-thumbnail image-list @if($img->main == 1) main-image @endif @if($img->status == 0) unpublished-image @endif">
+		<a href="{{{ $img->big() }}}" rel="prettyPhoto" id="title-{{{ $img->id }}}" title="{{{ $img->desc() }}}">
+			<img src="{{{ $img->thumb() }}}" class="img-responsive img-thumbnail image-list @if($img->main == 1) main-image @endif @if($img->status == 0) unpublished-image @endif">
 		</a>
 		<div image="{{{ $img->id }}}" class="tooltip-div image-btns">
-			<button type="button" class="btn btn-primary btn-sm delete-image-btn" title="{{ trans('messages.delete') }}"><span class="glyphicon glyphicon-trash"></span></button> |
+			<button type="submit" class="btn btn-primary btn-sm" form="delete-form-{{{ $img->id }}}" title="{{ trans('messages.delete') }}"><span class="glyphicon glyphicon-trash"></span></button> |
 			<a href="{{ route('articles.images.edit', [$article->id, $img->id]) }}" class="btn btn-primary btn-sm" title="{{ trans('messages.edit') }}"><span class="glyphicon glyphicon-camera"></a> |
 			<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-{{ $img->id }}" title="{{ trans('messages.description') }}"><span class="glyphicon glyphicon-th-list"></button> |
 			<button type="button" class="btn btn-primary btn-sm set-main-image"
@@ -23,7 +25,10 @@
 		</div>
 	</div>
 
-	<div class="modal" id="modal-{{ $img->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	{{ Form::open(['route' => ['articles.images.destroy', $img->article_id, $img->id], 'style' => 'display: hidden', 'method' => 'DELETE', 'id' => 'delete-form-'.$img->id, 'onsubmit' => "return confirm('".trans('messages.Are you sure?')."')"]) }}
+	{{ Form::close() }}
+
+	<div class="modal" id="modal-{{{ $img->id }}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -32,7 +37,7 @@
 				</div>
 				<div class="modal-body">
 					{{ Form::open(['id' => $img->id]) }}
-						<textarea name="desc" class="form-control">{{ $img[Config::get('app.locale')] }}</textarea>
+						<textarea name="desc" class="form-control">{{{ $img->desc() }}}</textarea>
 					{{ Form::close() }}
 				</div>
 				<div class="modal-footer">
@@ -54,8 +59,6 @@
 <style type="text/css">
 .row {margin-top:20px; margin-bottom: 20px}
 .image-btns {margin: 20px auto 40px auto;}
-.create-link {position: absolute; top: -10px; right: 0;}
-.format-link {color:inherit;}
 .main-image { border:1px solid red }
 .unpublished-image { opacity: 0.4; }
 </style>

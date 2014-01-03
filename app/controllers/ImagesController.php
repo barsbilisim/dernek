@@ -16,8 +16,9 @@ class ImagesController extends BaseController
 	{
 		$this->layout = 'layouts.default';
 		$this->lang   = Config::get("app.locale");
-		$this->beforeFilter('auth|csrf', ['on' => 'post', 'on' => 'put', 'on' => 'delete']);
-		
+		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
+		$this->beforeFilter('auth', ['on' => ['get', 'post', 'put', 'delete']]);
+
 		$this->image   = $image;
 		$this->article = $article;
 	}
@@ -52,19 +53,50 @@ class ImagesController extends BaseController
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store($art)
 	{
-		$input = Input::all();
-		$validation = Validator::make($input, []);
+		static::globalXssClean();
+		
+		$input = Input::only('description');
+		$validation = Validator::make($input, ['description' => 'alpha_num']);
 
-		if ($validation->passes())
+		$crop = Input::get('coords');
+		$file = Input::get('dataUrl');
+		
+		if ($validation->passes() && $crop != "" && $file != "")
 		{
-			$this->image->create($input);
+			$path = 'img/article/'.$art;
+			if(!File::isDirectory($path)) File::makeDirectory($path);
 
-			return Redirect::route('images.index');
+			$crop   = json_decode($crop, true);
+			$file   = base64_decode($file);
+			$orig   = imagecreatefromstring($file);
+			$big    = ImageCreateTrueColor(1200, 800);
+			$thumb  = ImageCreateTrueColor(300, 200);
+
+			$b_path = $path.'/'.uniqid().'.jpg';
+			imagecopyresampled($big, $orig, 0, 0, $crop['x'], $crop['y'], 1200, 800, $crop['w'], $crop['h']);
+			imagejpeg($big, $b_path, 80);
+
+			$t_path = $path.'/'.uniqid().'.jpg';
+			imagecopyresampled($thumb, $big, 0, 0, 0, 0, 300, 200, 1200, 800);
+			imagejpeg($thumb, $t_path, 40);
+
+			imagedestroy($big); // release from memory
+			imagedestroy($thumb); // release from memory
+
+			$img = new Image;
+			$img->id = uniqid();
+			$img->article_id = $art;
+			$img->big   = $b_path;
+			$img->thumb = $t_path;
+			$img[Config::get('app.locale')] = Input::get('description');
+			$img->save();
+
+			return Redirect::route('articles.images.index', $art);
 		}
 
-		return Redirect::route('images.create')
+		return Redirect::route('articles.images.create', $art)
 			->withInput()
 			->withErrors($validation);
 	}
@@ -110,17 +142,36 @@ class ImagesController extends BaseController
 	 */
 	public function update($art, $id)
 	{
-		$input = array_except(Input::all(), '_method');
-		$validation = Validator::make($input, []);
-
-		if ($validation->passes())
+		static::globalXssClean();
+		
+		$input = Input::only('description');
+		$validation = Validator::make($input, ['description' => 'alpha_num']);
+		
+		$crop = Input::get('coords');
+		
+		if ($validation->passes() && $crop != "")
 		{
-			$image = $this->image->find($id)->update($input);
+			$img  = Image::find($id);
+			$img->update([Config::get('app.locale') => Input::get('description')]);
 
-			return Redirect::route('images.show', $id);
+			$crop   = json_decode($crop, true);
+			$orig   = imagecreatefromjpeg($img->big);
+			$big    = ImageCreateTrueColor(1200, 800);
+			$thumb  = ImageCreateTrueColor(300, 200);
+
+			imagecopyresampled($big, $orig, 0, 0, $crop['x'], $crop['y'], 1200, 800, $crop['w'], $crop['h']);
+			imagejpeg($big, $img->big, 80);
+
+			imagecopyresampled($thumb, $big, 0, 0, 0, 0, 300, 200, 1200, 800);
+			imagejpeg($thumb, $$img->thumb, 40);
+
+			imagedestroy($big); // release from memory
+			imagedestroy($thumb); // release from memory
+
+			return Redirect::route('articles.images.index', $art);
 		}
 
-		return Redirect::route('images.edit', $id)
+		return Redirect::route('articles.images.edit', $art, $id)
 			->withInput()
 			->withErrors($validation);
 	}
@@ -133,9 +184,13 @@ class ImagesController extends BaseController
 	 */
 	public function destroy($art, $id)
 	{
-		$this->image->find($id)->delete();
+		$img = $this->image->find($id);
+		$img->forceDelete();
 
-		return Redirect::route('images.index');
+		if(File::isFile($img->big)) File::delete($img->big);
+		if(File::isFile($img->thumb)) File::delete($img->thumb);
+
+		return Redirect::route('articles.images.index', $art);
 	}
 
 }
