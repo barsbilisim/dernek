@@ -27,7 +27,7 @@ Route::post('login',  'AdminController@pLogin');
 Route::post('logout', 'AdminController@pLogout');
 //------------------------------------------------------------------------------------------------
 
-//API---------------------------------------------------------------------------------------------
+//API routes---------------------------------------------------------------------------------------------
 Route::post('api/article/{id}/status', 'APIController@putArticleStatus');
 
 Route::post('api/image/{id}/desc',   'APIController@putImageDesc');
