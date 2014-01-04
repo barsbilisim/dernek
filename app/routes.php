@@ -21,7 +21,7 @@ Route::resource('categories.articles', 'ArticlesController');
 Route::resource('articles.images'    , 'ImagesController');
 //-------------------------------------------------------------------------------------------------
 
-//admin--------------------------------------------------------------------------------------------
+//admin routes--------------------------------------------------------------------------------------------
 Route::get ('login',  'AdminController@Login');
 Route::post('login',  'AdminController@pLogin');
 Route::post('logout', 'AdminController@pLogout');
