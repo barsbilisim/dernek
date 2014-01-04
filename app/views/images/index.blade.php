@@ -1,7 +1,7 @@
 @section('content')
 <div class="tooltip-div">
 	<a href="{{ route('articles.images.create', $article->id) }}" class="btn btn-lg pull-left" data-placement="right" title="add image"><span class="glyphicon glyphicon-plus"></a>
-	<a href="{{ route('categories.articles.show', [$article->category->name, $article->id]) }}" class="btn btn-lg pull-right" data-placement="left" title="back"><span class="glyphicon glyphicon-share"></span></a>
+	<a href="{{ route('categories.articles.show', [$article->category->name, $article->id]) }}" class="btn btn-lg pull-right" data-placement="left" title="return"><span class="glyphicon glyphicon-share"></span></a>
 </div>
 <div style="clear:both"></div>
 

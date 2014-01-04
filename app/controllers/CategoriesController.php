@@ -8,12 +8,21 @@ class CategoriesController extends BaseController
 	 * @var Category
 	 */
 	protected $category;
+	protected $lang;
 
 	public function __construct(Category $category)
 	{
 		$this->layout = 'layouts.default';
-		$this->beforeFilter('auth|csrf', ['on' => 'post']);
-
+		$this->lang   = Config::get('app.locale');
+		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
+		$this->beforeFilter('auth', ['on' => ['get', 'post', 'put', 'delete']]);
+		
+		$this->beforeFilter(function()
+		{
+			if(Auth::check() && !Auth::user()->inRoles(['admin']))
+				return Redirect::guest('login');
+		});
+		
 		$this->category = $category;
 	}
 

@@ -5,7 +5,7 @@ class APIController extends BaseController
 	public function __construct()
 	{
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
-		$this->beforeFilter('auth', ['on' => ['post', 'put', 'delete']]);
+		$this->beforeFilter('auth', ['on' => ['get', 'post', 'put', 'delete']]);
 	}
 
 	public function putArticleStatus($id)

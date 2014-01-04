@@ -15,8 +15,16 @@ class PagesController extends BaseController
 	{
 		$this->layout = 'layouts.default';
 		$this->lang   = Config::get("app.locale");
-		$this->beforeFilter('auth|csrf', ['on' => 'post', 'on' => 'put']);
+		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
+		$this->beforeFilter('auth', ['on' => ['post', 'put', 'delete']]);
+		$this->beforeFilter('auth', ['on' => ['get'], 'except' => ['index', 'show']]);
 
+		$this->beforeFilter(function()
+		{
+			if(Auth::check() && !Auth::user()->inRoles(['admin']))
+				return Redirect::guest('login');
+		}, ['except' => ['index', 'show']]);
+		
 		$this->page = $page;
 	}
 

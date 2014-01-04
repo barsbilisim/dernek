@@ -18,7 +18,13 @@ class ImagesController extends BaseController
 		$this->lang   = Config::get("app.locale");
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
 		$this->beforeFilter('auth', ['on' => ['get', 'post', 'put', 'delete']]);
-
+		
+		$this->beforeFilter(function()
+		{
+			if(Auth::check() && !Auth::user()->inRoles(['admin']))
+				return Redirect::guest('login');
+		});
+		
 		$this->image   = $image;
 		$this->article = $article;
 	}
@@ -61,15 +67,15 @@ class ImagesController extends BaseController
 		$validation = Validator::make($input, ['description' => 'alpha_num']);
 
 		$crop = Input::get('coords');
-		$file = Input::get('dataUrl');
-		
+		$file = (Input::get('dataUrl') == "")? file_get_contents(Input::get('srcUrl')): base64_decode(Input::get('dataUrl'));
+
 		if ($validation->passes() && $crop != "" && $file != "")
 		{
 			$path = 'img/article/'.$art;
 			if(!File::isDirectory($path)) File::makeDirectory($path);
 
-			$crop   = json_decode($crop, true);
-			$file   = base64_decode($file);
+			$crop   = json_decode($crop, true);	
+
 			$orig   = imagecreatefromstring($file);
 			$big    = ImageCreateTrueColor(1200, 800);
 			$thumb  = ImageCreateTrueColor(300, 200);

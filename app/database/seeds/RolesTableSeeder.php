@@ -1,29 +1,31 @@
 <?php
 
-class CategoriesTableSeeder extends Seeder {
+class RolesTableSeeder extends Seeder
+{
 
 	public function run()
 	{
 		// Uncomment the below to wipe the table clean before populating
-		// DB::table('categories')->truncate();
+		// DB::table('roles')->truncate();
 
-		$categories = array(
-			['id'        => '1',
-			'name'       => 'news',
+		$roles = array(
+			['id'  => '1',
+			'name' => 'admin',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')],
-			['id'        => '2',
-			'name'       => 'events',
+			['id'  => '2',
+			'name' => 'moder',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')],
-			['id'        => '3',
-			'name'       => 'ints',
+			['id'  => '3',
+			'name' => 'user',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')]
+
 		);
 
 		// Uncomment the below to run the seeder
-		DB::table('categories')->insert($categories);
+		DB::table('roles')->insert($roles);
 	}
 
 }

@@ -3,6 +3,7 @@
 
 {{ Form::open(['route' => ['articles.images.store', $art], 'role' => 'form', 'class' => 'form-horizontal']) }}
 <input type="hidden" name="dataUrl" value="">
+<input type="hidden" name="srcUrl" value="">
 <input type="hidden" name="coords" value="">
 <input type="text" name="description" value="{{ Input::old('description') }}" class="form-control" placeholder="description">
 <input type="file" name="file" accept="image/*" id="file" class="btn btn-default btn-sm" style="margin: 10px 0;">
@@ -10,12 +11,32 @@
 <div class="form-group">
 	<div class="col-sm-12">
 		<button type="submit" class="btn btn-primary">create</button> | 
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalUrl">url</button> | 
 		<a href="{{ route('articles.images.index', $art) }}" class="btn btn-warning">cancel</a>
 	</div>
 </div>
 {{ Form::close() }}
 
 <div id="img-box"></div>
+
+<div class="modal" id="modalUrl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel">image url</h4>
+			</div>
+			<div class="modal-body">
+				<input type="text" name="url" placeholder="url" class="form-control">
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary" id="url-crop">Crop</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 @stop
 
 @section('style')
@@ -55,5 +76,14 @@ function setCoords(obj) {
 	var dim = obj.getBounds();
 	obj.setSelect([0, 0, Math.floor(dim[0]), Math.floor(dim[1])]);
 };
+
+$("#url-crop").on("click", function(e){
+	e.preventDefault();
+	var url = $("#modalUrl input[type='text']").val();
+	$("#img-box").html('<img class="cropbox" src="' + url + '">');
+	$("input[name='srcUrl']").val(url);
+	initJcrop();
+	$(".modal").modal('hide')
+});
 </script>
 @stop

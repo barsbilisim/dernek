@@ -18,6 +18,7 @@ class CreateArticlesTable extends Migration {
 			$table->string('cat_id', 20)->references('id')->on('categories');
 			$table->boolean('status')->default(1);
 			$table->boolean('slider')->default(0);
+			$table->boolean('anounce')->default(0);
 			$table->softDeletes();
 			$table->timestamp('ended_at');
 		});

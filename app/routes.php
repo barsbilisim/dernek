@@ -1,12 +1,4 @@
 <?php
-//home---------------------------------------------------------------------------------------------
-Route::get('/', function(){
-	//$courses = Course::all();
-	//return View::make('index', ['courses' => $courses, 'title' => 'Home']);
-	return View::make('index', ['title' => 'Home']);
-});
-//-------------------------------------------------------------------------------------------------
-
 //language-----------------------------------------------------------------------------------------
 Route::get("lang/{lang}", function($lang)
 {
@@ -15,6 +7,10 @@ Route::get("lang/{lang}", function($lang)
 	return Redirect::to($url)->withCookie($cookie);
 });
 //------------------------------------------------------------------------------------------------
+
+//home---------------------------------------------------------------------------------------------
+Route::get('/', 'HomeController@Index');
+//-------------------------------------------------------------------------------------------------
 
 //resourceful routes------------------------------------------------------------------------------
 Route::resource('users', 'UsersController');
@@ -33,7 +29,9 @@ Route::post('logout', 'AdminController@pLogout');
 //API---------------------------------------------------------------------------------------------
 Route::post('api/article/{id}/status', 'APIController@putArticleStatus');
 
-Route::post('api/image/{id}/desc',     'APIController@putImageDesc');
-Route::post('api/image/{id}/status',   'APIController@putImageStatus');
+Route::post('api/image/{id}/desc',   'APIController@putImageDesc');
+Route::post('api/image/{id}/status', 'APIController@putImageStatus');
 Route::post('api/image/{id}/main',   'APIController@putImageMain');
 //------------------------------------------------------------------------------------------------
+
+Route::resource('roles', 'RolesController');

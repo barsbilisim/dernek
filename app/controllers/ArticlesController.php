@@ -8,20 +8,30 @@ class ArticlesController extends BaseController
 	 *
 	 * @var Article
 	 */
+	protected $category;
 	protected $article;
-	protected $article_detail;
-	protected $article_join;
+	protected $artdetail;
+	protected $artjoin;
 	protected $lang;
 
-	public function __construct(Article $article, ArticleDetail $article_detail, ArticleJoin $article_join)
+	public function __construct(Article $article, ArticleDetail $artdetail, ArticleJoin $artjoin, Category $category)
 	{
 		$this->layout = 'layouts.default';
-		$this->lang   = Config::get("app.locale");
-		$this->beforeFilter('auth|csrf', ['on' => 'post', 'on' => 'put']);
+		$this->lang   = Config::get('app.locale');
+		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
+		$this->beforeFilter('auth', ['on' => ['post', 'put', 'delete']]);
+		$this->beforeFilter('auth', ['on' => ['get'], 'except' => ['index', 'show']]);
 
-		$this->article  = $article;
-		$this->article_detail = $article_detail;
-		$this->article_join   = $article_join;
+		$this->beforeFilter(function()
+		{
+			if(Auth::check() && !Auth::user()->inRoles(['admin']))
+				return Redirect::guest('login');
+		}, ['except' => ['index', 'show']]);
+
+		$this->category  = $category;
+		$this->article   = $article;
+		$this->artdetail = $artdetail;
+		$this->artjoin   = $artjoin;
 	}
 
 	/**
@@ -31,7 +41,7 @@ class ArticlesController extends BaseController
 	 */
 	public function index($cat)
 	{
-		$articles = $this->article_join->where('category', $cat)->where('lang', $this->lang)->get();
+		$articles = $this->artjoin->orderBy('created_at', 'desc')->where('category', $cat)->where('lang', $this->lang)->get();
 
 		$this->layout->title   = trans('messages.'.$cat);
 		$this->layout->content = View::make('articles.index', compact('articles', 'cat'));
@@ -44,8 +54,13 @@ class ArticlesController extends BaseController
 	 */
 	public function create($cat)
 	{
+		$lang = ['kg' => trans('messages.kg'), 'tr' => trans('messages.tr')];
+
+		foreach ($this->category->all() as $c)
+		$category[$c->id] = trans('messages.'.$c->name);
+
 		$this->layout->title   = trans('messages.'.$cat);
-		$this->layout->content = View::make('articles.create', compact('cat'));
+		$this->layout->content = View::make('articles.create', compact('cat', 'lang', 'category'));
 	}
 
 	/**
@@ -53,22 +68,38 @@ class ArticlesController extends BaseController
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store($cat)
 	{
 		$input = Input::all();
-		$validation = Validator::make($input, Article::$rules);
+		$validation = Validator::make($input, ['title' => 'required', 'content' => 'required']);
 
 		if ($validation->passes())
 		{
-			$this->article->create($input);
+			$id = uniqid();
 
-			return Redirect::route('articles.index');
+			$this->article->create([
+								'id'       => $id,
+								'cat_id'   => Input::get('category', 1),
+								'slider'   => Input::get('slider', 0),
+								'anounce'  => Input::get('anounce', 0),
+								'ended_at' => Input::get('alt_date').' '.date('23:59:59')]);
+
+			$this->artdetail->create([
+								'article_id' => $id,
+								'user_id' => Auth::user()->id,
+								'title'   => Input::get('title'),
+								'content' => Input::get('content'),
+								'desc'    => Input::get('desc'),
+								'lang'    => Input::get('lang', $this->lang)]);
+
+			
+
+			return Redirect::route('categories.articles.index', [$this->category->find(Input::get('category', 1))->name]);
 		}
 
-		return Redirect::route('articles.create')
+		return Redirect::route('categories.articles.create', $cat)
 			->withInput()
-			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+			->withErrors($validation);
 	}
 
 	/**
@@ -79,7 +110,10 @@ class ArticlesController extends BaseController
 	 */
 	public function show($cat, $id)
 	{
-		$article = $this->article_join->where('category', $cat)->where('lang', $this->lang)->where('id', $id)->firstOrFail();
+		$article = $this->artjoin->where('category', $cat)->where('lang', $this->lang)->where('id', $id)->first();
+
+		if(count($article) == 0) 
+			return Redirect::route('categories.articles.index', $cat);
 
 		$this->layout->title   = trans('messages.'.$cat);
 		$this->layout->content = View::make('articles.show', compact('cat', 'article'));
@@ -93,15 +127,18 @@ class ArticlesController extends BaseController
 	 */
 	public function edit($cat, $id)
 	{
-		$article = $this->article->find($id);
+		$article = $this->artjoin->where('category', $cat)->where('lang', $this->lang)->where('id', $id)->first();
+		
+		foreach ($this->category->all() as $c)
+		$category[$c->id] = trans('messages.'.$c->name);
 
 		if (is_null($article))
 		{
-			return Redirect::route('articles.index');
+			return Redirect::route('categories.articles.index', $cat);
 		}
 
 		$this->layout->title   = trans('messages.'.$cat);
-		$this->layout->content = View::make('articles.edit', compact('article', 'cat'));
+		$this->layout->content = View::make('articles.edit', compact('article', 'cat', 'category'));
 	}
 
 	/**
@@ -110,23 +147,34 @@ class ArticlesController extends BaseController
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($cat, $id)
 	{
-		$input = array_except(Input::all(), '_method');
-		$validation = Validator::make($input, Article::$rules);
+		$input = Input::all();
+		$validation = Validator::make($input, ['title' => 'required', 'content' => 'required']);
 
 		if ($validation->passes())
 		{
-			$article = $this->article->find($id);
-			$article->update($input);
+			$this->article->find($id)
+							->update([
+								'cat_id'   => Input::get('category', 1),
+								'slider'   => Input::get('slider', 0),
+								'anounce'  => Input::get('anounce', 0),
+								'ended_at' => Input::get('alt_date').' '.date('23:59:59')]);
 
-			return Redirect::route('articles.show', $id);
+			$this->artdetail->where('article_id', $id)
+							->where('lang', $this->lang)
+							->update([
+								'user_id' => Auth::user()->id,
+								'title'   => Input::get('title'),
+								'content' => Input::get('content'),
+								'desc'    => Input::get('desc')]);
+
+			return Redirect::route('categories.articles.show', [$this->category->find(Input::get('category', 1))->name, $id]);
 		}
 
-		return Redirect::route('articles.edit', $id)
+		return Redirect::route('categories.articles.edit', [$cat, $id])
 			->withInput()
-			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+			->withErrors($validation);
 	}
 
 	/**
