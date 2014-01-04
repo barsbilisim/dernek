@@ -13,6 +13,7 @@ Route::get('/', 'HomeController@Index');
 //-------------------------------------------------------------------------------------------------
 
 //resourceful routes------------------------------------------------------------------------------
+Route::resource('roles', 'RolesController');
 Route::resource('users', 'UsersController');
 Route::resource('pages', 'PagesController');
 Route::resource('categories', 'CategoriesController');
@@ -33,5 +34,3 @@ Route::post('api/image/{id}/desc',   'APIController@putImageDesc');
 Route::post('api/image/{id}/status', 'APIController@putImageStatus');
 Route::post('api/image/{id}/main',   'APIController@putImageMain');
 //------------------------------------------------------------------------------------------------
-
-Route::resource('roles', 'RolesController');
