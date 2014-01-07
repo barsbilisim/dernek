@@ -1,5 +1,5 @@
 @section('content')
-<div id="myCarousel" class="carousel carousel-fade slide hidden-xs col-sm-8">
+<div id="myCarousel" class="carousel carousel-fade slide hidden-xs col-sm-8 padding00">
 <div class="carousel-inner">
 @foreach($slider as $key => $s)
 @if($img = $s->link())@endif
@@ -18,11 +18,11 @@
 <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 </div>
 
-<div class="col-sm-4 padding-left-12">
+<div class="col-sm-4  padding00">
 
 @if($counter == 2)
 		@if($img = $anounce->link())@endif
-		<div class="col-sm-12" style="margin-bottom:12px;">
+		<div class="col-sm-12 padding00" style="margin-bottom:12px;">
 		<div class="news-box-block small-event">
 			<p class="timer blackop" id="defaultCountdown2">{{$anounce->days}} {{ trans('messages.days') }}</p>
 			<a href="{{ $img->thumb }}" class="news-box-link " rel="prettyPhoto[front-page]" title="{{ $img->desc }}">
@@ -36,7 +36,7 @@
 @foreach($events as $key => $ev)
 @if($img = $ev->link())@endif
  @if($counter == 3 && $key == 0) 		
- 		<div class="col-md-12" style=" margin-bottom:12px;">
+ 		<div class="col-md-12 padding00" style=" padding-left:12px !important;margin-bottom:12px;">
 		<div class="news-box-block small-event">
 			<p class="timer blackop" id="defaultCountdown2">{{$ev->days}} {{ trans('messages.days') }}</p>
 			<a href="{{ $img->thumb }}" class="news-box-link" rel="prettyPhoto[front-page]" title="{{ $img->desc }}">
@@ -48,7 +48,7 @@
 
 		@else
 		
-		<div class="col-sm-6" style="padding-right:6px">
+		<div class="col-sm-6 padding00" style="padding-left:12px;">
 		<div class="news-box-block small-event">
 			<p class="timer blackop" id="defaultCountdown2">{{$ev->days}} {{ trans('messages.days') }}</p>
 			<a href="{{ $img->thumb }}" class="news-box-link" rel="prettyPhoto[front-page]" title="{{ $img->desc }}">
@@ -60,7 +60,7 @@
  @endif
 @endforeach
 </div>
-<div class="col-sm-8 ds">
+<div class="col-sm-8 ds padding00">
 	@if(count($news) > 0)
 		<a href="{{ route('categories.articles.index', 'news')}}">
 			<div class="panel panel-primary ">
@@ -111,7 +111,7 @@
 
 </div>
 
-<div class="col-sm-4 padding-left-12 ds">
+<div class="col-sm-4 padding-left-12 ds padding00">
 		
 			<div class="panel panel-primary ">
 				<div class="panel-heading header_text">
@@ -128,6 +128,7 @@
 
 		<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FKyrgyzstan.Dostuk.jana.Madaniyat.Koomu&amp;width=368&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:368px; height:258px;" allowTransparency="true"></iframe>
 </div>
+@include('partial.footer')
 @stop
 
 @section('style')
