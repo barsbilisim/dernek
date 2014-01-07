@@ -1,6 +1,7 @@
-html
+html,
+body
 {
-	height: 100%;
+	min-height: 100%;
 }
 
 body
@@ -9,15 +10,17 @@ body
 	font-family: Calibri, sans-serif;
 	color: #666;
 	min-height: 100%;
-  border-top: 3px solid #4AB3EA;
-
-  padding-top:3px;
+	border-top: 3px solid #4AB3EA;
+	padding-top:3px;
+	padding-bottom: 100px;
+	margin-bottom:-100px;
 }
 
 body *
 {
   word-wrap:break-word;
 }
+
 .blackop {
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.6);
@@ -36,6 +39,7 @@ body *
     padding-right: 0px;
     position: relative;
 }
+
 .row
 {
   margin-right: 0;
@@ -82,7 +86,7 @@ padding:6px;
 {
 	text-decoration: none;
 	color: #666;
-  font-size:18px;
+	font-size:18px;
 }
 
 .navbar
@@ -96,6 +100,18 @@ padding:6px;
 .navbar-collapse
 {
   max-height: inherit;
+}
+
+.article a
+{
+	text-decoration: none;
+	color: #666;
+}
+
+.glyphicon
+{
+	top: -1px;
+	vertical-align: middle;
 }
 
 /* changes from Daniiar Satybaldiev
@@ -209,10 +225,6 @@ width:65%;}
 .carousel-fade .active.right {left:0;opacity:0;z-index:2;}
 .carousel-fade .prev {left:0;opacity:1;z-index:1;}
 
-<<<<<<< HEAD
-.container
-=======
-
 .carousel-control {
   opacity: 0;
   filter: alpha(opacity=0);
@@ -224,24 +236,10 @@ width:65%;}
 }
 
 .carousel-control.right
->>>>>>> 4c4cee1f66368ab28ee8445bbf1d31f7540f7488
 {
   background-image: none;
 }
 
-<<<<<<< HEAD
-.article a
-{
-	text-decoration: none;
-	color: #666;
-}
-
-.glyphicon
-{
-	top: -1px;
-	vertical-align: middle;
-}
-=======
 .carousel-control .icon-prev,
 .carousel-control .glyphicon-chevron-left {
   left: 25%;
@@ -326,4 +324,3 @@ width:65%;}
   }
 
 }
->>>>>>> 4c4cee1f66368ab28ee8445bbf1d31f7540f7488

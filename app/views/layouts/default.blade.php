@@ -7,21 +7,19 @@
 <meta name="author" content="">
 <link href="favicon.ico" rel="shortcut icon">
 <title>{{ $title }}</title>
-{{ HTML::style('css/bootstrap/bootstrap.min.css') }}
-{{ HTML::style('css/jquery.countdown.css') }}
-{{ HTML::style('css/default.css') }}
-@yield("style")
+<link rel="stylesheet" href="/css/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/css/default.css">
+@yield('style')
 </head>
 <body>
-<div class="container">
+<div class="container" style="min-height:100%;height: auto;">
 @include('partial.menu')
 @yield('content')
 </div>
-{{ HTML::script('js/jquery-2.0.3.min.js') }}
-{{ HTML::script('js/jquery.countdown.min.js') }}
-{{ HTML::script('js/bootstrap/bootstrap.min.js') }}
-@yield("script")
-<a href="#" class="btn btn-primary btn-sm" style="position: fixed; bottom: 0; right: 0; border-radius: 0; border-top-left-radius: 6px;">{{ Lang::get('messages.go-top') }}</a>
+<script src="/js/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/bootstrap/3.0.3/bootstrap.min.js"></script>
+@yield('script')
+<a href="#" class="btn btn-primary btn-sm" style="position: fixed; bottom: 0; right: 0; border-radius: 0; border-top-left-radius: 6px;">{{ trans('messages.go-top') }}</a>
 <div class="container">
 @include('partial.footer')
 </div>
