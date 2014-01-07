@@ -12,7 +12,7 @@
 @yield('style')
 </head>
 <body>
-<div class="container" style="min-height:100%;height: auto;">
+<div class="container">
 @include('partial.menu')
 @yield('content')
 </div>
