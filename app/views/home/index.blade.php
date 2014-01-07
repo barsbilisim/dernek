@@ -72,7 +72,7 @@
 	@if(count($news) > 0)
 		<a href="{{ route('categories.articles.index', 'news')}}">
 			<div class="panel panel-primary ">
-				<div class="panel-heading header_text">
+				<div class="header_text">
 					<p>{{ trans("messages.news") }}</p>
 				</div>
 			</div>
@@ -96,7 +96,7 @@
 	@if(count($ints) > 0)
 		<a href="{{ route('categories.articles.index', 'ints')}}">
 			<div class="panel panel-primary ">
-				<div class="panel-heading header_text">
+				<div class="header_text">
 					<p>{{ trans("messages.interviews") }}</p>
 				</div>
 			</div>
