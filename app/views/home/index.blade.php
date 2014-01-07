@@ -1,7 +1,7 @@
 @section('content')
 <div class="container">
 
-index
+indexs
 
 </div>
 @stop

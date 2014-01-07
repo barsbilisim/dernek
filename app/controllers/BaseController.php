@@ -49,7 +49,7 @@ class BaseController extends Controller
 	return $result;
 	}
 
-	function generatePassword($length = 8)
+	public static function generatePassword($length = 8)
 	{
 		$chars  = 'abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ123456789';
 		$count  = mb_strlen($chars);
@@ -60,7 +60,7 @@ class BaseController extends Controller
 		return $result;
 	}
 
-	function dateDiff($date)
+	public static function dateDiff($date)
 	{
 		$d1 = date_create(date("Y-m-d"));
 		$d2 = new DateTime($date);

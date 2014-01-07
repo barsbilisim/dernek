@@ -56,11 +56,15 @@ class ArticlesController extends BaseController
 	{
 		$lang = ['kg' => trans('messages.kg'), 'tr' => trans('messages.tr')];
 
+		$catid = 0;
 		foreach ($this->category->all() as $c)
-		$category[$c->id] = trans('messages.'.$c->name);
+		{
+			$category[$c->id] = trans('messages.'.$c->name);
+			if($c->name == $cat) $catid = $c->id;
+		}
 
 		$this->layout->title   = trans('messages.'.$cat);
-		$this->layout->content = View::make('articles.create', compact('cat', 'lang', 'category'));
+		$this->layout->content = View::make('articles.create', compact('cat', 'lang', 'category', 'catid'));
 	}
 
 	/**

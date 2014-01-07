@@ -1,5 +1,4 @@
 @section('content')
-
 @include('partial.errors')
 
 {{ Form::open(['route' => 'pages.store', "role" => "form", "class" => "form-horizontal"]) }}

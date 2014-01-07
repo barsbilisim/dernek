@@ -1,5 +1,4 @@
 @section('content')
-
 @include('partial.errors')
 
 {{ Form::model($page, ['method' => 'PATCH', 'route' => ['pages.update', $page->id]]) }}

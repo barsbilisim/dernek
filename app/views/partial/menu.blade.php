@@ -24,29 +24,44 @@
 						<li><a href="{{ route('categories.articles.index', 'news') }}">{{ trans('messages.news') }}</a></li>
 						<li><a href="{{ route('categories.articles.index', 'ints') }}">{{ trans('messages.interviews') }}</a></li>
 						<li><a href="{{ route('categories.articles.index', 'events') }}">{{ trans('messages.events') }}</a></li>
+						@if(Auth::check() && Auth::user()->inRoles(['admin']))
+						<li><a href="{{ route('categories.articles.create', 'news') }}">create</a></li>
+						<li><a href="/panel/articles">articles</a></li>
+						@endif
 					</ul>
 				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ trans('messages.our-organization') }} <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="/pages/projects">{{ trans('messages.projects') }}</a></li>
-						<li><a href="/pages/business">{{ trans('messages.business') }}</a></li>
-						<li><a href="/pages/help">{{ trans('messages.help') }}</a></li>
-						<li><a href="/pages/associates">{{ trans('messages.associates') }}</a></li>
+						<li><a href="{{ route('pages.show', 'projects') }}">{{ trans('messages.projects') }}</a></li>
+						<li><a href="{{ route('pages.show', 'business') }}">{{ trans('messages.business') }}</a></li>
+						<li><a href="{{ route('pages.show', 'help') }}">{{ trans('messages.help') }}</a></li>
+						<li><a href="{{ route('pages.show', 'associates') }}">{{ trans('messages.associates') }}</a></li>
+						@if(Auth::check() && Auth::user()->inRoles(['admin']))
+						<li><a href="{{ route('pages.index') }}">pages</a></li>
+						@endif
 					</ul>
 				</li>
 				<li><a href="/pages/contacts">{{ trans('messages.contacts') }}</a></li>
+				@if(Auth::check() && Auth::user()->inRoles(['admin']))
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">SMS<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="{{ route('sms.index') }}">SMS</a></li>
+					</ul>
+				</li>
+				@endif
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				@if(Auth::check())
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ Auth::user()->email }} <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th-large"></span> {{{ Auth::user()->email }}} <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="/users/{{{ Auth::user()->id }}}">profile</a></li>
-						<li><a href="/user/password/{{{ Auth::user()->id }}}">password</a></li>
-						<li><a href="/user/details/{{{ Auth::user()->id }}}">message</a></li>
+						<li><a href="{{ route('users.show', Auth::user()->id) }}"><span class="glyphicon glyphicon-user"></span> &nbsp; profile</a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-envelope"></span> &nbsp; message <span class="badge">7</span></a></li>
+						<li><a href="/panel"><span class="glyphicon glyphicon-briefcase"></span> &nbsp; settings</a></li>
 						<li class="divider"></li>
-						<li><a href="javascript:document.getElementById('logoutForm').submit()">logout</a></li>
+						<li><a href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-off"></span> &nbsp; logout</a></li>
 					</ul>
 				</li>
 				@else

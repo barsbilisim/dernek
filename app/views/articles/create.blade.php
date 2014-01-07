@@ -8,7 +8,7 @@
 			{{ Form::select('lang', $lang, Input::old('lang'), ['class' => 'form-control']) }}
 		</p>
 		<p class="col-sm-2">
-			{{ Form::select('category', $category, Input::old('category'), ['class' => 'form-control']) }}
+			{{ Form::select('category', $category, Input::old('category', $catid), ['class' => 'form-control']) }}
 		</p>
 	
 		<p class="col-sm-2">

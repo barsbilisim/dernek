@@ -1,36 +1,47 @@
 <?php
-//language-----------------------------------------------------------------------------------------
+//language----------------------------------------------------------------------------------------------
 Route::get("lang/{lang}", function($lang)
 {
 	$cookie = Cookie::forever('lang', $lang);
 	(Session::get('redir_url'))? $url = Session::get('redir_url') : $url = "/";
 	return Redirect::to($url)->withCookie($cookie);
 });
-//------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------
 
-//home---------------------------------------------------------------------------------------------
+//home--------------------------------------------------------------------------------------------------
 Route::get('/', 'HomeController@Index');
-//-------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------
 
-//resourceful routes------------------------------------------------------------------------------
+//resourceful routes------------------------------------------------------------------------------------
 Route::resource('roles', 'RolesController');
 Route::resource('users', 'UsersController');
 Route::resource('pages', 'PagesController');
 Route::resource('categories', 'CategoriesController');
 Route::resource('categories.articles', 'ArticlesController');
 Route::resource('articles.images'    , 'ImagesController');
-//-------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------
 
 //admin routes--------------------------------------------------------------------------------------------
 Route::get ('login',  'AdminController@Login');
 Route::post('login',  'AdminController@pLogin');
 Route::post('logout', 'AdminController@pLogout');
-//------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------
 
-//API routes---------------------------------------------------------------------------------------------
+//API routes----------------------------------------------------------------------------------------------
 Route::post('api/article/{id}/status', 'APIController@putArticleStatus');
 
-Route::post('api/image/{id}/desc',   'APIController@putImageDesc');
+Route::post('api/image/{id}/desc'  , 'APIController@putImageDesc');
 Route::post('api/image/{id}/status', 'APIController@putImageStatus');
-Route::post('api/image/{id}/main',   'APIController@putImageMain');
-//------------------------------------------------------------------------------------------------
+Route::post('api/image/{id}/main'  , 'APIController@putImageMain');
+
+Route::post('api/sms/{id}/delete', 'APIController@deleteSms');
+Route::post('api/sms/send'       , 'APIController@sendSms');
+//--------------------------------------------------------------------------------------------------------
+
+Route::group(array('prefix' => 'panel'), function()
+{
+	Route::get(''        , 'PanelController@Index');
+	Route::get('articles', 'PanelController@Article');
+});
+
+Route::resource('sms', 'SmsController');

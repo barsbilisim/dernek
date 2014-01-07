@@ -1,0 +1,3 @@
+@section('content')
+articles
+@stop

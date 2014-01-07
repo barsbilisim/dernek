@@ -8,6 +8,7 @@ class APIController extends BaseController
 		$this->beforeFilter('auth', ['on' => ['get', 'post', 'put', 'delete']]);
 	}
 
+	//Article--------------------------------------------------------------------------------
 	public function putArticleStatus($id)
 	{
 		$article = Article::findOrFail($id);
@@ -18,7 +19,9 @@ class APIController extends BaseController
 
 		return Response::json('error');
 	}
+	//--------------------------------------------------------------------------------------
 
+	//Image--------------------------------------------------------------------------------
 	public function putImageDesc($id)
 	{
 		$image = Image::findOrFail($id);
@@ -49,4 +52,36 @@ class APIController extends BaseController
 		
 		return Response::json('error');
 	}
+	//--------------------------------------------------------------------------------------
+
+
+	//SMS-----------------------------------------------------------------------------------
+	public function sendSMS()
+	{
+		$user = '5334660688';
+		$pass = 'kdmk123kdmk';
+		$status = static::send_sms('http://api.smsvitrini.com/index.php', 'islem=1&user='.$user.'&pass='.$pass.'&mesaj='.Input::json('content').'&numaralar='.Input::json('nums').'&baslik='.Input::json('title'));
+		$durum = static::send_sms("http://api.smsvitrini.com/index.php", "islem=2&user=".$user."&pass=".$pass);
+
+		if(Input::json('save') == 'true')
+		{
+			$sms = Sms::create(
+						['id'     => uniqid(),
+						'content' => Input::json('content', ''),
+						'pinned'  => (Input::json('pin') == 'true')?1:0
+						]
+			);
+		}
+
+		return Response::json(compact('status', 'durum', 'sms'));
+	}
+
+	public function deleteSMS($id)
+	{
+		if(SMS::findOrFail($id)->delete())
+		return Response::json('success');
+		
+		return Response::json('error');
+	}
+	//--------------------------------------------------------------------------------------
 }
