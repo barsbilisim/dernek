@@ -80,13 +80,13 @@
 	<div class="row news-box " id="news-box-block">
 			@foreach($news as $n)
 				@if($img = $n->link())@endif
-						<div class="col-sm-4 col-lg-4 news-box-block">
+						<div class="col-sm-4 col-lg-4 news-box-block" style="position:relative;">
 							<div class="thumbnail">
 							<a href="{{ $img->big }}" class="news-box-link " rel="prettyPhoto[news]" title="{{ $img->desc }}">
 								<img class="news-box-image" src="{{ $img->thumb }}">
 							</a>
-							<p class="thumb_date">{{$n->created_at}}</p>
 							<p>{{$n->title}}</p>
+							<p class="thumb_date" style="position:absolute; background: rgba(255,255,255, 0.8); padding:2px 5px; top:8px; right:8px; font-style:italic; color: #888; font-size:12px;">{{ (new DateTime($n->created_at))->format('d M Y') }}</p>
 							</div>
 						</div>
 			@endforeach
