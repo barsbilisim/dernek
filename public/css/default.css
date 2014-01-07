@@ -177,7 +177,7 @@ padding:6px;
   border-bottom:2px solid #4AB3EA;
   background-color: transparent;
 }
-.panel-primary > .header_text p{
+.ds-panel-primary > .header_text p{
   margin-bottom: -1px;
 border-bottom:3px solid #4AB3EA;
 display: inline-block;
