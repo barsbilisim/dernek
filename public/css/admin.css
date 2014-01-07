@@ -13,14 +13,17 @@ body *
 
 .login-box
 {
-    width: 316px;
-    margin:auto;
+    position: absolute;
+    width: 300px;
+    top: 50%;
+    left: 50%;
+    margin-top: -70px;
+    margin-left: -150px;
 }
 
 .login-box input
 {
     text-align: center;
-    line-height: initial;
 }
 
 .row

@@ -1,12 +1,17 @@
-<div class="navbar-wrapper">
-	<div style="text-align: center; position: relative; height: 40px;">
-		<div class="" style="position: absolute; top: 10px; right: 20px;">
-				<a href="/lang/kg" title="kg"><img src="/img/kg.gif" style="border-radius: 2px; width: 27px; height: 18px;"></a> | 
-				<a href="/lang/tr" title="tr"><img src="/img/tr.jpg" style="border-radius: 2px; width: 27px; height: 18px;"></a>
-		</div>
-	</div>
+<div class="col-sm-12" style="position:relative;height:100px;">
+	<div class="col-sm-2"><img  style="width:100px;"src="/img/logo.png"></div>
+	<div class="col-sm-10 headertext"><p>КЫРГЫЗСТАН ДОСТУК ЖАНА МАДАНИЯТ КООМУ<p></div>
+	
 
-	<div class="navbar navbar-inverse" role="navigation">
+<div class="" style="position: absolute; top: 10px; right: 20px;">
+		<a href="/lang/kg" title="kg"><img src="/img/kg.gif" style="border-radius: 2px; width: 27px; height: 18px;"></a> | 
+		<a href="/lang/tr" title="tr"><img src="/img/tr.jpg" style="border-radius: 2px; width: 27px; height: 18px;"></a>
+</div>
+	
+</div>
+<div class="clear"></div>
+<div class="navbar-wrapper">
+	<div class="navbar navbar-default" role="navigation">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 				<span class="sr-only">toggle navigation</span>
@@ -14,10 +19,11 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/"><span class="glyphicon glyphicon-home"></span></a>
+			
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
+				<li class="active"><a class="navbar-brand" href="/">{{ trans('messages.home') }}</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ trans('messages.news') }} <b class="caret"></b></a>
 					<ul class="dropdown-menu">
