@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateUserRoles extends Migration {
+class CreateUserGroups extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,16 +12,16 @@ class CreateUserRoles extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('user_roles', function(Blueprint $table)
+		Schema::create('user_groups', function(Blueprint $table)
 		{
 			$table->engine = 'InnoDB';
 			$table->string('user_id');
-			$table->string('role_id');
+			$table->string('group_id');
 			$table->timestamps();
 
-			$table->primary(['user_id', 'role_id']);
+			$table->primary(['user_id', 'group_id']);
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-			$table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
+			$table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade')->onUpdate('cascade');
 		});
 	}
 
@@ -32,7 +32,7 @@ class CreateUserRoles extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('user_roles');
+		Schema::drop('user_groups');
 	}
 
 }

@@ -59,15 +59,7 @@
 		</div>
  @endif
 @endforeach
-
-
-
-
-
 </div>
-
-
-
 <div class="col-sm-8 ds">
 	@if(count($news) > 0)
 		<a href="{{ route('categories.articles.index', 'news')}}">

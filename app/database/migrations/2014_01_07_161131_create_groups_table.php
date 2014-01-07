@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateRolesTable extends Migration
+class CreateGroupsTable extends Migration
 {
 
 	/**
@@ -13,11 +13,11 @@ class CreateRolesTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('roles', function(Blueprint $table)
+		Schema::create('groups', function(Blueprint $table)
 		{
 			$table->engine = 'InnoDB';
 			$table->string('id', 20)->unique()->primary();
-			$table->string('name', 20);
+			$table->string('name', 100);
 			$table->timestamps();
 		});
 	}
@@ -30,7 +30,7 @@ class CreateRolesTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('roles');
+		Schema::drop('groups');
 	}
 
 }

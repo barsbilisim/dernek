@@ -5,7 +5,7 @@ class ArticleDetailsTableSeeder extends Seeder {
 	public function run()
 	{
 		// Uncomment the below to wipe the table clean before populating
-		// DB::table('articles')->truncate();
+		DB::table('article_details')->truncate();
 
 		$articles = array(
 			['article_id' => '52c19a22ce106',

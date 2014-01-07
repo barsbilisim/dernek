@@ -43,9 +43,6 @@
 						<li><a href="{{ route('pages.show', 'business') }}">{{ trans('messages.business') }}</a></li>
 						<li><a href="{{ route('pages.show', 'help') }}">{{ trans('messages.help') }}</a></li>
 						<li><a href="{{ route('pages.show', 'associates') }}">{{ trans('messages.associates') }}</a></li>
-						@if(Auth::check() && Auth::user()->inRoles(['admin']))
-						<li><a href="{{ route('pages.index') }}">pages</a></li>
-						@endif
 					</ul>
 				</li>
 				<li><a href="/pages/contacts">{{ trans('messages.contacts') }}</a></li>
@@ -54,6 +51,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">SMS<b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="{{ route('sms.index') }}">SMS</a></li>
+						<li><a href="{{ route('groups.index') }}">Groups</a></li>
 					</ul>
 				</li>
 				@endif

@@ -5,7 +5,7 @@ class PagesTableSeeder extends Seeder {
 	public function run()
 	{
 		// Uncomment the below to wipe the table clean before populating
-		// DB::table('pages')->truncate();
+		DB::table('pages')->truncate();
 
 		$pages = array(
 			['id'        => '52c299dd50e1e',

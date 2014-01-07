@@ -20,6 +20,7 @@ Route::resource('categories', 'CategoriesController');
 Route::resource('categories.articles', 'ArticlesController');
 Route::resource('articles.images'    , 'ImagesController');
 Route::resource('sms', 'SmsController');
+Route::resource('groups', 'GroupsController');
 //--------------------------------------------------------------------------------------------------------
 
 //admin routes--------------------------------------------------------------------------------------------
