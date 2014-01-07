@@ -1,1 +1,33 @@
-﻿
+﻿body
+{
+    /*background: url('images/pattern.gif') repeat fixed;*/
+    font-family: Calibri, sans-serif;
+    color: #666;
+    padding-top: 70px;
+}
+
+body *
+{
+  word-wrap:break-word;
+}
+
+.login-box
+{
+    position: absolute;
+    width: 300px;
+    top: 50%;
+    left: 50%;
+    margin-top: -70px;
+    margin-left: -150px;
+}
+
+.login-box input
+{
+    text-align: center;
+}
+
+.row
+{
+    margin-right: 0;
+    margin-left: 0;
+}
