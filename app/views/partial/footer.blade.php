@@ -5,7 +5,7 @@
 					<p>{{ Lang::get("messages.twitter") }}</p>
 			</div>
 		</div>
-		<a class="twitter-timeline"  href="https://twitter.com/satybaldiev" data-chrome="noheader noscrollbar nofooter noborders transparent" data-widget-id="412495774740512768">Твиты пользователя @satybaldiev</a>
+		<a class="twitter-timeline"  href="https://twitter.com/KDMKIST"  data-widget-id="420491653653082112" data-chrome="noheader noscrollbar nofooter noborders transparent">Tweets by @KDMKIST</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 

@@ -12,7 +12,7 @@ body
 	min-height: 100%;
 	border-top: 3px solid #4AB3EA;
 	padding-top:3px;
-	padding-bottom: 100px;
+	padding-bottom: 10px;
 }
 
 body *
@@ -163,21 +163,21 @@ padding:6px;
 
 /* CONTENT */
 
-.panel-primary > .panel-heading {
+.padding-left-12 .panel-primary > .panel-heading {
     background-color: transparent;
 }
-.panel-heading {
+.padding-left-12 .panel-heading {
     border-radius: 0px;
     padding: 0px 0px;
     
 }
-.panel-primary {
+.padding-left-12 .panel-primary {
   border-radius: 0px;
   border: 0;
   border-bottom:2px solid #4AB3EA;
   background-color: transparent;
 }
-.panel-primary > .header_text p{
+.padding-left-12 .panel-primary > .header_text p{
   margin-bottom: -1px;
 border-bottom:3px solid #4AB3EA;
 display: inline-block;
