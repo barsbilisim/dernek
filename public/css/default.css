@@ -161,22 +161,22 @@ padding:6px;
 
 /* CONTENT */
 
-.padding-left-12 .panel-primary > .panel-heading {
+.ds .panel-primary > .panel-heading {
     background-color: transparent;
 }
-.padding-left-12 .panel-heading {
+.ds .panel-heading {
     border-radius: 0px;
     padding: 0px 0px;
     
 }
-.padding-left-12 .panel-primary {
+.ds .panel-primary {
   border-radius: 0px;
   border: 0;
   border-bottom:2px solid #4AB3EA;
   background-color: transparent;
 }
 
-.padding-left-12 .panel-primary > .header_text p{
+.ds .panel-primary > .header_text p{
 margin-bottom: -1px;
 border-bottom:3px solid #4AB3EA;
 display: inline-block;

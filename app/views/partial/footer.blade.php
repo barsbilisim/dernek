@@ -1,4 +1,4 @@
-<div class="footer" style="background-color:black !important;">
+<div class="footer ds" style="background-color:black !important;">
 	<div class="col-sm-3 padding-left-12">
 		<div class="panel panel-primary ">
 			<div class=" header_text">

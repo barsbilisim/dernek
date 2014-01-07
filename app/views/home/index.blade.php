@@ -68,11 +68,11 @@
 
 
 
-<div class="col-sm-8">
+<div class="col-sm-8 ds">
 	@if(count($news) > 0)
 		<a href="{{ route('categories.articles.index', 'news')}}">
 			<div class="panel panel-primary ">
-				<div class="header_text">
+				<div class="panel-heading header_text">
 					<p>{{ trans("messages.news") }}</p>
 				</div>
 			</div>
@@ -96,7 +96,7 @@
 	@if(count($ints) > 0)
 		<a href="{{ route('categories.articles.index', 'ints')}}">
 			<div class="panel panel-primary ">
-				<div class="header_text">
+				<div class="panel-heading header_text">
 					<p>{{ trans("messages.interviews") }}</p>
 				</div>
 			</div>
@@ -119,7 +119,7 @@
 
 </div>
 
-<div class="col-sm-4 padding-left-12">
+<div class="col-sm-4 padding-left-12 ds">
 		
 			<div class="panel panel-primary ">
 				<div class="panel-heading header_text">
