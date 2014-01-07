@@ -1,8 +1,7 @@
 @section('content')
-
 <div id="myCarousel" class="carousel carousel-fade slide hidden-xs col-sm-8">
 <div class="carousel-inner">
-@foreach($news as $key => $s)
+@foreach($slider as $key => $s)
 @if($img = $s->link())@endif
 <div class="item @if($key == 0) active @endif">
 <img src="{{ $img->big }}">
@@ -71,7 +70,7 @@
 
 <div class="col-sm-8">
 	@if(count($news) > 0)
-		<a href="/news">
+		<a href="{{ route('categories.articles.index', 'news')}}">
 			<div class="panel panel-primary ">
 				<div class="panel-heading header_text">
 					<p>{{ trans("messages.news") }}</p>
@@ -95,7 +94,7 @@
 	@endif
 
 	@if(count($ints) > 0)
-		<a href="/news">
+		<a href="{{ route('categories.articles.index', 'ints')}}">
 			<div class="panel panel-primary ">
 				<div class="panel-heading header_text">
 					<p>{{ trans("messages.interviews") }}</p>
@@ -146,4 +145,11 @@
 
 @section('script')
 {{ HTML::script("js/prettyPhoto/3.1.15/jquery.prettyPhoto.js") }}
+<script type="text/javascript">
+$("[rel^='prettyPhoto']").prettyPhoto({
+	theme: 'facebook',
+	overlay_gallery: false,
+	social_tools: ''
+});
+</script>
 @stop

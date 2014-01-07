@@ -19,6 +19,7 @@ Route::resource('pages', 'PagesController');
 Route::resource('categories', 'CategoriesController');
 Route::resource('categories.articles', 'ArticlesController');
 Route::resource('articles.images'    , 'ImagesController');
+Route::resource('sms', 'SmsController');
 //--------------------------------------------------------------------------------------------------------
 
 //admin routes--------------------------------------------------------------------------------------------
@@ -43,5 +44,3 @@ Route::group(array('prefix' => 'panel'), function()
 	Route::get(''        , 'PanelController@Index');
 	Route::get('articles', 'PanelController@Article');
 });
-
-Route::resource('sms', 'SmsController');
