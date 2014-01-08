@@ -109,7 +109,7 @@
 							<a href="{{ $img->big }}" class="news-box-link" rel="prettyPhoto[news]" title="{{ $img->desc }}">
 								<img class="news-box-image" src="{{ $img->thumb }}">
 							</a>
-							<p class="thumb_date">{{$n->created_at}}</p>
+							<p class="thumb_date" style="position:absolute; background: rgba(255,255,255, 0.8); padding:2px 5px; top:8px; right:8px; font-style:italic; color: #888; font-size:12px;">{{ (new DateTime($n->created_at))->format('d M Y') }}</p>
 							<p>{{$n->title}}</p>
 							</div>
 						</div>
@@ -136,7 +136,6 @@
 
 		<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FKyrgyzstan.Dostuk.jana.Madaniyat.Koomu&amp;width=368&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:368px; height:258px;" allowTransparency="true"></iframe>
 </div>
-@include('partial.footer')
 @stop
 
 @section('style')
