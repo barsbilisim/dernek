@@ -23,7 +23,7 @@ class HomeController extends BaseController
 	{
 		$news    = $this->art->orderBy('created_at', 'DESC')->where('lang'  , $this->lang)->where('status', '1')->where('category', 'news')->where('slider', '0')->take(6)->get();
 		$slider  = $this->art->orderBy('created_at', 'DESC')->where('lang'  , $this->lang)->where('status', '1')->where('category', 'news')->where('slider', '1')->take(5)->get();
-		$ints    = $this->art->orderBy('created_at', 'DESC')->where('lang'  , $this->lang)->where('status', '1')->where('category', 'ints')->take(4)->get();
+		$ints    = $this->art->orderBy('created_at', 'DESC')->where('lang'  , $this->lang)->where('status', '1')->where('category', 'ints')->take(6)->get();
 		$anounce = $this->art->orderBy('created_at', 'DESC')->where('lang'  , $this->lang)->where('status', '1')->where('category', 'events')->where('anounce', 1)->first();
 
   		$counter = (count($anounce) > 0)?2:3;

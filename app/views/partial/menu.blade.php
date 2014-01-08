@@ -3,7 +3,7 @@
 	<div class="col-sm-10 headertext"><p>КЫРГЫЗСТАН ДОСТУК ЖАНА МАДАНИЯТ КООМУ<p></div>
 	
 
-<div class="" style="position: absolute; top: 10px; right: 20px;">
+<div class="" style="position: absolute; top: 10px; right: 20px;z-index:99999;">
 		<a href="/lang/kg" title="kg"><img src="/img/kg.gif" style="border-radius: 2px; width: 27px; height: 18px;"></a> | 
 		<a href="/lang/tr" title="tr"><img src="/img/tr.jpg" style="border-radius: 2px; width: 27px; height: 18px;"></a>
 </div>
