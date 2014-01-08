@@ -34,7 +34,7 @@ class UsersController extends BaseController
 	 */
 	public function index()
 	{
-		$users = $this->user->all();
+		$users = $this->user->withTrashed()->get();
 
 		$this->layout->title   = 'Users';
 		$this->layout->content = View::make('users.index', compact('users'));
@@ -58,22 +58,28 @@ class UsersController extends BaseController
 	 */
 	public function store()
 	{
-		$inputs = Input::all();
-		$validation = Validator::make($inputs, ['email' => 'required|email|unique:users,email|max:250', 'password' => 'required|alpha_num|max:100|min:5', 'balance' => 'numeric']);
+		$input = Input::all();
+		$validation = Validator::make($input,
+					['email' => 'required|email|unique:users,email|max:250',
+					'password' => 'required|alpha_num|max:100|min:5', 'balance' => 'numeric']);
 
 		if ($validation->passes())
 		{
-			$inputs['id']       = uniqid();
-			$inputs['password'] = Hash::make($inputs['password']);
-			$this->user->create($inputs);
+			$id = uniqid();
+			$this->user->create(
+				['id'      => $id,
+				'email'    => $input['email'],
+				'password' => Hash::make($input['password']),
+				'balance'  => $input['balance'],
+				'phone'    => $input['phone']
+				]);
 
-			return Redirect::route('users.show', $inputs['id']);
+			return Redirect::route('users.show', $id);
 		}
 
 		return Redirect::route('users.create')
 			->withInput()
-			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+			->withErrors($validation);
 	}
 
 	/**
@@ -84,7 +90,7 @@ class UsersController extends BaseController
 	 */
 	public function show($id)
 	{
-		$user = $this->user->findOrFail($id);
+		$user = $this->user->withTrashed()->findOrFail($id);
 
 		$this->layout->title   = 'User';
 		$this->layout->content = View::make('users.show', compact('user'));
@@ -98,7 +104,7 @@ class UsersController extends BaseController
 	 */
 	public function edit($id)
 	{
-		$user = $this->user->find($id);
+		$user = $this->user->withTrashed()->find($id);
 
 		if (is_null($user))
 		{
@@ -117,23 +123,28 @@ class UsersController extends BaseController
 	 */
 	public function update($id)
 	{
-		$inputs = array_except(Input::all(), '_method');
-		$validation = Validator::make($inputs, ['email' => 'required|email|unique:users,email,'.$id.'|max:250', 'password' => 'alpha_num|max:100|min:5', 'balance' => 'numeric']);
+		$input = array_except(Input::all(), '_method');
+		$validation = Validator::make($input,
+					['email' => 'required|email|unique:users,email,'.$id.'|max:250',
+					'password' => 'alpha_num|max:100|min:5', 'balance' => 'numeric']);
 
 		if ($validation->passes())
 		{
-			if($inputs['password'] == "") unset($inputs['password']);
-			else $inputs['password'] = Hash::make($inputs['password']);
-
-			$user = $this->user->find($id)->update($inputs);
+			$user = $this->user->withTrashed()->find($id);
+			$user->email    = $input['email'];
+			if($input['password'] != "")
+				$user->password = Hash::make($input['password']);
+			$user->balance  = $input['balance'];
+			$user->phone    = $input['phone'];
+			$user->deleted_at = (Input::get('deleted') == 1)?date('Y-m-d H:t:s'):null;
+			$user->save();
 
 			return Redirect::route('users.show', $id);
 		}
 
 		return Redirect::route('users.edit', $id)
 			->withInput()
-			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+			->withErrors($validation);
 	}
 
 	/**
@@ -144,7 +155,11 @@ class UsersController extends BaseController
 	 */
 	public function destroy($id)
 	{
-		$this->user->find($id)->delete();
+		if(Auth::user()->id != $id)
+		{
+			$user = $this->user->withTrashed()->find($id);
+			($user->deleted_at == null)?$user->delete():$user->forceDelete();
+		}
 
 		return Redirect::route('users.index');
 	}

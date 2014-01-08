@@ -19,7 +19,7 @@
 		<tbody>
 			@foreach ($categories as $category)
 				<tr>
-					<td>{{{ $category->name }}}</td>
+					<td><a href="{{ route('categories.show', $category->name) }}">{{{ $category->name }}}</a></td>
 					<td>{{{ $category->articles->count() }}}</td>
 					<td>{{{ $category->deleted_at }}}</td>
 					<td><a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary">edit</a></td>

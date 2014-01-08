@@ -77,8 +77,7 @@ class PagesController extends BaseController
 
 		return Redirect::route('pages.create')
 			->withInput()
-			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+			->withErrors($validation);
 	}
 
 	/**

@@ -17,7 +17,7 @@
 		<tbody>
 			@foreach ($groups as $group)
 			<tr>
-				<td>{{{ $group->name }}}</td>
+				<td><a href="{{ route('groups.show', $group->id) }}">{{{ $group->name }}}</a></td>
 				<td>{{{ $group->users->count() }}}</td>
 				<td><a href="{{ route('groups.edit', $group->id) }}" class="btn btn-primary">edit</a></td>
 				<td>

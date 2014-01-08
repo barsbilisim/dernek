@@ -59,7 +59,7 @@ class RolesController extends BaseController
 	public function store()
 	{
 		$input = Input::all();
-		$validation = Validator::make($input, ['name' => 'required|min:5|max:100']);
+		$validation = Validator::make($input, ['name' => 'required|min:5|max:100|unique:roles,name']);
 
 		if ($validation->passes())
 		{
@@ -124,7 +124,7 @@ class RolesController extends BaseController
 	public function update($id)
 	{
 		$input = Input::all();
-		$validation = Validator::make($input, ['name' => 'required|min:5|max:100']);
+		$validation = Validator::make($input, ['name' => 'required|min:5|max:100|unique:roles,name,'.$id]);
 
 		if ($validation->passes())
 		{
@@ -155,7 +155,10 @@ class RolesController extends BaseController
 	 */
 	public function destroy($id)
 	{
-		$this->role->find($id)->delete();
+		$role = $this->role->find($id);
+		
+		if($role->name != 'admin')
+			$role->delete();
 
 		return Redirect::route('roles.index');
 	}

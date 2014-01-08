@@ -19,7 +19,7 @@
 		<tbody>
 			@foreach ($pages as $page)
 			<tr>
-				<td>{{{ $page->name }}}</td>
+				<td><a href="{{ route('pages.show', $page->name) }}">{{{ $page->name }}}</a></td>
 				<td>{{ $page->content }}</td>
 				<td>{{ trans('messages.'.$page->lang) }}</td>
 				<td>{{{ $page->deleted_at }}}</td>

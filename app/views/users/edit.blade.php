@@ -17,7 +17,19 @@
 <div class="form-group">
 	<p class="col-sm-2">
 		<label for="balance">Balance</label>
-		<input type="number" name="balance" class="form-control" value="{{ Input::old('balance', $user->balance) }}" required min="-10000" max="10000">
+		<input type="text" name="balance" class="form-control" value="{{ Input::old('balance', $user->balance) }}" required maxlength="4">
+	</p>
+</div>
+<div class="form-group">
+	<p class="col-sm-2">
+		<label for="phone">Phone</label>
+		<input type="text" name="phone" class="form-control" value="{{ Input::old('phone', $user->phone) }}" required maxlength="10">
+	</p>
+</div>
+<div class="form-group">
+	<p class="col-sm-2">
+		<input type="checkbox" name="deleted" style="vertical-align:middle; margin-top:0" value="1" @if($user->deleted_at != null) checked="checked" @endif>
+		<label for="save">deleted</label>
 	</p>
 </div>
 <div class="form-group">
