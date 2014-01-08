@@ -16,7 +16,7 @@ class ArticlesController extends BaseController
 
 	public function __construct(Article $article, ArticleDetail $artdetail, ArticleJoin $artjoin, Category $category)
 	{
-		$this->layout = 'layouts.default';
+		$this->layout = (User::inRoles(['admin']))?'layouts.panel':'layouts.default';
 		$this->lang   = Config::get('app.locale');
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
 		$this->beforeFilter('auth', ['on' => ['post', 'put', 'delete']]);
@@ -24,7 +24,7 @@ class ArticlesController extends BaseController
 
 		$this->beforeFilter(function()
 		{
-			if(Auth::check() && !Auth::user()->inRoles(['admin']))
+			if(!User::inRoles(['admin']))
 				return Redirect::guest('login');
 		}, ['except' => ['index', 'show']]);
 

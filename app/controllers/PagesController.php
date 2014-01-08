@@ -13,17 +13,16 @@ class PagesController extends BaseController
 
 	public function __construct(Page $page)
 	{
-		$this->layout = 'layouts.default';
+		$this->layout = (User::inRoles(['admin']))?'layouts.panel':'layouts.default';
 		$this->lang   = Config::get("app.locale");
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
 		$this->beforeFilter('auth', ['on' => ['post', 'put', 'delete']]);
-		$this->beforeFilter('auth', ['on' => ['get'], 'except' => ['index', 'show']]);
 
 		$this->beforeFilter(function()
 		{
-			if(Auth::check() && !Auth::user()->inRoles(['admin']))
+			if(!User::inRoles(['admin']))
 				return Redirect::guest('login');
-		}, ['except' => ['index', 'show']]);
+		}, ['except' => ['show']]);
 		
 		$this->page = $page;
 	}
@@ -35,7 +34,7 @@ class PagesController extends BaseController
 	 */
 	public function index()
 	{
-		$pages = $this->page->all();
+		$pages = $this->page->withTrashed()->where('lang', $this->lang)->orderBy('created_at', 'desc')->get();
 
 		$this->layout->title   = 'Pages';
 		$this->layout->content = View::make('pages.index', compact('pages'));
@@ -90,7 +89,7 @@ class PagesController extends BaseController
 	 */
 	public function show($name)
 	{
-		$page = $this->page->where('lang', $this->lang)->where('name', $name)->first();
+		$page = $this->page->withTrashed()->where('lang', $this->lang)->where('name', $name)->first();
 
 		if(!$page)
 		$page = $this->page->where('lang', $this->lang)->where('name', '404')->first();
@@ -107,7 +106,7 @@ class PagesController extends BaseController
 	 */
 	public function edit($id)
 	{
-		$page = $this->page->find($id);
+		$page = $this->page->withTrashed()->find($id);
 		$lang = ["kg" => trans("messages.kg"), "tr" => trans("messages.tr")];
 
 		if (is_null($page))
@@ -130,19 +129,22 @@ class PagesController extends BaseController
 		$input = array_except(Input::all(), '_method');
 		$validation = Validator::make($input, ['name' => 'required', 'content' => 'required']);
 
-		$page = $this->page->find($id);
 
 		if ($validation->passes())
 		{
-			$page->update($input);
+			$page = $this->page->withTrashed()->find($id);
+			$page->name       = $input['name'];
+			$page->content    = $input['content'];
+			$page->lang       = $input['lang'];
+			$page->deleted_at = (Input::get('deleted') == 1)?date('Y-m-d H:t:s'):null;
+			$page->save();
 
 			return Redirect::route('pages.show', $page->name);
 		}
 
-		return Redirect::route('pages.edit', $page->id)
+		return Redirect::route('pages.edit', $id)
 			->withInput()
-			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+			->withErrors($validation);
 	}
 
 	/**
@@ -153,7 +155,8 @@ class PagesController extends BaseController
 	 */
 	public function destroy($id)
 	{
-		$this->page->find($id)->delete();
+		$p = $this->page->withTrashed()->find($id);
+		($p->deleted_at == null)?$p->delete():$p->forceDelete();
 
 		return Redirect::route('pages.index');
 	}

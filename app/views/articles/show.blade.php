@@ -13,7 +13,7 @@
 	@endforeach
 </div>
 
-@if(Auth::check() && Auth::user()->inRoles(['admin']))
+@if(User::inRoles(['admin']))
 <div class="tooltip-div" style="margin-bottom: 40px">
 	<button type="submit" class="btn btn-primary btn-sm" form="delete-article" title="{{ trans('messages.delete') }}"><span class="glyphicon glyphicon-trash"></span></button> | 
 	<a href="{{ route('categories.articles.edit', [$cat, $article->id]) }}" class="btn btn-primary btn-sm" title="{{ trans('messages.edit') }}"><span class="glyphicon glyphicon-pencil"></span></a> |

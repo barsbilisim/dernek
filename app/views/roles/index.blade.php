@@ -1,12 +1,15 @@
 @section('content')
-<a href="{{ route('roles.create') }}" class="btn btn-sm pull-right" title="new role"><span class="glyphicon glyphicon-plus"></span></a>
+<div class="tooltip-div">
+	<a href="{{ route('roles.create') }}" class="btn btn-sm pull-right" data-placement="left" title="add role"><span class="glyphicon glyphicon-plus"></span></a>
+</div>
+<div style="clear:both"></div>
 
 @if ($roles->count())
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Id</th>
-				<th>Name</th>
+				<th>role</th>
+				<th>users</th>
 				<th></th>
 				<th></th>
 			</tr>
@@ -14,14 +17,14 @@
 		<tbody>
 			@foreach ($roles as $role)
 			<tr>
-				<td>{{{ $role->id }}}</td>
-					<td>{{{ $role->name }}}</td>
-                    <td>{{ link_to_route('roles.edit', 'Edit', array($role->id), array('class' => 'btn btn-info')) }}</td>
-                    <td>
-                        {{ Form::open(array('method' => 'DELETE', 'route' => array('roles.destroy', $role->id))) }}
-                            {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
-                        {{ Form::close() }}
-                    </td>
+				<td>{{{ $role->name }}}</td>
+				<td>{{{ $role->users->count() }}}</td>
+				<td><a href="{{ route('roles.edit', $role->id) }}" class="btn btn-primary">edit</a></td>
+				<td>
+					{{ Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'onsubmit' => 'return confirm("Are you sure?")']) }}
+						<button type="submit" class="btn btn-danger">delete</button>
+					{{ Form::close() }}
+				</td>
 			</tr>
 			@endforeach
 		</tbody>
@@ -30,4 +33,13 @@
 	There are no roles
 @endif
 
+@stop
+
+@section('script')
+<script type="text/javascript">
+$(".tooltip-div").tooltip({
+	selector: "button, a",
+	container: "body"
+});
+</script>
 @stop

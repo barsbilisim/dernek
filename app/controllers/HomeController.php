@@ -12,7 +12,7 @@ class HomeController extends BaseController
 
 	public function __construct(ArticleJoin $art)
 	{
-		$this->layout = 'layouts.default';
+		$this->layout = (User::inRoles(['admin']))?'layouts.panel':'layouts.default';
 		$this->lang   = Config::get('app.locale');
 		
 		$this->art = $art; 

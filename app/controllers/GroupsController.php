@@ -13,14 +13,14 @@ class GroupsController extends BaseController
 
 	public function __construct(Group $group)
 	{
-		$this->layout = 'layouts.default';
+		$this->layout = (User::inRoles(['admin']))?'layouts.panel':'layouts.default';
 		$this->lang   = Config::get("app.locale");
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
 		$this->beforeFilter('auth', ['on' => ['get', 'post', 'put', 'delete']]);
 		
 		$this->beforeFilter(function()
 		{
-			if(Auth::check() && !Auth::user()->inRoles(['admin']))
+			if(!User::inRoles(['admin']))
 				return Redirect::guest('login');
 		});
 		
@@ -63,7 +63,16 @@ class GroupsController extends BaseController
 
 		if ($validation->passes())
 		{
-			$this->group->create($input);
+			$id = uniqid();
+			$this->group->create([
+				'id'   => $id,
+				'name' => $input['name']]);
+
+			if(Input::get('users'))
+			foreach (Input::get('users') as $user)
+			{
+				$this->group->find($id)->users()->attach($user);
+			}
 
 			return Redirect::route('groups.index');
 		}
@@ -114,14 +123,23 @@ class GroupsController extends BaseController
 	 */
 	public function update($id)
 	{
-		$input = array_except(Input::all(), '_method');
-		$validation = Validator::make($input, []);
+		$input = Input::all();
+		$validation = Validator::make($input, ['name' => 'required|min:5|max:100']);
 
 		if ($validation->passes())
 		{
-			$group = $this->group->find($id)->update($input);
+			$this->group->find($id)->update(['name' => $input['name']]);
 
-			return Redirect::route('groups.show', $id);
+			if(Input::get('users'))
+			foreach (Input::get('users') as $user)
+			{
+				$ug = $this->group->find($id)->users()->find($user);
+
+				if(count($ug) == 0)
+				$this->group->find($id)->users()->attach($user);
+			}
+
+			return Redirect::route('groups.index');
 		}
 
 		return Redirect::route('groups.edit', $id)

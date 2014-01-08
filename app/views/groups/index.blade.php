@@ -8,8 +8,9 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Name</th>
-				<th>Users</th>
+				<th>name</th>
+				<th>users</th>
+				<th></th>
 				<th></th>
 			</tr>
 		</thead>
@@ -18,10 +19,10 @@
 			<tr>
 				<td>{{{ $group->name }}}</td>
 				<td>{{{ $group->users->count() }}}</td>
-				<td>{{ link_to_route('groups.edit', 'Edit', array($group->id), array('class' => 'btn btn-info')) }}</td>
+				<td><a href="{{ route('groups.edit', $group->id) }}" class="btn btn-primary">edit</a></td>
 				<td>
-					{{ Form::open(array('method' => 'DELETE', 'route' => array('groups.destroy', $group->id))) }}
-						{{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
+					{{ Form::open(['method' => 'DELETE', 'route' => ['groups.destroy', $group->id], 'onsubmit' => 'return confirm("Are you sure?")']) }}
+						<button type="submit" class="btn btn-danger">delete</button>
 					{{ Form::close() }}
 				</td>
 			</tr>

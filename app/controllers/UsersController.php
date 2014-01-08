@@ -13,14 +13,14 @@ class UsersController extends BaseController
 
 	public function __construct(User $user)
 	{
-		$this->layout = 'layouts.default';
+		$this->layout = (User::inRoles(['admin']))?'layouts.panel':'layouts.default';
 		$this->lang   = Config::get("app.locale");
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
 		$this->beforeFilter('auth', ['on' => ['get', 'post', 'put', 'delete']]);
 		
 		$this->beforeFilter(function()
 		{
-			if(Auth::check() && !Auth::user()->inRoles(['admin']))
+			if(!User::inRoles(['admin']))
 				return Redirect::guest('login');
 		});
 		

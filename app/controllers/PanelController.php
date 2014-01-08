@@ -7,7 +7,7 @@ class PanelController extends BaseController
 
 	public function __construct(ArticleJoin $artjoin)
 	{
-		$this->layout = 'layouts.default';
+		$this->layout = (User::inRoles(['admin']))?'layouts.panel':'layouts.default';
 		$this->lang   = Config::get("app.locale");
 
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
@@ -15,7 +15,7 @@ class PanelController extends BaseController
 		
 		$this->beforeFilter(function()
 		{
-			if(Auth::check() && !Auth::user()->inRoles(['admin']))
+			if(!User::inRoles(['admin']))
 				return Redirect::guest('login');
 		});
 

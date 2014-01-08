@@ -1,6 +1,6 @@
 @section('content')
 <div class="tooltip-div">
-	<a href="{{ route('pages.create') }}" class="btn btn-lg pull-left" data-placement="right" title="add page"><span class="glyphicon glyphicon-plus"></a>
+	<a href="{{ route('pages.create') }}" class="btn pull-right" data-placement="left" title="add page"><span class="glyphicon glyphicon-plus"></a>
 </div>
 <div style="clear:both"></div>
 
@@ -8,26 +8,28 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Name</th>
-				<th>Content</th>
-				<th>Language</th>
+				<th>name</th>
+				<th>content</th>
+				<th>language</th>
+				<th>deleted</th>
 				<th></th>
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			@foreach ($pages as $page)
-				<tr>
-					<td>{{{ $page->name }}}</td>
-					<td>{{ $page->content }}</td>
-					<td>{{ trans('messages.'.$page->lang) }}</td>
-                    <td><a href="{{ route('pages.edit', $page->id) }}" class="btn btn-primary">{{ trans('messages.edit') }}</a></td>
-                    <td>
-                        {{ Form::open(['method' => 'DELETE', 'route' => ['pages.destroy', $page->id], 'onsubmit' => 'return confirm("Are you sure?")']) }}
-                            {{ Form::submit('delete', array('class' => 'btn btn-danger')) }}
-                        {{ Form::close() }}
-                    </td>
-				</tr>
+			<tr>
+				<td>{{{ $page->name }}}</td>
+				<td>{{ $page->content }}</td>
+				<td>{{ trans('messages.'.$page->lang) }}</td>
+				<td>{{{ $page->deleted_at }}}</td>
+				<td><a href="{{ route('pages.edit', $page->id) }}" class="btn btn-primary">{{ trans('messages.edit') }}</a></td>
+				<td>
+					{{ Form::open(['method' => 'DELETE', 'route' => ['pages.destroy', $page->id], 'onsubmit' => 'return confirm("Are you sure?")']) }}
+						{{ Form::submit('delete', array('class' => 'btn btn-danger')) }}
+					{{ Form::close() }}
+				</td>
+			</tr>
 			@endforeach
 		</tbody>
 	</table>

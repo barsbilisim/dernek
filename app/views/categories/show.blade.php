@@ -1,29 +1,41 @@
 @section('content')
+<div class="tooltip-div">
+	<a href="{{ route('categories.index') }}" class="btn btn-lg pull-right" data-placement="left" title="return to categories"><span class="glyphicon glyphicon-new-window"></span></a>
+</div>
+<div style="clear:both"></div>
 
-<p>{{ link_to_route('categories.index', 'Return to all categories') }}</p>
-
-<table class="table table-striped table-bordered">
+<table class="table">
 	<thead>
 		<tr>
-			<th>Id</th>
-				<th>Name</th>
-				<th>Status</th>
+			<th>name</th>
+			<th>articles</th>
+			<th>deleted</th>
+			<th></th>
+			<th></th>
 		</tr>
 	</thead>
-
 	<tbody>
 		<tr>
-			<td>{{{ $category->id }}}</td>
-					<td>{{{ $category->name }}}</td>
-					<td>{{{ $category->status }}}</td>
-                    <td>{{ link_to_route('categories.edit', 'Edit', array($category->id), array('class' => 'btn btn-info')) }}</td>
-                    <td>
-                        {{ Form::open(array('method' => 'DELETE', 'route' => array('categories.destroy', $category->id))) }}
-                            {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
-                        {{ Form::close() }}
-                    </td>
+			<td>{{{ $category->name }}}</td>
+			<td>{{{ $category->articles->count() }}}</td>
+			<td>{{{ $category->deleted_at }}}</td>
+			<td><a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary">edit</a></td>
+			<td>
+				{{ Form::open(['method' => 'DELETE', 'route' => ['categories.destroy', $category->id], 'onsubmit' => 'return confirm("Are you sure?")']) }}
+					<button type="submit" class="btn btn-danger">delete</button>
+				{{ Form::close() }}
+			</td>
 		</tr>
 	</tbody>
 </table>
 
+@stop
+
+@section('script')
+<script type="text/javascript">
+$(".tooltip-div").tooltip({
+	selector: "button, a",
+	container: "body"
+});
+</script>
 @stop

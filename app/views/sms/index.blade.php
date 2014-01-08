@@ -8,7 +8,6 @@
 <div class="row">
 	<div class="col-sm-6">
 		{{ Form::open(['url' => '/api/sms/send', 'role' => 'form', 'id' => 'sms-form']) }}
-		<input type="hidden" name="nums" value="5067919414">
 		<div class="form-group">
 			<input type="text" name="title" class="form-control" value="{{ Input::old('title', 'KDMK') }}" required placeholder="title">
 		</div>
@@ -51,8 +50,11 @@
 		</div>
 	</div>
 
-	<div class="col-sm-6">
-		filter
+	<div class="col-sm-6 tooltip-div">
+		{{ Form::select("groups", $groups, null, ["class" => "form-control", 'style' => 'max-width:300px; display:inline-block']) }}
+		<button type="button" class="btn btn-default group-btn" id="group-load" title="load"><span class="glyphicon glyphicon-refresh"></span></button>
+		<button type="button" class="btn btn-default group-btn" id="group-clear" title="clear"><span class="glyphicon glyphicon-remove"></span></button>
+		<div id="user-list"></div>
 	</div>
 </div>
 
@@ -99,10 +101,32 @@ $(".panel-heading").on("click", "button", function(e){
 	}
 });
 
+$("#group-load").on("click", function(){
+	var id = $("select[name='groups']").val();
+	(id == 0)?$("#user-list").html(""):$('#user-list').load('/api/group/' + id);
+});
+
+$("select[name='groups']").on("change", function(){
+	var id = $(this).val();
+	(id == 0)?$("#user-list").html(""):$('#user-list').load('/api/group/' + id);
+});
+
+$("#group-clear").on("click", function(){
+	$("#user-list").html("");
+});
+
+$("#user-list").on("click", "button.delete-user", function(){
+	$(this).parent().parent("tr").remove();
+});
+
 $('#sms-form').on('submit', function(e){
 	e.preventDefault();
 	if(confirm('{{ trans("messages.Are you sure?") }}'))
 	{	
+		var arr = $.map($("#user-list td#user-phone"), function(n){
+			return n.innerHTML;
+		});
+
 		var btn = $(this).find("button[type='submit']");
 		btn.prop("disabled",true);
 		$.ajax({
@@ -111,7 +135,7 @@ $('#sms-form').on('submit', function(e){
 			headers:	{'X-CSRF-Token': '{{ Session::token() }}'},
 			data:		'{"content": "' + $("textarea[name='content']").val()
 							+ '", "title": "' + $("input[name='title']").val()
-							+ '", "nums": "'  + $("input[name='nums']").val()
+							+ '", "nums": "'  + arr.join(',')
 							+ '", "save": "'  + $("input[name='save']").prop('checked')
 							+ '", "pin": "'   + $("input[name='pin']").prop('checked')
 							+ '"}',
@@ -120,14 +144,8 @@ $('#sms-form').on('submit', function(e){
 							console.log("error");
 						},
 			success:	function(response){
-							if(response.status.indexOf('DONUS|OK') >= 0)
-							{
-								alert('sms sent successfully');
-								$('#sms-durum').html(response.durum);
-								location.reload();
-							}
-							else
-							alert('error, reload page and try again');
+							alert(response.status);
+							if(response.status.indexOf('DONUS|OK') >= 0) location.reload();							
 						},
 			complete:	function(){
 							btn.prop("disabled", false);

@@ -38,6 +38,14 @@ Route::post('api/image/{id}/main'  , 'APIController@putImageMain');
 
 Route::post('api/sms/{id}/delete', 'APIController@deleteSms');
 Route::post('api/sms/send'       , 'APIController@sendSms');
+
+Route::get ('api/user/list'       , 'APIController@getUsers');
+
+Route::post('api/group/{gid}/user/{uid}/delete', 'APIController@deleteGroupUser');
+Route::get ('api/group/{gid}'                  , 'APIController@getGroupUsers');
+
+Route::post('api/role/{rid}/user/{uid}/delete', 'APIController@deleteRoleUser');
+Route::get ('api/role/{rid}'                  , 'APIController@getRoleUsers');
 //--------------------------------------------------------------------------------------------------------
 
 Route::group(array('prefix' => 'panel'), function()

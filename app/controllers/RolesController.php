@@ -13,14 +13,14 @@ class RolesController extends BaseController
 
 	public function __construct(Role $role)
 	{
-		$this->layout = 'layouts.default';
+		$this->layout = (User::inRoles(['admin']))?'layouts.panel':'layouts.default';
 		$this->lang   = Config::get("app.locale");
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
 		$this->beforeFilter('auth', ['on' => ['get', 'post', 'put', 'delete']]);
 		
 		$this->beforeFilter(function()
 		{
-			if(Auth::check() && !Auth::user()->inRoles(['admin']))
+			if(!User::inRoles(['admin']))
 				return Redirect::guest('login');
 		});
 		
@@ -59,11 +59,20 @@ class RolesController extends BaseController
 	public function store()
 	{
 		$input = Input::all();
-		$validation = Validator::make($input, []);
+		$validation = Validator::make($input, ['name' => 'required|min:5|max:100']);
 
 		if ($validation->passes())
 		{
-			$this->role->create($input);
+			$id = uniqid();
+			$this->role->create([
+				'id'   => $id,
+				'name' => $input['name']]);
+
+			if(Input::get('users'))
+			foreach (Input::get('users') as $user)
+			{
+				$this->role->find($id)->users()->attach($user);
+			}
 
 			return Redirect::route('roles.index');
 		}
@@ -114,14 +123,23 @@ class RolesController extends BaseController
 	 */
 	public function update($id)
 	{
-		$input = array_except(Input::all(), '_method');
-		$validation = Validator::make($input, []);
+		$input = Input::all();
+		$validation = Validator::make($input, ['name' => 'required|min:5|max:100']);
 
 		if ($validation->passes())
 		{
-			$role = $this->role->find($id)->update($input);
+			$this->role->find($id)->update(['name' => $input['name']]);
 
-			return Redirect::route('roles.show', $id);
+			if(Input::get('users'))
+			foreach (Input::get('users') as $user)
+			{
+				$ur = $this->role->find($id)->users()->find($user);
+
+				if(count($ur) == 0)
+				$this->role->find($id)->users()->attach($user);
+			}
+
+			return Redirect::route('roles.index');
 		}
 
 		return Redirect::route('roles.edit', $id)

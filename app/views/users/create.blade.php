@@ -1,5 +1,4 @@
 @section('content')
-
 @include('partial.errors')
 
 {{ Form::open(['route' => 'users.store', 'role' => 'form', 'class' => 'form-horizontal']) }}
@@ -27,6 +26,6 @@
 		<a href="{{ route('users.index') }}" class="btn btn-warning">cancel</a>
 	</p>
 </div>
-{{ Form::close() }}
 
+{{ Form::close() }}
 @stop

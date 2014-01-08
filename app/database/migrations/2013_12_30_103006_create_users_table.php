@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration {
 			$table->string('id', 20)->unique()->primary();
 			$table->string('email', 200)->unique();
 			$table->string('password', 100);
+			$table->string('phone', 10);
 			$table->smallInteger('balance')->default(0);
 			$table->boolean('active')->default(1);
 			$table->softDeletes();

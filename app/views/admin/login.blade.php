@@ -5,11 +5,11 @@
 		{{ Form::token() }}
 		<div class="input-group">
 			<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-			<input type="text" name="email" class="form-control" placeholder="email" value="{{ Input::old('email') }}" required autofocus>
+			<input type="text" name="email" class="form-control" placeholder="email" value="{{ Input::old('email') }}" required autofocus maxlength="100">
 		</div>
 		<div class="input-group">
 			<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-			<input type="password" name="password" class="form-control" placeholder="password" value="{{ Input::old('password') }}" required>
+			<input type="password" name="password" class="form-control" placeholder="password" value="{{ Input::old('password') }}" required maxlength="100">
 		</div>
 		<!-- <label class="checkbox">
 		<input type="checkbox" value="remember-me"> remember me
@@ -28,7 +28,7 @@
 @section('style')
 <style type="text/css">
 .login {width: 400px; margin: 10px auto; text-align: center}
-.login .logo img { width: 150px}
+.login .logo img { width: 150px; margin-bottom:15px}
 .login .input-group, .login button {margin-bottom: 10px}
 .login input {text-align: center; color: #999; font-weight: bold}
 .login .alert-danger {list-style: none; font-weight: bold; padding-left: 40px}

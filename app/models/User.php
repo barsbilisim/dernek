@@ -68,11 +68,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 		return (in_array($role, array_fetch($this->roles->toArray(), 'name')))? true:false;
 	}
 
-	public function inRoles($roles)
-	{
+	public static function inRoles($roles)
+	{	
+		if(Auth::check())
 		foreach ($roles as $role)
 		{
-			if(in_array($role, array_fetch($this->roles->toArray(), 'name')))
+			if(in_array($role, array_fetch(Auth::user()->roles->toArray(), 'name')))
 				return true;
 		}
 

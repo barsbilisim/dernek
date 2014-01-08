@@ -12,14 +12,14 @@ class CategoriesController extends BaseController
 
 	public function __construct(Category $category)
 	{
-		$this->layout = 'layouts.default';
+		$this->layout = (User::inRoles(['admin']))?'layouts.panel':'layouts.default';
 		$this->lang   = Config::get('app.locale');
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
 		$this->beforeFilter('auth', ['on' => ['get', 'post', 'put', 'delete']]);
 		
 		$this->beforeFilter(function()
 		{
-			if(Auth::check() && !Auth::user()->inRoles(['admin']))
+			if(!User::inRoles(['admin']))
 				return Redirect::guest('login');
 		});
 		
@@ -33,7 +33,7 @@ class CategoriesController extends BaseController
 	 */
 	public function index()
 	{
-		$categories = $this->category->all();
+		$categories = $this->category->withTrashed()->get();
 
 		$this->layout->title   = 'Categories';
 		$this->layout->content = View::make('categories.index', compact('categories'));
@@ -58,19 +58,21 @@ class CategoriesController extends BaseController
 	public function store()
 	{
 		$input = Input::all();
-		$validation = Validator::make($input, Category::$rules);
+		$validation = Validator::make($input, ['name' => 'required|min:5|max:100']);
 
 		if ($validation->passes())
 		{
-			$this->category->create($input);
+			$id = uniqid();
+			$this->category->create([
+				'id'   => $id,
+				'name' => $input['name']]);
 
 			return Redirect::route('categories.index');
 		}
 
 		return Redirect::route('categories.create')
 			->withInput()
-			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+			->withErrors($validation);
 	}
 
 	/**
@@ -81,7 +83,7 @@ class CategoriesController extends BaseController
 	 */
 	public function show($name)
 	{
-		$category = $this->category->where('name', $name)->firstOrFail();
+		$category = $this->category->withTrashed()->where('name', $name)->firstOrFail();
 
 		$this->layout->title   = trans('messages.'.$name);
 		$this->layout->content = View::make('categories.show', compact('category'));
@@ -95,14 +97,15 @@ class CategoriesController extends BaseController
 	 */
 	public function edit($id)
 	{
-		$category = $this->category->find($id);
+		$category = $this->category->withTrashed()->find($id);
 
 		if (is_null($category))
 		{
 			return Redirect::to('/');
 		}
 
-		return View::make('categories.edit', compact('category'));
+		$this->layout->title   = 'Edit category';
+		$this->layout->content = View::make('categories.edit', compact('category'));
 	}
 
 	/**
@@ -113,21 +116,22 @@ class CategoriesController extends BaseController
 	 */
 	public function update($id)
 	{
-		$input = array_except(Input::all(), '_method');
-		$validation = Validator::make($input, Category::$rules);
+		$input = Input::all();
+		$validation = Validator::make($input, ['name' => 'required|min:5|max:100']);
 
 		if ($validation->passes())
 		{
-			$category = $this->category->find($id);
-			$category->update($input);
+			$cat = $this->category->withTrashed()->find($id);
+			$cat->name = $input['name'];
+			$cat->deleted_at = (Input::get('deleted') == 1)?date('Y-m-d H:t:s'):null;
+			$cat->save();
 
-			return Redirect::route('categories.show', $id);
+			return Redirect::route('categories.index');
 		}
 
 		return Redirect::route('categories.edit', $id)
 			->withInput()
-			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+			->withErrors($validation);
 	}
 
 	/**
@@ -138,7 +142,8 @@ class CategoriesController extends BaseController
 	 */
 	public function destroy($id)
 	{
-		$this->category->find($id)->delete();
+		$cat = $this->category->withTrashed()->find($id);
+		($cat->deleted_at == null)?$cat->delete():$cat->forceDelete();
 
 		return Redirect::route('categories.index');
 	}

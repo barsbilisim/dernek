@@ -9,11 +9,12 @@ class SmsController extends BaseController
 	 * @var Sm
 	 */
 	protected $sms;
+	protected $group;
 	protected $lang;
 
-	public function __construct(Sms $sms)
+	public function __construct(Sms $sms, Group $group)
 	{
-		$this->layout = 'layouts.default';
+		$this->layout = (User::inRoles(['admin']))?'layouts.panel':'layouts.default';
 		$this->lang   = Config::get("app.locale");
 
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
@@ -21,11 +22,12 @@ class SmsController extends BaseController
 		
 		$this->beforeFilter(function()
 		{
-			if(Auth::check() && !Auth::user()->inRoles(['admin']))
+			if(!User::inRoles(['admin']))
 				return Redirect::guest('login');
 		});
 
-		$this->sms = $sms;
+		$this->sms   = $sms;
+		$this->group = $group;
 	}
 
 	/**
@@ -36,6 +38,11 @@ class SmsController extends BaseController
 	public function index()
 	{
 		$sms = $this->sms->orderBy('pinned', 'DESC')->orderBy('created_at', 'DESC')->take(50)->get();
+		$gr  = $this->group->all();
+
+		$groups['0'] = "select group";
+		foreach ($gr as $g)
+		$groups[$g->id] = $g->name;
 
 		$user = "5334660688";
 		$pass = "kdmk123kdmk";
@@ -43,7 +50,7 @@ class SmsController extends BaseController
 		$durum = static::send_sms("http://api.smsvitrini.com/index.php", "islem=2&user=".$user."&pass=".$pass);
 
 		$this->layout->title   = 'Sms';
-		$this->layout->content = View::make('sms.index', compact('sms', 'durum'));
+		$this->layout->content = View::make('sms.index', compact('sms', 'durum', 'groups'));
 	}
 
 	/**

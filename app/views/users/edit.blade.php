@@ -1,5 +1,4 @@
 @section('content')
-
 @include('partial.errors')
 
 {{ Form::model($user, ['method' => 'PATCH', 'role' => 'form', 'class' => 'form-horizontal', 'route' => ['users.update', $user->id]]) }}
@@ -27,6 +26,6 @@
 		<a href="{{ route('users.index') }}" class="btn btn-warning">cancel</a>
 	</p>
 </div>
-{{ Form::close() }}
 
+{{ Form::close() }}
 @stop
