@@ -9,16 +9,16 @@
 		<tr>
 			<th>name</th>
 			<th>users</th>
-			<th></th>
-			<th></th>
+			<th style="width:70px"></th>
+			<th style="width:70px"></th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 			<td>{{{ $group->name }}}</td>
 			<td>{{{ $group->users->count() }}}</td>
-			<td><a href="{{ route('groups.edit', $group->id) }}" class="btn btn-primary">edit</a></td>
-			<td>
+			<td style="text-align:center"><a href="{{ route('groups.edit', $group->id) }}" class="btn btn-primary">edit</a></td>
+			<td style="text-align:center">
 				{{ Form::open(['method' => 'DELETE', 'route' => ['groups.destroy', $group->id], 'onsubmit' => 'return confirm("Are you sure?")']) }}
 					<button type="submit" class="btn btn-danger">delete</button>
 				{{ Form::close() }}

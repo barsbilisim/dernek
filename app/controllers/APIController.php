@@ -138,6 +138,37 @@ class APIController extends BaseController
 	//---------------------------------------------------------------------------------------
 
 	//Article--------------------------------------------------------------------------------
+	public function getArticles()
+	{
+		$articles = ArticleJoin::withTrashed()->orderBy('created_at', Input::get('sort-date', 'desc'));
+
+		$articles = $articles->get();
+
+		$content = '';
+		
+		if ($articles->count()):
+			$content = '<table class="table"><thead>
+				<tr>
+					<th>title</th>
+					<th>created</th>
+					<th></th>
+				</tr>
+			</thead><tbody>';
+
+		foreach($articles as $article):
+			$content .= ($article->deleted_at == null)?'<tr>':'<tr class="danger">';
+			$content .=	'<td>'.$article->title.'</td>
+				<td>'.$article->created_at.'</td>
+				<td style="text-align:right"><button type="button" class="btn btn-default btn-xs delete-article" user-id="'.$article->id.'"><span class="glyphicon glyphicon-remove"></span></button></td>
+			</tr>';
+		endforeach;
+
+		$content .= '</tbody></table>';
+		endif;
+
+		return Response::make($content);
+	}
+
 	public function putArticleStatus($id)
 	{
 		$article = Article::findOrFail($id);

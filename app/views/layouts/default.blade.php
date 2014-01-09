@@ -20,8 +20,6 @@
 <script src="/js/bootstrap/3.0.3/bootstrap.min.js"></script>
 @yield('script')
 <a href="#" class="btn btn-primary btn-sm" style="z-index:99999;position: fixed; bottom: 0; right: 0; border-radius: 0; border-top-left-radius: 6px;">{{ trans('messages.go-top') }}</a>
-
 @include('partial.footer')
-
 </body>
 </html>

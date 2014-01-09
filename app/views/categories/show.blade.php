@@ -10,8 +10,8 @@
 			<th>name</th>
 			<th>articles</th>
 			<th>deleted</th>
-			<th></th>
-			<th></th>
+			<th style="width:70px"></th>
+			<th style="width:70px"></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -19,8 +19,8 @@
 			<td>{{{ $category->name }}}</td>
 			<td>{{{ $category->articles->count() }}}</td>
 			<td>{{{ $category->deleted_at }}}</td>
-			<td><a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary">edit</a></td>
-			<td>
+			<td style="text-align:center"><a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary">edit</a></td>
+			<td style="text-align:center">
 				{{ Form::open(['method' => 'DELETE', 'route' => ['categories.destroy', $category->id], 'onsubmit' => 'return confirm("Are you sure?")']) }}
 					<button type="submit" class="btn btn-danger">delete</button>
 				{{ Form::close() }}

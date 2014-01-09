@@ -30,7 +30,7 @@ class PanelController extends BaseController
 
 	public function Article()
 	{
-		$articles = $this->artjoin->orderBy('created_at', 'desc')->get();
+		$articles = $this->artjoin->withTrashed()->orderBy('created_at', 'desc')->get();
 
 		$this->layout->title   = 'All articles';
 		$this->layout->content = View::make('panel.article', compact('articles'));

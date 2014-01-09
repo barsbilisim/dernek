@@ -11,20 +11,18 @@
 				<th>name</th>
 				<th>content</th>
 				<th>language</th>
-				<th>deleted</th>
-				<th></th>
-				<th></th>
+				<th style="width:70px"></th>
+				<th style="width:70px"></th>
 			</tr>
 		</thead>
 		<tbody>
 			@foreach ($pages as $page)
-			<tr>
+			<tr @if($page->deleted_at != null) class="danger" @endif>
 				<td><a href="{{ route('pages.show', $page->name) }}">{{{ $page->name }}}</a></td>
 				<td>{{ $page->content }}</td>
 				<td>{{ trans('messages.'.$page->lang) }}</td>
-				<td>{{{ $page->deleted_at }}}</td>
-				<td><a href="{{ route('pages.edit', $page->id) }}" class="btn btn-primary">{{ trans('messages.edit') }}</a></td>
-				<td>
+				<td style="text-align:center"><a href="{{ route('pages.edit', $page->id) }}" class="btn btn-primary">{{ trans('messages.edit') }}</a></td>
+				<td style="text-align:center">
 					{{ Form::open(['method' => 'DELETE', 'route' => ['pages.destroy', $page->id], 'onsubmit' => 'return confirm("Are you sure?")']) }}
 						{{ Form::submit('delete', array('class' => 'btn btn-danger')) }}
 					{{ Form::close() }}

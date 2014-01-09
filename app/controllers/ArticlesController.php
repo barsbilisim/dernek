@@ -41,7 +41,7 @@ class ArticlesController extends BaseController
 	 */
 	public function index($cat)
 	{
-		$articles = $this->artjoin->orderBy('created_at', 'desc')->where('category', $cat)->where('lang', $this->lang)->get();
+		$articles = $this->artjoin->orderBy('created_at', 'desc')->where('category', $cat)->where('lang', $this->lang)->paginate(6);
 
 		$this->layout->title   = trans('messages.'.$cat);
 		$this->layout->content = View::make('articles.index', compact('articles', 'cat'));

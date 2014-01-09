@@ -29,6 +29,11 @@
 	@endif
 </div>
 @endforeach
+
+<div style="text-align: center;">
+	{{ $articles->links() }}
+</div>
+
 </div>
 @else
 	There are no articles
