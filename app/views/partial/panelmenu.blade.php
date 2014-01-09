@@ -15,11 +15,10 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			
+			<a class="navbar-brand active" href="/"><span class="glyphicon glyphicon-home"></span></a>			
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a class="navbar-brand" href="/"><span class="glyphicon glyphicon-home"></span></a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ trans('messages.news') }} <b class="caret"></b></a>
 					<ul class="dropdown-menu">
