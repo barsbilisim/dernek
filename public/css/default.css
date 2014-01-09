@@ -6,20 +6,19 @@ body
 
 body
 {
-
 	font-family: Calibri, sans-serif;
 	color: #666;
 	border-top: 3px solid #4AB3EA;
 	padding-top:3px;
 	padding-bottom: 55px;
 	margin-bottom: -55px;
-	
 }
 
 body *
 {
 	word-wrap:break-word;
 }
+
 
 .blackop {
 	background-color: rgb(0, 0, 0);
