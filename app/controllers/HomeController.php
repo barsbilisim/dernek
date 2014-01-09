@@ -12,9 +12,9 @@ class HomeController extends BaseController
 
 	public function __construct(ArticleJoin $art)
 	{
+		$this->beforeFilter('auth', ['on' => 'get']);
 		$this->layout = 'layouts.default';
 		$this->lang   = Config::get('app.locale');
-		
 		$this->art = $art; 
 	}
 
