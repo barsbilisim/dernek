@@ -1,12 +1,12 @@
-<div class="col-sm-12" style="position:relative;height:100px;">
-	<div class="col-sm-2"><img  style="width:100px;"src="/img/logo.png"></div>
+<div class="col-sm-12 hidden-xs" style="position:relative;height:100px;">
+	<div class="col-sm-2 "><img  style="width:100px;"src="/img/logo.png"></div>
 	<div class="col-sm-10 headertext"><p>КЫРГЫЗСТАН ДОСТУК ЖАНА МАДАНИЯТ КООМУ<p></div>
 	
 
-<div class="" style="position: absolute; top: 10px; right: 20px;z-index:99999;">
-		<a href="/lang/kg" title="kg"><img src="/img/kg.gif" style="border-radius: 2px; width: 27px; height: 18px;"></a> | 
+<!-- <div class="" style="position: absolute; top: 0; right: 0;z-index:99999;">
+		<a href="/lang/kg" title="kg"><img src="/img/kg.gif" style="border-radius: 2px; width: 27px; height: 18px;"></a>
 		<a href="/lang/tr" title="tr"><img src="/img/tr.jpg" style="border-radius: 2px; width: 27px; height: 18px;"></a>
-</div>
+</div> -->
 	
 </div>
 <div class="clear"></div>
@@ -19,11 +19,10 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			
+			<a class="navbar-brand active" href="/">{{ trans('messages.home') }}</a>
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a class="navbar-brand" href="/">{{ trans('messages.home') }}</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ trans('messages.news') }} <b class="caret"></b></a>
 					<ul class="dropdown-menu">

@@ -31,6 +31,7 @@ Route::post('logout', 'AdminController@pLogout');
 
 //API routes----------------------------------------------------------------------------------------------
 Route::get ('api/article/list'       , 'APIController@getArticles');
+Route::get ('api/article/loadmore'   , 'APIController@getLoadmore');
 Route::post('api/article/{id}/status', 'APIController@putArticleStatus');
 
 Route::post('api/image/{id}/desc'  , 'APIController@putImageDesc');

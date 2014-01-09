@@ -1581,12 +1581,12 @@
         "source": {
             "type": "git",
             "url": "https://github.com/laravel/framework.git",
-            "reference": "e7bcc5741dff0ac6bd16d0d26248d14d8a285842"
+            "reference": "198e9f2519a29ba8ff67ab08444f75509b80498b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/laravel/framework/zipball/e7bcc5741dff0ac6bd16d0d26248d14d8a285842",
-            "reference": "e7bcc5741dff0ac6bd16d0d26248d14d8a285842",
+            "url": "https://api.github.com/repos/laravel/framework/zipball/198e9f2519a29ba8ff67ab08444f75509b80498b",
+            "reference": "198e9f2519a29ba8ff67ab08444f75509b80498b",
             "shasum": ""
         },
         "require": {
@@ -1654,7 +1654,7 @@
         "suggest": {
             "doctrine/dbal": "Allow renaming columns and dropping SQLite columns."
         },
-        "time": "2014-01-09 04:59:16",
+        "time": "2014-01-09 14:41:10",
         "type": "library",
         "extra": {
             "branch-alias": {

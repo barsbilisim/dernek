@@ -2,8 +2,10 @@
 
 class APIController extends BaseController
 {
+	protected $lang;
 	public function __construct()
 	{
+		$this->lang = Config::get('app.locale');
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
 		$this->beforeFilter('auth', ['on' => ['get', 'post', 'put', 'delete']]);
 	}
@@ -167,6 +169,27 @@ class APIController extends BaseController
 		endif;
 
 		return Response::make($content);
+	}
+
+	public function getLoadmore()
+	{
+		$articles = ArticleJoin::orderBy('created_at', 'desc')->where('lang', $this->lang)->where('category', Input::get('cat', 'news'))->skip(Input::get('next', 6)*3)->take(3)->get();
+
+		$content = '';
+		foreach($articles as $article):
+			if($img = $article->link())
+			$content .= '<div class="col-sm-4 col-lg-4 news-box-block" style="position:relative;">
+							<div class="thumbnail">
+							<a href="'.$img->big.'" class="news-box-link " rel="prettyPhoto[news]" title="'.$img->desc.'">
+								<img class="news-box-image" src="'.$img->thumb.'">
+							</a>
+							<a href="'.route('categories.articles.show', [$article->category, $article->id]).'"><p>'.$article->title.'</p></a>
+							<p class="thumb_date" style="position:absolute; background: rgba(255,255,255, 0.8); padding:2px 5px; top:8px; right:8px; font-style:italic; color: #888; font-size:12px;">'.(new DateTime($article->created_at))->format('d M Y').'</p>
+							</div>
+						</div>';
+		endforeach;
+
+		return Response::json($content);
 	}
 
 	public function putArticleStatus($id)
