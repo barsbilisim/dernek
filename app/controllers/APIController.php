@@ -7,7 +7,7 @@ class APIController extends BaseController
 	{
 		$this->lang = Config::get('app.locale');
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
-		$this->beforeFilter('auth', ['on' => ['get', 'post', 'put', 'delete']]);
+		$this->beforeFilter('auth', ['on' => ['get', 'post', 'put', 'delete'], 'except' => ['getLoadmore']]);
 	}
 
 	//Users--------------------------------------------------------------------------------
