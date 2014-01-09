@@ -11,43 +11,46 @@ body
 	color: #666;
 	border-top: 3px solid #4AB3EA;
 	padding-top:3px;
-  padding-bottom: 55px;
-  margin-bottom: -55px;
+	padding-bottom: 55px;
+	margin-bottom: -55px;
 	
 }
 
 body *
 {
-  word-wrap:break-word;
+	word-wrap:break-word;
 }
 
 .blackop {
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.6);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.6);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
 }
 .whiteop {
-    background-color: rgb(255, 255, 255);
-    background-color: rgba(255, 255, 255, 0.6);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff, endColorstr=#ffffff);
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff, endColorstr=#ffffff)";
+	background-color: rgb(255, 255, 255);
+	background-color: rgba(255, 255, 255, 0.6);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff, endColorstr=#ffffff);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff, endColorstr=#ffffff)";
 }
 
 .padding00{  
-    padding-left: 0px;
-    padding-right: 0px;
-    position: relative;}
+	padding-left: 0px;
+	padding-right: 0px;
+	position: relative;
+}
+
 .row
 {
-  margin-right: 0;
-  margin-left: 0;
+	margin-right: 0;
+	margin-left: 0;
 }
 
 .news-box .news-box-block
 {
-padding:6px;
+	padding:6px;
 }
+
 .news-box-block {position: relative;}
 .news-box-block.small-event {position: relative;}
 .news-box-block.annonce p.timer{position:absolute;color:#fff; width:60%; margin-top:20px; }
@@ -56,8 +59,8 @@ padding:6px;
 .news-box-block.small-event p.text-box{position:absolute; bottom:0px; width:100%; margin:0px; color:#4AB3EA;}
 .news-box .news-box-link
 {
-  text-decoration: none;
-  color: #666;
+	text-decoration: none;
+	color: #666;
 }
 .thumb_date{color:#4AB3EA;}
 .news-box-block{text-align: center;}
@@ -66,7 +69,7 @@ padding:6px;
 .col-sm-6 .news-box-block p.timer{}
 .news-box .news-box-image
 {
-  width: 100%;
+	width: 100%;
 }
 .thumbnail{padding:5px; border-radius: 0; height: 230px; overflow: hidden;}
 .news-box .news-box-title
@@ -89,15 +92,15 @@ padding:6px;
 
 .navbar
 {
-  margin-bottom: 10px;
-  margin-top: 10px;
-  border-radius: 0px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	border-radius: 0px;
 
 }
 
 .navbar-collapse
 {
-  max-height: inherit;
+	max-height: inherit;
 }
 
 .article a
@@ -129,30 +132,30 @@ padding:6px;
 .logo{padding:0px; width:100px;}
 /* menu */
 .navbar-default {
-    background-color: transparent;
-    border-color: none;
-    border:none;
-    border-bottom: 2px solid #4AB3EA;
+		background-color: transparent;
+		border-color: none;
+		border:none;
+		border-bottom: 2px solid #4AB3EA;
 }
 .navbar-default .navbar-nav > li > a {
-    color: #555555;
-    font-size: 16px;
-    font-weight: bold;
+		color: #555555;
+		font-size: 16px;
+		font-weight: bold;
 }
 .navbar-collapse  {padding:0px}
 .nav > li > a {padding-left:0px;padding-right:0px;text-transform:uppercase;}
 .nav > li {margin-right: 20px;}
 .navbar-default .navbar-nav > li.active {
-    border-bottom:4px solid #4AB3EA ;
+		border-bottom:4px solid #4AB3EA ;
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-    background-color: transparent;
-    color: #777;
+		background-color: transparent;
+		color: #777;
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-    background-color: transparent;
-    color: #4AB3EA;
+		background-color: transparent;
+		color: #4AB3EA;
 }
 
 
@@ -161,18 +164,18 @@ padding:6px;
 /* CONTENT */
 
 .ds .panel-primary > .panel-heading {
-    background-color: transparent;
+		background-color: transparent;
 }
 .ds .panel-heading {
-    border-radius: 0px;
-    padding: 0px 0px;
-    
+		border-radius: 0px;
+		padding: 0px 0px;
+		
 }
 .ds .panel-primary {
-  border-radius: 0px;
-  border: 0;
-  border-bottom:2px solid #4AB3EA;
-  background-color: transparent;
+	border-radius: 0px;
+	border: 0;
+	border-bottom:2px solid #4AB3EA;
+	background-color: transparent;
 }
 
 .ds .panel-primary > .header_text p{
@@ -192,27 +195,27 @@ width:65%;}
 
 /* Carousel base class */
 .carousel {
-  overflow: hidden;
-  height: 376px;
-  border: 0px solid #aaa;
+	overflow: hidden;
+	height: 376px;
+	border: 0px solid #aaa;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
-  z-index: 10;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    left:0px;
+	z-index: 10;
+		width: 100%;
+		background-color: rgba(0, 0, 0, 0.6);
+		left:0px;
 }
 
 /* Declare heights because of positioning of img element */
 .carousel .item {
-  height: 400px;
+	height: 400px;
 }
 .carousel-inner > .item > img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-width: 100%;
 
 }
 
@@ -223,28 +226,28 @@ width:65%;}
 .carousel-fade .prev {left:0;opacity:1;z-index:1;}
 
 .carousel-control {
-  opacity: 0;
-  filter: alpha(opacity=0);
+	opacity: 0;
+	filter: alpha(opacity=0);
 }
 
 .carousel-control.left
 {
-  background-image: none;
+	background-image: none;
 }
 
 .carousel-control.right
 {
-  background-image: none;
+	background-image: none;
 }
 
 .carousel-control .icon-prev,
 .carousel-control .glyphicon-chevron-left {
-  left: 25%;
+	left: 25%;
 }
 
 .carousel-control .icon-next,
 .carousel-control .glyphicon-chevron-right {
-  right: 25%;
+	right: 25%;
 }
 
 
@@ -253,21 +256,21 @@ width:65%;}
 
 /* Pad the edges of the mobile views a bit */
 .marketing {
-  padding-left: 15px;
-  padding-right: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 /* Center align the text within the three columns below the carousel */
 .marketing .col-lg-4 {
-  text-align: center;
-  margin-bottom: 20px;
+	text-align: center;
+	margin-bottom: 20px;
 }
 .marketing h2 {
-  font-weight: normal;
+	font-weight: normal;
 }
 .marketing .col-lg-4 p {
-  margin-left: 10px;
-  margin-right: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 
@@ -275,29 +278,29 @@ width:65%;}
 ------------------------- */
 
 .featurette-divider {
-  margin: 60px 0; /* Space out the Bootstrap <hr> more */
+	margin: 60px 0; /* Space out the Bootstrap <hr> more */
 }
 
 /* Thin out the marketing headings */
 .featurette-heading {
-  font-weight: 300;
-  line-height: 1;
-  letter-spacing: -1px;
+	font-weight: 300;
+	line-height: 1;
+	letter-spacing: -1px;
 }
 
 .featurette-image
 {
-  box-shadow: 0 0 10px 0 #aaa;
-  width: 440px;
-  height: auto;
+	box-shadow: 0 0 10px 0 #aaa;
+	width: 440px;
+	height: auto;
 }
 
 @media (min-width: 1200px) {
-  .container {
-    min-height: 100%;
-    width: 1170px;
-    padding: 0;
-  }
+	.container {
+		min-height: 100%;
+		width: 1170px;
+		padding: 0;
+	}
 }
 
 /* RESPONSIVE CSS
@@ -305,22 +308,22 @@ width:65%;}
 
 @media (min-width: 768px) {
 
-  /* Remove the edge padding needed for mobile */
-  .marketing {
-   padding-left: 0;
-   padding-right: 0;
-  }
+	/* Remove the edge padding needed for mobile */
+	.marketing {
+	 padding-left: 0;
+	 padding-right: 0;
+	}
 
-  /* Bump up size of carousel content */
-  .carousel-caption p {
-    margin-bottom: 20px;
-    font-size: 21px;
-    line-height: 1.4;
-  }
+	/* Bump up size of carousel content */
+	.carousel-caption p {
+		margin-bottom: 20px;
+		font-size: 21px;
+		line-height: 1.4;
+	}
 
-  .featurette-heading {
-    font-size: 30px;
-  }
+	.featurette-heading {
+		font-size: 30px;
+	}
 
 }
 
