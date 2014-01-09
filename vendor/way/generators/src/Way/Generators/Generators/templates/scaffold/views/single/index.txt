@@ -1,0 +1,25 @@
+@section('content')
+<a href="{{ route('{{models}}.create') }}" class="btn btn-sm pull-right" title="new {{model}}"><span class="glyphicon glyphicon-plus"></span></a>
+
+@if (${{models}}->count())
+	<table class="table">
+		<thead>
+			<tr>
+				{{headings}}
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (${{models}} as ${{model}})
+			<tr>
+				{{fields}}
+			</tr>
+			@endforeach
+		</tbody>
+	</table>
+@else
+	There are no {{models}}
+@endif
+
+@stop

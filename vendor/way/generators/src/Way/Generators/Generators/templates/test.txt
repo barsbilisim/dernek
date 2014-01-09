@@ -1,0 +1,11 @@
+<?php
+
+class {{className}} extends TestCase
+{
+
+	public function test()
+	{
+
+	}
+
+}
