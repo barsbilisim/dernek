@@ -7,6 +7,8 @@
 		{{ Form::label('name', 'Category name:') }}
 		{{ Form::text('name', Input::old('name', $category->name), ['class' => 'form-control', 'maxlength' => 100, 'required' => true]) }}
 	</div>
+</div>
+<div class="form-group">
 	<div class="col-sm-12">
 		<input type="checkbox" name="deleted" style="vertical-align:middle; margin-top:0" value="1" @if($category->deleted_at != null) checked="checked" @endif>
 		<label for="save">deleted</label>

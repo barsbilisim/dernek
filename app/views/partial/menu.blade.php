@@ -29,6 +29,10 @@
 						<li><a href="{{ route('categories.articles.index', 'news') }}">{{ trans('messages.news') }}</a></li>
 						<li><a href="{{ route('categories.articles.index', 'ints') }}">{{ trans('messages.interviews') }}</a></li>
 						<li><a href="{{ route('categories.articles.index', 'events') }}">{{ trans('messages.events') }}</a></li>
+						@if(User::inRoles(['moder', 'admin']))
+							<li><a href="{{ route('categories.articles.create', 'news') }}">ADD ARTICLE</a></li>
+							<li><a href="{{ route('categories.index') }}">CATEGORIES</a></li>
+						@endif
 					</ul>
 				</li>
 				<li class="dropdown">

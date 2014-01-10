@@ -27,12 +27,4 @@ class PanelController extends BaseController
 		$this->layout->title   = 'Admin panel';
 		$this->layout->content = View::make('panel.index');
 	}
-
-	public function Article()
-	{
-		$articles = $this->artjoin->withTrashed()->orderBy('created_at', 'desc')->get();
-
-		$this->layout->title   = 'All articles';
-		$this->layout->content = View::make('panel.article', compact('articles'));
-	}
 }

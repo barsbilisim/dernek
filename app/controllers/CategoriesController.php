@@ -19,9 +19,15 @@ class CategoriesController extends BaseController
 		
 		$this->beforeFilter(function()
 		{
-			if(!User::inRoles(['admin']))
+			if(!User::inRoles(['admin', 'moder']))
 				return Redirect::guest('login');
 		});
+
+		$this->beforeFilter(function()
+		{
+			if(!User::inRoles(['admin']))
+				return Redirect::guest('login');
+		}, ['except' => ['show', 'index']]);
 		
 		$this->category = $category;
 	}

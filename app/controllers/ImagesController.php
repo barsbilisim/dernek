@@ -21,7 +21,7 @@ class ImagesController extends BaseController
 		
 		$this->beforeFilter(function()
 		{
-			if(!User::inRoles(['admin']))
+			if(!User::inRoles(['admin', 'moder']))
 				return Redirect::guest('login');
 		});
 		
@@ -169,7 +169,7 @@ class ImagesController extends BaseController
 			imagejpeg($big, $img->big, 80);
 
 			imagecopyresampled($thumb, $big, 0, 0, 0, 0, 300, 200, 1200, 800);
-			imagejpeg($thumb, $$img->thumb, 40);
+			imagejpeg($thumb, $img->thumb, 40);
 
 			imagedestroy($big); // release from memory
 			imagedestroy($thumb); // release from memory

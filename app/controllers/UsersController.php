@@ -9,9 +9,10 @@ class UsersController extends BaseController
 	 * @var User
 	 */
 	protected $user;
+	protected $role;
 	protected $lang;
 
-	public function __construct(User $user)
+	public function __construct(User $user, Role $role)
 	{
 		$this->layout = (User::inRoles(['admin']))?'layouts.panel':'layouts.default';
 		$this->lang   = Config::get("app.locale");
@@ -25,6 +26,7 @@ class UsersController extends BaseController
 		});
 		
 		$this->user = $user;
+		$this->role = $role;
 	}
 
 	/**
@@ -47,8 +49,10 @@ class UsersController extends BaseController
 	 */
 	public function create()
 	{
+		$roles = $this->role->all();
+
 		$this->layout->title   = 'Create';
-		$this->layout->content = View::make('users.create');
+		$this->layout->content = View::make('users.create', compact('roles'));
 	}
 
 	/**
@@ -60,8 +64,10 @@ class UsersController extends BaseController
 	{
 		$input = Input::all();
 		$validation = Validator::make($input,
-					['email' => 'required|email|unique:users,email|max:250',
-					'password' => 'required|alpha_num|max:100|min:5', 'balance' => 'numeric']);
+					['email'   => 'required|email|unique:users,email|max:250',
+					'password' => 'required|alpha_num|max:100|min:5',
+					'balance'  => 'numeric',
+					'phone'    => 'numeric']);
 
 		if ($validation->passes())
 		{
@@ -73,6 +79,12 @@ class UsersController extends BaseController
 				'balance'  => $input['balance'],
 				'phone'    => $input['phone']
 				]);
+
+			foreach ($this->role->all() as $role)
+			{
+				if(in_array($role->name, Input::get('roles',[])))
+				$role->users()->attach($id);
+			}
 
 			return Redirect::route('users.show', $id);
 		}
@@ -104,7 +116,8 @@ class UsersController extends BaseController
 	 */
 	public function edit($id)
 	{
-		$user = $this->user->withTrashed()->find($id);
+		$user  = $this->user->withTrashed()->find($id);
+		$roles = $this->role->all();
 
 		if (is_null($user))
 		{
@@ -112,7 +125,7 @@ class UsersController extends BaseController
 		}
 
 		$this->layout->title   = 'Edit';
-		$this->layout->content = View::make('users.edit', compact('user'));
+		$this->layout->content = View::make('users.edit', compact('user', 'roles'));
 	}
 
 	/**
@@ -125,8 +138,10 @@ class UsersController extends BaseController
 	{
 		$input = array_except(Input::all(), '_method');
 		$validation = Validator::make($input,
-					['email' => 'required|email|unique:users,email,'.$id.'|max:250',
-					'password' => 'alpha_num|max:100|min:5', 'balance' => 'numeric']);
+					['email'   => 'required|email|unique:users,email,'.$id.'|max:250',
+					'password' => 'alpha_num|max:100|min:5',
+					'balance'  => 'numeric',
+					'phone'    => 'numeric']);
 
 		if ($validation->passes())
 		{
@@ -138,6 +153,13 @@ class UsersController extends BaseController
 			$user->phone    = $input['phone'];
 			$user->deleted_at = (Input::get('deleted') == 1)?date('Y-m-d H:t:s'):null;
 			$user->save();
+
+			foreach ($this->role->all() as $role)
+			{
+				$user->roles()->detach($role->id);
+				if(in_array($role->name, Input::get('roles',[])))
+				$user->roles()->attach($role->id);
+			}
 
 			return Redirect::route('users.show', $id);
 		}

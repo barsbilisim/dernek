@@ -46,7 +46,6 @@
 						<li><a href="{{ route('sms.index') }}">SMS</a></li>
 						<li><a href="{{ route('groups.index') }}">Groups</a></li>
 						<li><a href="{{ route('categories.index') }}">Categories</a></li>
-						<li><a href="/panel/articles">Articles</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">

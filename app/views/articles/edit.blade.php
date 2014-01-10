@@ -8,17 +8,22 @@
 			{{ Form::text('lang', trans('messages.'.$article->lang), ['class' => 'form-control', 'readonly' => true]) }}
 		</p>
 		<p class="col-sm-2">
-			{{ Form::select('category', $category, Input::old('category', $article->cat_id), ['class' => 'form-control']) }}
+			{{ Form::select('category', $category, Input::old('category', $article->category), ['class' => 'form-control']) }}
 		</p>
 	
-		<p class="col-sm-2">
-			{{ Form::checkbox('slider', 1, Input::old('slider', $article->slider)) }}
+		<p class="col-sm-1">
+			{{ Form::checkbox('slider', 1, Input::old('slider', $article->slider), ["style" => "vertical-align:middle; margin-top:0" ]) }}
 			{{ Form::label('slider', 'slider', ['class' => 'control-label']) }}
 		</p>
 
-		<p class="col-sm-2">
-			{{ Form::checkbox('anounce', 1, Input::old('anounce', $article->anounce)) }}
+		<p class="col-sm-1">
+			{{ Form::checkbox('anounce', 1, Input::old('anounce', $article->anounce), ["style" => "vertical-align:middle; margin-top:0" ]) }}
 			{{ Form::label('anounce', 'anounce', ['class' => 'control-label']) }}
+		</p>
+
+		<p class="col-sm-1">
+			{{ Form::checkbox('deleted', 1, Input::old('deleted', $article->deleted_at), ["style" => "vertical-align:middle; margin-top:0" ]) }}
+			{{ Form::label('deleted', 'deleted', ['class' => 'control-label']) }}
 		</p>
 
 		<p class="col-sm-3">
