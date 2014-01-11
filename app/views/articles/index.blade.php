@@ -9,7 +9,7 @@
 	@if($key % 2)
 	<div class="col-md-5" style="margin-right: -5px; text-align: center">
 		<a href="{{{ $img->big }}}" rel="prettyPhoto[front-page]" title="{{{ $img->desc }}}">
-			<img class="img-responsive visible-md visible-lg img-thumbnail" src="{{{ $img->thumb }}}">
+			<img class="img-responsive visible-md visible-lg img-thumbnail" src="{{{ $img->big }}}">
 		</a>
 	</div>
 	<div class="col-md-7">
@@ -23,7 +23,7 @@
 	</div>
 	<div class="col-md-5" style="margin-left: -5px; text-align: center">
 		<a href="{{{ $img->big }}}" rel="prettyPhoto[front-page]" title="{{{ $img->desc }}}">
-			<img class="img-responsive visible-md visible-lg img-thumbnail" src="{{{ $img->thumb }}}">
+			<img class="img-responsive visible-md visible-lg img-thumbnail" src="{{{ $img->big }}}">
 		</a>
 	</div>
 	@endif

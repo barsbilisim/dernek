@@ -29,18 +29,14 @@
 <div class="form-group">
 	<p class="col-sm-4">
 		@foreach($roles as $key => $role)
-		@if($user->hasRole($role->name))
-			{{ Form::checkbox('roles[]', $role->name, true) }}
-		@else
-			{{ Form::checkbox('roles[]', $role->name,false) }}
-		@endif
-		<label for="roles">{{{ $role->name }}}</label> &nbsp;
+			{{ Form::checkbox('roles[]', $role->name, ($user->hasRole($role->name)), ["style" => "vertical-align:middle; margin-top:0" ]) }}
+			<label for="roles">{{{ $role->name }}}</label> &nbsp;
 		@endforeach
 	</p>
 </div>
 <div class="form-group">
 	<p class="col-sm-2">
-		<input type="checkbox" name="deleted" style="vertical-align:middle; margin-top:0" value="1" @if($user->deleted_at != null) checked="checked" @endif>
+		{{ Form::checkbox('deleted', 1, ($user->deleted_at != null), ["style" => "vertical-align:middle; margin-top:0" ]) }}
 		<label for="deleted">deleted</label>
 	</p>
 </div>

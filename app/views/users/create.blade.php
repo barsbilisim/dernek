@@ -29,12 +29,8 @@
 <div class="form-group">
 	<p class="col-sm-4">
 		@foreach($roles as $role)
-		@if($role->name == 'user')
-			{{ Form::checkbox('roles[]', $role->name, true) }}
-		@else
-			{{ Form::checkbox('roles[]', $role->name, false) }}
-		@endif
-		<label for="roles[]">{{{ $role->name }}}</label> &nbsp;
+			{{ Form::checkbox('roles[]', $role->name, ($role->name == 'user')) }}
+			<label for="roles[]">{{{ $role->name }}}</label> &nbsp;
 		@endforeach
 	</p>
 </div>

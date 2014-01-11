@@ -11,7 +11,7 @@
 		{{ Form::open(["route" => ["categories.articles.destroy", $cat, $article->id], "method" => "delete", "id" => "delete-article", "onsubmit" => "return confirm('".trans('messages.Are you sure?')."')"]) }}
 		{{ Form::close() }}
 	</div>
-	<a href="{{ route('categories.show', $cat) }}" class="btn btn-primary btn-sm pull-right" data-placement="left" title="return to categories"><span class="glyphicon glyphicon-new-window"></span></a>
+	<a href="{{ route('categories.show', $cat) }}" class="btn btn-primary btn-sm pull-right" data-placement="left" title="return"><span class="glyphicon glyphicon-new-window"></span></a>
 </div>
 <div style="clear:both"></div>
 @endif
