@@ -27,8 +27,6 @@
 	</tbody>
 </table>
 
-<hr>
-
 <div id="user-group"></div>
 @stop
 

@@ -8,16 +8,24 @@ class CategoriesTableSeeder extends Seeder {
 		DB::table('categories')->truncate();
 
 		$categories = array(
-			['id'        => '1',
+			['id'        => '52d140a5eed29',
 			'name'       => 'news',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')],
-			['id'        => '2',
+			['id'        => '52d140a5eed74',
 			'name'       => 'events',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')],
-			['id'        => '3',
+			['id'        => '52d140a5eed9e',
 			'name'       => 'ints',
+			'created_at' => date('Y-m-d H:i:s'),
+			'updated_at' => date('Y-m-d H:i:s')],
+			['id'        => '52d152c5e4a4c',
+			'name'       => 'announces',
+			'created_at' => date('Y-m-d H:i:s'),
+			'updated_at' => date('Y-m-d H:i:s')],
+			['id'        => '52d152d9c1445',
+			'name'       => 'slides',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')]
 		);

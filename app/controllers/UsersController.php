@@ -23,8 +23,8 @@ class UsersController extends BaseController
 		{
 			if(!User::inRoles(['admin']))
 				return Redirect::guest('login');
-		});
-		
+		}, ['except' => ['show', 'edit', 'update']]);
+
 		$this->user = $user;
 		$this->role = $role;
 	}
@@ -36,10 +36,20 @@ class UsersController extends BaseController
 	 */
 	public function index()
 	{
-		$users = $this->user->withTrashed()->get();
+		$users = $this->user->where('active', '<>', 2);
+		$regs  = $this->user->where('active', 2);
+
+		if(Input::get('show') == 'deleted')
+		{
+			$users = $users->onlyTrashed();
+			$regs  = $regs->onlyTrashed();
+		}
+
+		$users = $users->get();
+		$regs  = $regs->get();
 
 		$this->layout->title   = 'Users';
-		$this->layout->content = View::make('users.index', compact('users'));
+		$this->layout->content = View::make('users.index', compact('users', 'regs'));
 	}
 
 	/**
@@ -62,29 +72,80 @@ class UsersController extends BaseController
 	 */
 	public function store()
 	{
-		$input = Input::all();
-		$validation = Validator::make($input,
-					['email'   => 'required|email|unique:users,email|max:250',
-					'password' => 'required|alpha_num|max:100|min:5',
-					'balance'  => 'numeric',
-					'phone'    => 'numeric']);
+		static::globalXssClean();			
+
+			$input = Input::all();
+			$validation = Validator::make($input,
+						[
+						'email'      => 'required|email|unique:users,email|max:250',
+						'phone'      => 'numeric',
+						'firstname'  => 'required|max:100',
+						'lastname'   => 'required|max:100',
+						'passport'   => 'max:100',
+						'birth_date'     => 'required|max:100',
+						'marital_status' => 'required|max:100'
+						]);
 
 		if ($validation->passes())
 		{
-			$id = uniqid();
-			$this->user->create(
-				['id'      => $id,
-				'email'    => $input['email'],
-				'password' => Hash::make($input['password']),
-				'balance'  => $input['balance'],
-				'phone'    => $input['phone']
-				]);
+			$file  = Input::get('dataUrl');
+			$crop  = Input::get('coords');
+			$id    = uniqid();
+			$email = Input::get('email'); 
+			$pass  = static::generatePassword();
+			$user  = new User;
+
+			if($file != "" && $crop != "")
+			{
+				$targ_w = 400;
+				$targ_h = 400;
+				$quality = 80;
+
+				$crop  = json_decode($crop, true);
+				$file  = base64_decode($file);
+				$img_r = imagecreatefromstring($file);				
+				$dst_r = ImageCreateTrueColor($targ_w, $targ_h);
+
+				imagecopyresampled($dst_r, $img_r, 0, 0, $crop['x'], $crop['y'], $targ_w, $targ_h, $crop['w'], $crop['h']);
+				
+				$path = "img/users";
+				$name = $id.".jpg";
+
+				if(!File::isDirectory($path))
+					File::makeDirectory($path);
+
+				imagejpeg($dst_r, $path."/".$name, $quality);
+				imagedestroy($dst_r); // release from memory
+
+				$user->photo = $path."/".$name;
+			}
+
+			$user->id         = $id;
+			$user->email      = $input['email'];
+			$user->phone      = $input['phone'];
+			$user->firstname  = $input['firstname'];
+			$user->lastname   = $input['lastname'];
+			$user->passport   = $input['passport'];
+			$user->occupation = $input['occupation'];
+			$user->company    = $input['company'];
+			$user->birth_date = $input['birth_date'];
+			$user->bachelor   = $input['bachelor'];
+			$user->master     = $input['master'];
+			$user->phd        = $input['phd'];
+			$user->password   = Hash::make($pass);
+			$user->marital_status = $input['marital_status'];
+			
+			$user->save();
 
 			foreach ($this->role->all() as $role)
 			{
 				if(in_array($role->name, Input::get('roles',[])))
 				$role->users()->attach($id);
 			}
+
+			// Mail::send('emails.auth.usercreate', ["password" => $pass, "email" => $email], function($message) use($email) {
+			// 	$message->to($email)->subject('New account');
+			// });
 
 			return Redirect::route('users.show', $id);
 		}
@@ -102,10 +163,18 @@ class UsersController extends BaseController
 	 */
 	public function show($id)
 	{
-		$user = $this->user->withTrashed()->findOrFail($id);
+		if(Auth::user()->id == $id || User::inRoles(['admin']))
+		{
+			$user = $this->user->withTrashed()->findOrFail($id);
 
-		$this->layout->title   = 'User';
-		$this->layout->content = View::make('users.show', compact('user'));
+			$d = new Datetime($user->birth_date);
+			$date = $d->format('j').' '.static::localMonth($d->format('F')).' '.$d->format('Y');
+
+			$this->layout->title   = 'User';
+			$this->layout->content = View::make('users.show', compact('user', 'date'));
+		}
+		else
+		return Redirect::to('login');		
 	}
 
 	/**
@@ -116,16 +185,24 @@ class UsersController extends BaseController
 	 */
 	public function edit($id)
 	{
-		$user  = $this->user->withTrashed()->find($id);
-		$roles = $this->role->all();
-
-		if (is_null($user))
+		if(Auth::user()->id == $id || User::inRoles(['admin']))
 		{
-			return Redirect::route('users.index');
-		}
+			$user  = $this->user->withTrashed()->find($id);
+			$roles = $this->role->all();
 
-		$this->layout->title   = 'Edit';
-		$this->layout->content = View::make('users.edit', compact('user', 'roles'));
+			if (is_null($user))
+			{
+				return Redirect::route('users.index');
+			}
+
+			$d = new Datetime($user->birth_date);
+			$date = $d->format('j').' '.static::localMonth($d->format('F')).' '.$d->format('Y');
+
+			$this->layout->title   = 'Edit';
+			$this->layout->content = View::make('users.edit', compact('user', 'roles', 'date'));
+		}
+		else
+		return Redirect::to('login');	
 	}
 
 	/**
@@ -136,37 +213,120 @@ class UsersController extends BaseController
 	 */
 	public function update($id)
 	{
-		$input = array_except(Input::all(), '_method');
-		$validation = Validator::make($input,
-					['email'   => 'required|email|unique:users,email,'.$id.'|max:250',
-					'password' => 'alpha_num|max:100|min:5',
-					'balance'  => 'numeric',
-					'phone'    => 'numeric']);
-
-		if ($validation->passes())
+		if(Auth::user()->id == $id || User::inRoles(['admin']))
 		{
-			$user = $this->user->withTrashed()->find($id);
-			$user->email    = $input['email'];
-			if($input['password'] != "")
-				$user->password = Hash::make($input['password']);
-			$user->balance  = $input['balance'];
-			$user->phone    = $input['phone'];
-			$user->deleted_at = (Input::get('deleted') == 1)?date('Y-m-d H:t:s'):null;
-			$user->save();
+			static::globalXssClean();			
 
-			foreach ($this->role->all() as $role)
+			if(Input::get('dataUrl'))
 			{
-				$user->roles()->detach($role->id);
-				if(in_array($role->name, Input::get('roles',[])))
-				$user->roles()->attach($role->id);
+				$file = Input::get('dataUrl');
+				$crop = Input::get('coords');
+
+				if($file != "" && $crop != "")
+				{
+					$targ_w = 400;
+					$targ_h = 400;
+					$quality = 80;
+
+					$crop  = json_decode($crop, true);
+					$file  = base64_decode($file);
+					$img_r = imagecreatefromstring($file);				
+					$dst_r = ImageCreateTrueColor($targ_w, $targ_h);
+
+					imagecopyresampled($dst_r, $img_r, 0, 0, $crop['x'], $crop['y'], $targ_w, $targ_h, $crop['w'], $crop['h']);
+					
+					$path = "img/users";
+					$name = $id.".jpg";
+
+					if(!File::isDirectory($path))
+						File::makeDirectory($path);
+
+					imagejpeg($dst_r, $path."/".$name, $quality);
+					imagedestroy($dst_r); // release from memory
+
+					$this->user->withTrashed()->find($id)->update(['photo' => $path."/".$name]);
+				}
+			}
+			else
+			if(Input::get('firstname'))
+			{
+				$input = array_except(Input::all(), '_method');
+				$validation = Validator::make($input,
+							[
+							'phone'      => 'numeric',
+							'firstname'  => 'required|max:100',
+							'lastname'   => 'required|max:100',
+							'passport'   => 'max:100',
+							'occupation' => 'required',
+							'company'    => 'required',
+							'birth_date'     => 'required|max:100',
+							'marital_status' => 'required|max:100'
+							]);
+
+				if ($validation->passes())
+				{
+					$user = $this->user->withTrashed()->find($id);
+					$user->phone          = $input['phone'];
+					$user->firstname      = $input['firstname'];
+					$user->lastname       = $input['lastname'];
+					$user->passport       = $input['passport'];
+					$user->occupation     = $input['occupation'];
+					$user->company        = $input['company'];
+					$user->birth_date     = $input['birth_date'];
+					$user->marital_status = $input['marital_status'];
+					$user->bachelor       = $input['bachelor'];
+					$user->master         = $input['master'];
+					$user->phd            = $input['phd'];
+					$user->save();
+
+					return Redirect::route('users.show', $id);
+				}
+
+				return Redirect::to('/users/'.$id.'/edit?part=profile')
+					->withInput()
+					->withErrors($validation);
+			}
+			else
+			if(Input::get('email'))
+			{
+				$input = array_except(Input::all(), '_method');
+				$validation = Validator::make($input,
+							[
+							'email'    => 'required|email|unique:users,email,'.$id.'|max:250',
+							'password' => 'min:6|max:100|alpha_dash'
+							]);
+
+				if ($validation->passes())
+				{
+					$user = $this->user->withTrashed()->find($id);
+
+					$user->email      = $input['email'];
+					$user->deleted_at = (Input::get('deleted') == 1)?date('Y-m-d H:t:s'):null;
+					
+					if(Input::get('password') != '')
+						$user->password = Hash::make($input['password']);
+
+					$user->save();
+
+					foreach ($this->role->all() as $role)
+					{
+						$user->roles()->detach($role->id);
+						if(in_array($role->name, Input::get('roles',[])))
+						$user->roles()->attach($role->id);
+					}
+
+					return Redirect::route('users.show', $id);
+				}
+
+				return Redirect::to('/users/'.$id.'/edit?part=settings')
+					->withInput()
+					->withErrors($validation);
 			}
 
 			return Redirect::route('users.show', $id);
 		}
-
-		return Redirect::route('users.edit', $id)
-			->withInput()
-			->withErrors($validation);
+		else
+		return Redirect::to('login');	
 	}
 
 	/**
@@ -180,9 +340,18 @@ class UsersController extends BaseController
 		if(Auth::user()->id != $id)
 		{
 			$user = $this->user->withTrashed()->find($id);
-			($user->deleted_at == null)?$user->delete():$user->forceDelete();
-		}
+			
+			if($user->deleted_at == null)
+				$user->delete();
+			else
+			{
+				if($user->photo != null || $user->photo != "")
+					File::delete($user->photo);
 
+				$user->forceDelete();
+				return Redirect::to('/users?show=deleted');
+			}
+		}
 		return Redirect::route('users.index');
 	}
 

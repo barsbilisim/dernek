@@ -25,11 +25,11 @@ class ArticlesTableSeeder extends Seeder {
 			'status'   => 1,
 			'slider'   => 0,
 			'anounce'  => 0,
-			'ended_at'    => date('Y-m-d H:i:s')]
+			'ended_at' => date('Y-m-d H:i:s')]
 		);
 
 		// Uncomment the below to run the seeder
-		DB::table('articles')->insert($articles);
+		// DB::table('articles')->insert($articles);
 	}
 
 }

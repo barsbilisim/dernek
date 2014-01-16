@@ -51,7 +51,7 @@ class ArticleDetailsTableSeeder extends Seeder {
 		);
 
 		// Uncomment the below to run the seeder
-		DB::table('article_details')->insert($articles);
+		// DB::table('article_details')->insert($articles);
 	}
 
 }

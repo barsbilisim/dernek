@@ -11,24 +11,14 @@
 			{{ Form::select('category', $category, Input::old('category', $article->category), ['class' => 'form-control']) }}
 		</p>
 	
-		<p class="col-sm-1">
-			{{ Form::checkbox('slider', 1, Input::old('slider', $article->slider), ["style" => "vertical-align:middle; margin-top:0" ]) }}
-			{{ Form::label('slider', 'slider', ['class' => 'control-label']) }}
-		</p>
-
-		<p class="col-sm-1">
-			{{ Form::checkbox('anounce', 1, Input::old('anounce', $article->anounce), ["style" => "vertical-align:middle; margin-top:0" ]) }}
-			{{ Form::label('anounce', 'anounce', ['class' => 'control-label']) }}
+		<p class="col-sm-3">
+			{{ Form::text('date', null, ['id' => 'date', 'class' => 'form-control', 'readonly' => true ]) }}
+			{{ Form::hidden('alt_date', null, ['id' => 'alt_date' ]) }}
 		</p>
 
 		<p class="col-sm-1">
 			{{ Form::checkbox('deleted', 1, Input::old('deleted', $article->deleted_at), ["style" => "vertical-align:middle; margin-top:0" ]) }}
 			{{ Form::label('deleted', 'deleted', ['class' => 'control-label']) }}
-		</p>
-
-		<p class="col-sm-3">
-			{{ Form::text('date', null, ['id' => 'date', 'class' => 'form-control', 'readonly' => true ]) }}
-			{{ Form::hidden('alt_date', null, ['id' => 'alt_date' ]) }}
 		</p>
 	</div>
 

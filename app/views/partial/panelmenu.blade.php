@@ -20,7 +20,7 @@
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ trans('messages.news') }} <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ trans('messages.news') }}</a>
 					<ul class="dropdown-menu">
 						<li><a href="{{ route('categories.articles.index', 'news') }}">{{ trans('messages.news') }}</a></li>
 						<li><a href="{{ route('categories.articles.index', 'ints') }}">{{ trans('messages.interviews') }}</a></li>
@@ -28,7 +28,7 @@
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ trans('messages.our-organization') }} <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ trans('messages.our-organization') }}</a>
 					<ul class="dropdown-menu">
 						<li><a href="{{ route('pages.show', 'projects') }}">{{ trans('messages.projects') }}</a></li>
 						<li><a href="{{ route('pages.show', 'business') }}">{{ trans('messages.business') }}</a></li>
@@ -38,7 +38,7 @@
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">ADMIN<b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">ADMIN</a>
 					<ul class="dropdown-menu">
 						<!-- <li><a href="{{ route('roles.index') }}">Roles</a></li> -->
 						<li><a href="{{ route('users.index') }}">Users</a></li>
@@ -49,7 +49,7 @@
 					</ul>
 				</li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">PAYMENTS<b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">PAYMENTS</a>
 					<ul class="dropdown-menu">
 						<li><a href="#">payments</a></li>
 					</ul>
@@ -58,11 +58,10 @@
 			<ul class="nav navbar-nav navbar-right">
 				@if(Auth::check())
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th-large"></span> {{{ Auth::user()->email }}} <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{{ Auth::user()->firstname }}} {{{ Auth::user()->lastname }}}</a>
 					<ul class="dropdown-menu">
 						<li><a href="{{ route('users.show', Auth::user()->id) }}"><span class="glyphicon glyphicon-user"></span> &nbsp; profile</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-envelope"></span> &nbsp; message <span class="badge">7</span></a></li>
-						<li><a href="/panel"><span class="glyphicon glyphicon-briefcase"></span> &nbsp; settings</a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-envelope"></span> &nbsp; message <span class="badge">0</span></a></li>
 						<li class="divider"></li>
 						<li><a href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-off"></span> &nbsp; logout</a></li>
 					</ul>

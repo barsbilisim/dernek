@@ -9,22 +9,22 @@ class GroupsTableSeeder extends Seeder
 		// DB::table('groups')->truncate();
 
 		$groups = array(
-			['id'  => '1',
+			['id'  => uniqid(),
 			'name' => 'all users',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')],
-			['id'  => '2',
+			['id'  => uniqid(),
 			'name' => 'private',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')],
-			['id'  => '3',
+			['id'  => uniqid(),
 			'name' => 'genel kurul',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')]
 		);
 
 		// Uncomment the below to run the seeder
-		DB::table('groups')->insert($groups);
+		// DB::table('groups')->insert($groups);
 	}
 
 }

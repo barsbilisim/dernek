@@ -24,9 +24,12 @@ Route::resource('groups', 'GroupsController');
 //--------------------------------------------------------------------------------------------------------
 
 //admin routes--------------------------------------------------------------------------------------------
-Route::get ('login',  'AdminController@Login');
-Route::post('login',  'AdminController@pLogin');
-Route::post('logout', 'AdminController@pLogout');
+Route::get ('login'   , 'AdminController@Login');
+Route::post('login'   , 'AdminController@pLogin');
+Route::post('logout'  , 'AdminController@pLogout');
+Route::get ('register', 'AdminController@Register');
+Route::post('register', 'AdminController@pRegister');
+Route::post('approve/{id}', 'AdminController@pApprove');
 //--------------------------------------------------------------------------------------------------------
 
 //API routes----------------------------------------------------------------------------------------------

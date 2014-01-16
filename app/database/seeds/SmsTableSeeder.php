@@ -36,7 +36,7 @@ class SmsTableSeeder extends Seeder
 		);
 
 		// Uncomment the below to run the seeder
-		DB::table('sms')->insert($sms);
+		// DB::table('sms')->insert($sms);
 	}
 
 }

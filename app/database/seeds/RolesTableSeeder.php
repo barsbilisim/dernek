@@ -9,15 +9,15 @@ class RolesTableSeeder extends Seeder
 		// DB::table('roles')->truncate();
 
 		$roles = array(
-			['id'  => '1',
+			['id'  => '52d140a658c58',
 			'name' => 'admin',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')],
-			['id'  => '2',
+			['id'  => '52d140a658c74',
 			'name' => 'moder',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')],
-			['id'  => '3',
+			['id'  => '52d140a658c82',
 			'name' => 'user',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')]

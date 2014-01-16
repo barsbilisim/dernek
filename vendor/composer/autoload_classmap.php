@@ -1470,6 +1470,7 @@ return array(
     'Symfony\\Component\\Translation\\Writer\\TranslationWriter' => $vendorDir . '/symfony/translation/Symfony/Component/Translation/Writer/TranslationWriter.php',
     'TestCase' => $baseDir . '/app/tests/TestCase.php',
     'User' => $baseDir . '/app/models/User.php',
+    'UserDetail' => $baseDir . '/app/models/UserDetail.php',
     'UserGroupsTableSeeder' => $baseDir . '/app/database/seeds/UserGroupsTableSeeder.php',
     'UserRolesTableSeeder' => $baseDir . '/app/database/seeds/UserRolesTableSeeder.php',
     'UsersController' => $baseDir . '/app/controllers/UsersController.php',

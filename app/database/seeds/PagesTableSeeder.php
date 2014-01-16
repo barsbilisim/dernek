@@ -8,7 +8,7 @@ class PagesTableSeeder extends Seeder {
 		DB::table('pages')->truncate();
 
 		$pages = array(
-			['id'        => '52c299dd50e1e',
+			['id'        => uniqid(),
 			'name'       => 'help',
 			'content'    => '<h2>Кайрымдуулук</h2>
 							<div>
@@ -19,7 +19,7 @@ class PagesTableSeeder extends Seeder {
 			'lang'       => 'kg',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')],
-			['id'        => '52c299dd50e3e',
+			['id'        => uniqid(),
 			'name'       => 'projects',
 			'content'    => '<h2>Долбоорлор</h2>
 							<div>
@@ -38,7 +38,7 @@ class PagesTableSeeder extends Seeder {
 			'lang'       => 'kg',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')],
-			['id'        => '52c299dd50e4e',
+			['id'        => uniqid(),
 			'name'       => 'contacts',
 			'content'    => '<h2>Байланыш</h2>
 							<div>
@@ -68,13 +68,13 @@ class PagesTableSeeder extends Seeder {
 			'lang'       => 'tr',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')],
-			['id'        => '52c2a429e9207',
+			['id'        => uniqid(),
 			'name'       => '404',
 			'content'    => '<h3>Баракча табылбады</h3>',
 			'lang'       => 'kg',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')],
-			['id'        => '52c2a429e9237',
+			['id'        => uniqid(),
 			'name'       => '404',
 			'content'    => '<h3>Sayfa bulunamadı</h3>',
 			'lang'       => 'tr',
@@ -83,14 +83,14 @@ class PagesTableSeeder extends Seeder {
 			['id'        => uniqid(),
 			'name'       => 'associates',
 			'content'    => '<h2>Ortaklar</h2>
-							<p><a href="http://wp.jia.kg/" target="_blank"><img alt="" height="76" src="/img/sponsors/jia.png" width="121" /> </a> <a href="http://www.zpress.kg/" target="_blank"> <img alt="" height="89" src="/img/sponsors/zamandash_logo.jpg" width="68" /> </a> <a href="http://kyrgyzclub.org/" target="_blank"> <img alt="" height="81" src="/img/sponsors/kg_club.jpg" width="129" /> </a> <a href="http://egemendik.org/" target="_blank"> <img alt="" height="93" src="/img/sponsors/egemendik_logo.jpg" width="93" /> </a> <a href="http://www.kyrgyzamerican.org/" target="_blank"> <img alt="" height="91" src="/img/sponsors/kyrusass.jpg" width="92" /> </a> <a href="http://kyrgyz.org.ua/" target="_blank"> <img alt="" height="95" src="/img/sponsors/ukr_logo.png" width="94" /></a></p>',
+							<p><a href="http://wp.jia.kg/" target="_blank"><img alt="" src="/img/sponsors/jia.png" style="height:76px; width:121px" /> </a> <a href="http://www.zpress.kg/" target="_blank"> <img alt="" src="/img/sponsors/zamandash_logo.jpg" style="height:89px; width:68px" /> </a> <a href="http://kyrgyzclub.org/" target="_blank"> <img alt="" src="/img/sponsors/kg_club.jpg" style="height:81px; width:129px" /> </a> <a href="http://egemendik.org/" target="_blank"> <img alt="" src="/img/sponsors/egemendik_logo.jpg" style="height:93px; width:93px" /> </a> <a href="http://www.kyrgyzamerican.org/" target="_blank"> <img alt="" src="/img/sponsors/kyrusass.jpg" style="height:91px; width:92px" /> </a> <a href="http://kyrgyz.org.ua/" target="_blank"> <img alt="" src="/img/sponsors/ukr_logo.png" style="height:95px; width:94px" /></a></p>',
 			'lang'       => 'tr',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')],
 			['id'        => uniqid(),
 			'name'       => 'associates',
 			'content'    => '<h2>Көмөктөштөр</h2>
-							<p><a href="http://wp.jia.kg/" target="_blank"><img alt="" height="76" src="/img/sponsors/jia.png" width="121" /> </a> <a href="http://www.zpress.kg/" target="_blank"> <img alt="" height="89" src="/img/sponsors/zamandash_logo.jpg" width="68" /> </a> <a href="http://kyrgyzclub.org/" target="_blank"> <img alt="" height="81" src="/img/sponsors/kg_club.jpg" width="129" /> </a> <a href="http://egemendik.org/" target="_blank"> <img alt="" height="93" src="/img/sponsors/egemendik_logo.jpg" width="93" /> </a> <a href="http://www.kyrgyzamerican.org/" target="_blank"> <img alt="" height="91" src="/img/sponsors/kyrusass.jpg" width="92" /> </a> <a href="http://kyrgyz.org.ua/" target="_blank"> <img alt="" height="95" src="/img/sponsors/ukr_logo.png" width="94" /></a></p>',
+							<p><a href="http://wp.jia.kg/" target="_blank"><img alt="" src="/img/sponsors/jia.png" style="height:76px; width:121px" /> </a> <a href="http://www.zpress.kg/" target="_blank"> <img alt="" src="/img/sponsors/zamandash_logo.jpg" style="height:89px; width:68px" /> </a> <a href="http://kyrgyzclub.org/" target="_blank"> <img alt="" src="/img/sponsors/kg_club.jpg" style="height:81px; width:129px" /> </a> <a href="http://egemendik.org/" target="_blank"> <img alt="" src="/img/sponsors/egemendik_logo.jpg" style="height:93px; width:93px" /> </a> <a href="http://www.kyrgyzamerican.org/" target="_blank"> <img alt="" src="/img/sponsors/kyrusass.jpg" style="height:91px; width:92px" /> </a> <a href="http://kyrgyz.org.ua/" target="_blank"> <img alt="" src="/img/sponsors/ukr_logo.png" style="height:95px; width:94px" /></a></p>',
 			'lang'       => 'kg',
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')],

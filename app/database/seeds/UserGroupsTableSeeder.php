@@ -29,7 +29,7 @@ class UserGroupsTableSeeder extends Seeder
 		);
 
 		// Uncomment the below to run the seeder
-		DB::table('user_groups')->insert($groups);
+		// DB::table('user_groups')->insert($groups);
 	}
 
 }

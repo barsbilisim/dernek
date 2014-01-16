@@ -204,10 +204,14 @@ width:65%;}
 
 @media (min-width: 1200px) {
 	.container {
-		min-height: 100%;
 		width: 1170px;
 		padding: 0;
 	}
+}
+
+.container
+{
+	min-height: 100%;
 }
 
 .form-control {display:inline-block;}

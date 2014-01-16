@@ -7,18 +7,9 @@
 		<p class="col-sm-2">
 			{{ Form::select('lang', $lang, Input::old('lang'), ['class' => 'form-control']) }}
 		</p>
-		<p class="col-sm-2">
-			{{ Form::select('category', $category, Input::old('category', $cat), ['class' => 'form-control']) }}
-		</p>
-	
-		<p class="col-sm-2">
-			{{ Form::checkbox('slider', 1, Input::old('slider'), ["style" => "vertical-align:middle; margin-top:0" ]) }}
-			{{ Form::label('slider', 'slider', ['class' => 'control-label']) }}
-		</p>
 		
 		<p class="col-sm-2">
-			{{ Form::checkbox('anounce', 1, Input::old('anounce'), ["style" => "vertical-align:middle; margin-top:0" ]) }}
-			{{ Form::label('anounce', 'anounce', ['class' => 'control-label']) }}
+			{{ Form::select('category', $category, Input::old('category', $cat), ['class' => 'form-control']) }}
 		</p>
 
 		<p class="col-sm-3">
@@ -77,10 +68,10 @@
 {{ HTML::script('js/jqueryui/1.10.3/jquery.ui.widget.min.js') }}
 {{ HTML::script('js/jqueryui/1.10.3/jquery.ui.datepicker.min.js') }}
 <script type="text/javascript">
-	$("#date").datepicker({
-		dateFormat	: 'dd MM yy ',
-		altField	: '#alt_date',
-		altFormat	: 'yy-mm-dd'
-	}).datepicker("setDate", '+30d');
+$("#date").datepicker({
+	dateFormat	: 'dd MM yy ',
+	altField	: '#alt_date',
+	altFormat	: 'yy-mm-dd'
+}).datepicker("setDate", '+30d');
 </script>
 @stop

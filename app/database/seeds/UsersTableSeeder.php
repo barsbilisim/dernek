@@ -8,28 +8,24 @@ class UsersTableSeeder extends Seeder {
 		// DB::table('users')->truncate();
 
 		$users = array(
-			['id'        => '52c19a22743c9',
+			['id'        => '52d140a5537cf',
 			'email'      => 'nurchin@gmail.com',
 			'password'   => Hash::make('admin'),
-			'phone'      => '5309428200',
-			'balance'    => 40,
-			'active'     => 1,
-			'created_at' => date('Y-m-d H:i:s'),
-			'updated_at' => date('Y-m-d H:i:s')],
-			['id'        => '52c19a2288bd1',
-			'email'      => 'cbega@mail.ru',
-			'password'   => Hash::make('admin'),
 			'phone'      => '5067919414',
-			'balance'    => -200,
 			'active'     => 1,
-			'created_at' => date('Y-m-d H:i:s'),
-			'updated_at' => date('Y-m-d H:i:s')],
-			['id'        => '52c19a229d045',
-			'email'      => 'cbegi@mail.ru',
-			'password'   => Hash::make('admin'),
-			'phone'      => '5342990890',
-			'balance'    => 0,
-			'active'     => 1,
+
+			'firstname'  => 'Chyngyz',
+			'lastname'   => 'Begimkulov',
+			'birth_date' => '1984-01-01',
+			'marital_status' => 'Single',
+			'occupation' => 'Web developer',
+			'company'    => 'Bars Bilisim',
+			'passport'   => '99787028796',
+			'photo'      => null,
+			'bachelor'   => 'KTU MANAS',
+			'master'     => null,
+			'phd'		 => null,
+
 			'created_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s')]
 		);

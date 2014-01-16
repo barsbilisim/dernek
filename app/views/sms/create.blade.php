@@ -1,4 +1,9 @@
 @section('content')
+<div class="tooltip-div">
+	<a href="{{ route('sms.index') }}" class="btn pull-right" data-placement="left" title="return"><span class="glyphicon glyphicon-new-window"></span></a>
+</div>
+<div style="clear:both"></div>
+
 @include('partial.errors')
 
 <div class="row">
@@ -70,11 +75,17 @@
 @section('style')
 <style type="text/css">
 .panel-heading { cursor: pointer; border-color: transparent;}
+.row {margin-top: 20px;}
 </style>
 @stop
 
 @section('script')
 <script type="text/javascript">
+$(".tooltip-div").tooltip({
+	selector: "button, a",
+	container: "body"
+});
+
 $(".row").on("click", ".panel-body", function(e){
 	e.preventDefault();
 	$("textarea[name='content']").text(($(this).text()).trim());

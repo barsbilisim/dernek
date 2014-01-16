@@ -13,14 +13,14 @@ class APIController extends BaseController
 	//Users--------------------------------------------------------------------------------
 	public function getUsers()
 	{
-		$users   = User::orderBy('balance', 'asc');
+		$users   = new User;
 
 		if(Input::get('del') == 1)
 		$users->withTrashed();
-		if(is_numeric(Input::get('min')))
-		$users->where('balance', '>=' , Input::get('min'));
-		if(is_numeric(Input::get('max')))
-		$users->where('balance', '<=', Input::get('max'));
+		// if(is_numeric(Input::get('min')))
+		// $users->where('balance', '>=' , Input::get('min'));
+		// if(is_numeric(Input::get('max')))
+		// $users->where('balance', '<=', Input::get('max'));
 
 		$content = '';
 		
@@ -151,7 +151,6 @@ class APIController extends BaseController
 
 		if(Input::get('cat'))
 		$articles->where('category', Input::get('cat'));
-
 
 		$content = '';
 		if ($articles->count()):

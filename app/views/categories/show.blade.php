@@ -1,6 +1,6 @@
 @section('content')
 <div class="tooltip-div">
-	<a href="{{ route('categories.articles.create', [$category->name]) }}" class="btn btn-lg pull-left" data-placement="right" title="add article"><span class="glyphicon glyphicon-plus"></a>
+	<a href="{{ route('categories.articles.create', $category->name) }}" class="btn btn-lg pull-left" data-placement="right" title="add article"><span class="glyphicon glyphicon-plus"></a>
 	<a href="{{ route('categories.index') }}" class="btn btn-lg pull-right" data-placement="left" title="return to categories"><span class="glyphicon glyphicon-new-window"></span></a>
 </div>
 <div style="clear:both"></div>
@@ -11,7 +11,7 @@
 			<th>name</th>
 			<th>articles</th>
 			<th>deleted</th>
-			@if(User::inRoles(['admin']))
+			@if(User::inRoles(['super']))
 			<th style="width:70px"></th>
 			<th style="width:70px"></th>
 			@endif
@@ -19,10 +19,10 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td>{{{ $category->name }}}</td>
+			<td>{{{ trans('messages.'.$category->name) }}}</td>
 			<td >{{{ $category->articles->count() }}} | {{{ $category->articles()->onlyTrashed()->count() }}}</td>
 			<td>{{{ $category->deleted_at }}}</td>
-			@if(User::inRoles(['admin']))
+			@if(User::inRoles(['super']))
 			<td style="text-align:center"><a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary">edit</a></td>
 			<td style="text-align:center">
 				{{ Form::open(['method' => 'DELETE', 'route' => ['categories.destroy', $category->id], 'onsubmit' => 'return confirm("Are you sure?")']) }}

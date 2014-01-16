@@ -80,4 +80,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 		return false;
 	}
 
+	public function getPhoto()
+	{
+		return '/'.$this->photo;
+	}
+
 }

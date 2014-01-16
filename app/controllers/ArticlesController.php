@@ -84,8 +84,6 @@ class ArticlesController extends BaseController
 			$this->article->create([
 								'id'       => $id,
 								'cat_id'   => $c->id,
-								'slider'   => Input::get('slider', 0),
-								'anounce'  => Input::get('anounce', 0),
 								'ended_at' => Input::get('alt_date').' '.date('23:59:59')]);
 
 			$this->artdetail->create([
@@ -166,8 +164,6 @@ class ArticlesController extends BaseController
 			$this->article->withTrashed()->find($id)
 							->update([
 								'cat_id'   => $c->id,
-								'slider'   => Input::get('slider', 0),
-								'anounce'  => Input::get('anounce', 0),
 								'deleted_at'  => (Input::get('deleted'))?date('Y-m-d H:t:s'):null,
 								'ended_at'    => Input::get('alt_date').' '.date('23:59:59')]);
 
