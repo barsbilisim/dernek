@@ -16,7 +16,7 @@
 		@if($user->photo != null || $user->photo != "")
 			<img class="img-thumbnail img-responsive avatar" src="{{ $user->getPhoto() }}" title="change" onclick="location.href='/users/{{ $user->id }}/edit?part=avatar'">
 		@else
-			<img class="img-thumbnail img-responsive" src="/img/noimg.png">
+			<img class="img-thumbnail img-responsive" src="/img/noimg.png" title="change" onclick="location.href='/users/{{ $user->id }}/edit?part=avatar'">
 		@endif
 	</div>
 
@@ -114,7 +114,7 @@
 
 @section('style')
 <style type="text/css">
-.avatar:hover {opacity: 0.4; text-decoration: none; cursor: pointer;}
+.avatar:hover {opacity: 0.6; cursor: pointer;}
 </style>
 @stop
 

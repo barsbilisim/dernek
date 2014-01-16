@@ -96,11 +96,14 @@ class AdminController extends BaseController
 		$user = $this->user->find($id);
 		$user->update(['active' => 1, 'password' => Hash::make($pass)]);
 
+		$role = Role::where('name', 'user')->first();
+		$user->roles()->attach($role->id);
+
 		$email = $user->email;
 
-		// Mail::send('emails.auth.userapprove', ["password" => $pass, "email" => $email], function($message) use($email) {
-		// 	$message->to($email)->subject('Account approved');
-		// });
+		Mail::send('emails.auth.userapprove', ["password" => $pass, "email" => $email], function($message) use($email) {
+			$message->to($email)->subject('Account approved');
+		});
 
 		return Redirect::route('users.index');
 	}

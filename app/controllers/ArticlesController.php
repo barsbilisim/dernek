@@ -61,8 +61,15 @@ class ArticlesController extends BaseController
 			$category[$c->name] = trans('messages.'.$c->name);
 		}
 
+		$cd = new Datetime();
+		$create_date = $cd->format('j').' '.static::localMonth($cd->format('F')).' '.$cd->format('Y');
+
+		$ed = new Datetime();
+		$ed->add(new DateInterval('P30D'));
+		$end_date = $ed->format('j').' '.static::localMonth($ed->format('F')).' '.$ed->format('Y');
+
 		$this->layout->title   = trans('messages.'.$cat);
-		$this->layout->content = View::make('articles.create', compact('cat', 'lang', 'category'));
+		$this->layout->content = View::make('articles.create', compact('cat', 'lang', 'category', 'create_date', 'end_date', 'cd', 'ed'));
 	}
 
 	/**
@@ -82,9 +89,11 @@ class ArticlesController extends BaseController
 			$c = $this->category->where('name', Input::get('category', 'news'))->first();
 
 			$this->article->create([
-								'id'       => $id,
-								'cat_id'   => $c->id,
-								'ended_at' => Input::get('alt_date').' '.date('23:59:59')]);
+								'id'         => $id,
+								'cat_id'     => $c->id,
+								'created_at' => Input::get('create_alt').' '.date('H:t:s'),
+								'ended_at'   => Input::get('end_alt').' '.date('23:59:59')
+								]);
 
 			$this->artdetail->create([
 								'article_id' => $id,
@@ -120,8 +129,10 @@ class ArticlesController extends BaseController
 				return Redirect::route('categories.articles.index', $cat);
 		}
 
+		$date = static::localDate($article->created_at);
+
 		$this->layout->title   = trans('messages.'.$cat);
-		$this->layout->content = View::make('articles.show', compact('cat', 'article'));
+		$this->layout->content = View::make('articles.show', compact('cat', 'article', 'date'));
 	}
 
 	/**
@@ -142,8 +153,14 @@ class ArticlesController extends BaseController
 			return Redirect::route('categories.articles.index', $cat);
 		}
 
+		$cd = new Datetime($article->created_at);
+		$create_date = $cd->format('j').' '.static::localMonth($cd->format('F')).' '.$cd->format('Y');
+
+		$ed = new Datetime($article->ended_at);
+		$end_date = $ed->format('j').' '.static::localMonth($ed->format('F')).' '.$ed->format('Y');
+
 		$this->layout->title   = trans('messages.'.$cat);
-		$this->layout->content = View::make('articles.edit', compact('article', 'cat', 'category'));
+		$this->layout->content = View::make('articles.edit', compact('article', 'cat', 'category', 'create_date', 'end_date', 'cd', 'ed'));
 	}
 
 	/**
@@ -160,12 +177,13 @@ class ArticlesController extends BaseController
 		if ($validation->passes())
 		{
 			$c = $this->category->where('name', Input::get('category', 'news'))->first();
-
-			$this->article->withTrashed()->find($id)
-							->update([
-								'cat_id'   => $c->id,
-								'deleted_at'  => (Input::get('deleted'))?date('Y-m-d H:t:s'):null,
-								'ended_at'    => Input::get('alt_date').' '.date('23:59:59')]);
+			
+			$this->article->withTrashed()->find($id)->update([
+								'cat_id'     => $c->id,
+								'deleted_at' => (Input::get('deleted'))?date('Y-m-d H:t:s'):null,
+								'created_at' => Input::get('create_alt').' '.date('H:t:s'),
+								'ended_at'   => Input::get('end_alt').' '.date('23:59:59')
+								]);
 
 			$this->artdetail->where('article_id', $id)
 							->where('lang', $this->lang)

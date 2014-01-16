@@ -16,6 +16,12 @@ class BaseController extends Controller
 		}
 	}
 
+	public static function localDate($date)
+	{
+		$d = new Datetime($date);
+		return $d->format('j').' '.static::localMonth($d->format('F')).' '.$d->format('Y');
+	}
+
 	public static function localMonth($month)
 	{
 		$locale = Config::get('app.locale');

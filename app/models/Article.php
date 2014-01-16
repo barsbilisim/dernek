@@ -6,7 +6,7 @@ class Article extends Eloquent
 	protected $guarded    = array();
 	protected $fillable   = array();
 	protected $softDelete = true;
-	public    $timestamps = false;
+	// public    $timestamps = false;
 
 	public function category()
 	{

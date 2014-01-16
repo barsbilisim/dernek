@@ -195,7 +195,7 @@ class APIController extends BaseController
 								<img class="news-box-image" src="'.$img->thumb.'">
 							</a>
 							<a href="'.route('categories.articles.show', [$article->category, $article->id]).'"><p>'.$article->title.'</p></a>
-							<p class="thumb_date" style="position:absolute; background: rgba(255,255,255, 0.8); padding:2px 5px; top:8px; right:8px; font-style:italic; color: #888; font-size:12px;">'.(new DateTime($article->created_at))->format('d M Y').'</p>
+							<p class="thumb_date">'.static::localDate($article->created_at).'</p>
 							</div>
 						</div>';
 		endforeach;

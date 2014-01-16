@@ -8,7 +8,7 @@
 			<img src="{{ $img->big }}">
 				<div class="container">
 					<div class="carousel-caption">
-						<h2>{{ $img->desc }}</h2>
+						<h2><a href="{{ route('categories.articles.show', [$s->category, $s->id]) }}">{{ $img->desc }}</a></h2>
 					</div>
 			</div>
 		</div>
@@ -23,29 +23,16 @@
 
 <div class="col-sm-4  padding00">
 
-@if($counter == 2)
-		@if($img = $announce->link())@endif
-		<div class="col-sm-12 padding00" style="margin-bottom:12px;">
-		<div class="news-box-block small-event">
-			<p class="timer blackop" id="defaultCountdown2">{{$announce->days}} {{ trans('messages.days') }}</p>
-			<a href="{{ $img->big }}" class="news-box-link " rel="prettyPhoto[front-page]" title="{{ $img->desc }}">
-				 <img class="events-image-small" src="{{ $img->thumb }}">
-			</a>
-			<p class="text-box blackop">{{ $announce->title }}</p>
-		</div>
-		</div>
-@endif
-
-@foreach($events as $key => $ev)
+@foreach($anev as $key => $ev)
 	@if($img = $ev->link())@endif
-	@if($counter == 3 && $key == 0) 		
+	@if($key == 0) 		
 		<div class="col-md-12 padding00" style=" padding-left:12px !important;margin-bottom:12px;">
 		<div class="news-box-block small-event">
 			<p class="timer blackop" id="defaultCountdown2">{{$ev->days}} {{ trans('messages.days') }}</p>
 			<a href="{{ $img->big }}" class="news-box-link" rel="prettyPhoto[front-page]" title="{{ $img->desc }}">
 				 <img class="events-image-small" src="{{ $img->thumb }}">
 			</a>
-			<p class="text-box blackop">{{ $ev->title }}</p>
+			<p class="text-box blackop"><a href="{{ route('categories.articles.show', [$ev->category, $ev->id]) }}">{{ $ev->title }}</p>
 		</div>
 		</div> 
 	@else
@@ -55,7 +42,7 @@
 			<a href="{{ $img->big }}" class="news-box-link" rel="prettyPhoto[front-page]" title="{{ $img->desc }}">
 				 <img class="events-image-small" src="{{ $img->thumb }}">
 			</a>
-			<p class="text-box blackop">{{ $ev->title }}</p>
+			<p class="text-box blackop"><a href="{{ route('categories.articles.show', [$ev->category, $ev->id]) }}">{{ $ev->title }}</p>
 		</div>
 		</div>
 	@endif
@@ -80,7 +67,7 @@
 								<img class="news-box-image" src="{{ $img->thumb }}">
 							</a>
 							<a href="{{ route('categories.articles.show', [$n->category, $n->id]) }}"><p>{{{ $n->title }}}</p></a>
-							<p class="thumb_date" style="position:absolute; background: rgba(255,255,255, 0.8); padding:2px 5px; top:8px; right:8px; font-style:italic; color: #888; font-size:12px;">{{ (new DateTime($n->created_at))->format('d M Y') }}</p>
+							<p class="thumb_date">{{ BaseController::localDate($n->created_at) }}</p>
 							</div>
 						</div>
 			@endforeach
@@ -106,7 +93,7 @@
 						<img class="news-box-image" src="{{ $img->thumb }}">
 					</a>
 					<a href="{{ route('categories.articles.show', [$n->category, $n->id]) }}"><p>{{{ $n->title }}}</p></a>
-					<p class="thumb_date" style="position:absolute; background: rgba(255,255,255, 0.8); padding:2px 5px; top:8px; right:8px; font-style:italic; color: #888; font-size:12px;">{{ (new DateTime($n->created_at))->format('d M Y') }}</p>
+					<p class="thumb_date">{{ BaseController::localDate($n->created_at) }}</p>
 				</div>
 			</div>
 		@endforeach
@@ -139,6 +126,7 @@
 @section('style')
 {{ HTML::style("css/prettyPhoto/3.1.15/css/prettyPhoto.css") }}
 <style type="text/css">
+.thumb_date {position:absolute; background: rgba(255,255,255, 0.85); padding:2px 5px; top:8px; right:8px; font-style:italic; color: #666; font-size:12px;}
 /* CUSTOMIZE THE CAROUSEL Daniiar*/
 .events-image-big{width:100%;}
 .events-image-small{width:100%;}
@@ -160,6 +148,8 @@
 	left:0px;
 	padding:20px;
 }
+
+.carousel-caption a {color: #fff; text-decoration: none;}
 
 /* Declare heights because of positioning of img element */
 .carousel .item {

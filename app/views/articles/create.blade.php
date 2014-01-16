@@ -4,17 +4,20 @@
 {{ Form::open(['route' => ['categories.articles.store', $cat], 'class' => 'form-horizontal', 'role' => 'form']) }}
 
 	<div class="form-group">
-		<p class="col-sm-2">
+		<p class="col-sm-3">
 			{{ Form::select('lang', $lang, Input::old('lang'), ['class' => 'form-control']) }}
 		</p>
 		
-		<p class="col-sm-2">
+		<p class="col-sm-3">
 			{{ Form::select('category', $category, Input::old('category', $cat), ['class' => 'form-control']) }}
 		</p>
-
 		<p class="col-sm-3">
-			{{ Form::text('date', null, ['id' => 'date', 'class' => 'form-control', 'readonly' => true ]) }}
-			{{ Form::hidden('alt_date', null, ['id' => 'alt_date' ]) }}
+			{{ Form::text('create_date', $create_date, ['id' => 'create_date', 'class' => 'form-control', 'readonly' => true ]) }}
+			{{ Form::hidden('create_alt', $cd->format('Y-m-d'), ['id' => 'create_alt' ]) }}
+		</p>
+		<p class="col-sm-3">
+			{{ Form::text('end_date', $end_date, ['id' => 'end_date', 'class' => 'form-control', 'readonly' => true ]) }}
+			{{ Form::hidden('end_alt', $ed->format('Y-m-d'), ['id' => 'end_alt' ]) }}
 		</p>
 	</div>
 
@@ -67,11 +70,18 @@
 {{ HTML::script('js/jqueryui/1.10.3/jquery.ui.core.min.js') }}
 {{ HTML::script('js/jqueryui/1.10.3/jquery.ui.widget.min.js') }}
 {{ HTML::script('js/jqueryui/1.10.3/jquery.ui.datepicker.min.js') }}
+{{ HTML::script('js/jqueryui/1.10.3/locales/jquery.ui.datepicker-'.Config::get("app.locale").'.min.js') }}
 <script type="text/javascript">
-$("#date").datepicker({
+$("#create_date").datepicker({
 	dateFormat	: 'dd MM yy ',
-	altField	: '#alt_date',
+	altField	: '#create_alt',
 	altFormat	: 'yy-mm-dd'
-}).datepicker("setDate", '+30d');
+});
+
+$("#end_date").datepicker({
+	dateFormat	: 'dd MM yy ',
+	altField	: '#end_alt',
+	altFormat	: 'yy-mm-dd'
+});
 </script>
 @stop

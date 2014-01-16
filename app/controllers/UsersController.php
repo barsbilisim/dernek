@@ -143,9 +143,9 @@ class UsersController extends BaseController
 				$role->users()->attach($id);
 			}
 
-			// Mail::send('emails.auth.usercreate', ["password" => $pass, "email" => $email], function($message) use($email) {
-			// 	$message->to($email)->subject('New account');
-			// });
+			Mail::send('emails.auth.usercreate', ["password" => $pass, "email" => $email], function($message) use($email) {
+				$message->to($email)->subject('New account');
+			});
 
 			return Redirect::route('users.show', $id);
 		}

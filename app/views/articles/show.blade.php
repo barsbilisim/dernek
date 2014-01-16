@@ -19,7 +19,7 @@
 <div style="margin-top:30px">
 	<h2>{{{ $article->title }}}</h2>
 	<p>{{ $article->content }}</p>
-	<p>{{{ $article->created_at }}}</p>
+	<p style="font-style:italic; font-size: 12px">{{{ $date }}}</p>
 </div>
 
 <div class="row">

@@ -35,6 +35,9 @@ h2
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
 }
+
+.blackop a {color:#fff; text-decoration: none}
+
 .whiteop {
 	background-color: rgb(255, 255, 255);
 	background-color: rgba(255, 255, 255, 0.6);
@@ -89,7 +92,18 @@ h2
 .vertical-menu{padding-left: 0px;}
 .headertext{line-height:100px;  }
 .headertext p{color:black; font-size:32px; }
+
 .vertical-menu li{list-style-type: none !important;}
+
+@media (max-width: 1200px) {
+	.headertext p{color:black; font-size:24px; }
+}
+@media (max-width: 960px) {
+	.headertext p{color:black; font-size:18px; }
+}
+@media (max-width: 560px) {
+	.headertext p{color:black; font-size:12px; }
+}
 
 .news-box .news-box-content
 {
