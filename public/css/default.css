@@ -151,8 +151,8 @@ h2
 		font-weight: bold;
 }
 .navbar-collapse  {padding:0px}
-.nav > li > a {padding-left:0px;padding-right:0px;text-transform:uppercase;}
-.nav > li {margin-right: 20px;}
+.navbar-wrapper .nav > li > a {padding-left:0px;padding-right:0px;text-transform:uppercase;}
+.navbar-wrapper .nav > li {margin-right: 20px;}
 .navbar-default .navbar-nav > li.active {
 		border-bottom:4px solid #4AB3EA;
 }

@@ -15,6 +15,8 @@ class APIController extends BaseController
 	{
 		$users   = User::orderBy('balance', 'asc');
 
+		if(Input::get('del') == 1)
+		$users->withTrashed();
 		if(is_numeric(Input::get('min')))
 		$users->where('balance', '>=' , Input::get('min'));
 		if(is_numeric(Input::get('max')))
@@ -33,8 +35,8 @@ class APIController extends BaseController
 			</thead><tbody>';
 
 		foreach($users->get() as $user):
+			$content .= ($user->deleted_at == null)?'<tr>':'<tr class="danger">';
 			$content .= '
-			<tr>
 				<td>'.$user->email.'</td>
 				<td>'.$user->balance.'</td>
 				<td id="user-phone">'.$user->phone.'</td>					
@@ -56,7 +58,7 @@ class APIController extends BaseController
 	//Groups--------------------------------------------------------------------------------
 	public function getGroupUsers($gid)
 	{
-		$users = Group::find($gid)->users;
+		$users = Group::find($gid)->users()->withTrashed()->get();
 
 		$content = '';
 		
@@ -71,8 +73,8 @@ class APIController extends BaseController
 			</thead><tbody>';
 
 		foreach($users as $user):
+			$content .= ($user->deleted_at == null)?'<tr>':'<tr class="danger">';
 			$content .= '
-			<tr>
 				<td>'.$user->email.'</td>
 				<td>'.$user->balance.'</td>					
 				<td id="user-phone">'.$user->phone.'</td>					
@@ -99,7 +101,7 @@ class APIController extends BaseController
 	//Roles--------------------------------------------------------------------------------
 	public function getRoleUsers($rid)
 	{
-		$users = Role::find($rid)->users;
+		$users = Role::find($rid)->users()->withTrashed()->get();
 
 		$content = '';
 		
@@ -114,8 +116,8 @@ class APIController extends BaseController
 			</thead><tbody>';
 
 		foreach($users as $user):
+			$content .= ($user->deleted_at == null)?'<tr>':'<tr class="danger">';
 			$content .= '
-			<tr>
 				<td>'.$user->email.'</td>
 				<td>'.$user->balance.'</td>					
 				<td id="user-phone">'.$user->phone.'</td>					
@@ -142,26 +144,36 @@ class APIController extends BaseController
 	//Article--------------------------------------------------------------------------------
 	public function getArticles()
 	{
-		$articles = ArticleJoin::withTrashed()->orderBy('created_at', Input::get('sort-date', 'desc'));
+		$articles = ArticleJoin::orderBy('created_at', Input::get('sort-date', 'desc'));
 
-		$articles = $articles->get();
+		if(Input::get('del') == 1)
+		$articles->onlyTrashed();
+
+		if(Input::get('cat'))
+		$articles->where('category', Input::get('cat'));
+
 
 		$content = '';
-		
 		if ($articles->count()):
-			$content = '<table class="table"><thead>
+			$content = '<table class="table article tooltip-div"><thead>
 				<tr>
 					<th>title</th>
-					<th>created</th>
-					<th></th>
+					<th>language</th>
+					<th style="width:140px; text-align:center">created at</th>
+					<th style="width:140px"></th>
 				</tr>
 			</thead><tbody>';
 
-		foreach($articles as $article):
-			$content .= ($article->deleted_at == null)?'<tr>':'<tr class="danger">';
-			$content .=	'<td>'.$article->title.'</td>
+		foreach($articles->get() as $article):
+			$deleted   = ($article->deleted_at == null)?'':'text-decoration: line-through';
+			$content .=  ($article->status == 1)?'<tr>':'<tr class="danger">';
+			$content .=	'
+			<td style="'.$deleted.'"><a target="_blank" href="'.route('categories.articles.show', [$article->category, $article->id]).'">'.$article->title.'</a></td>
+				<td>'.trans($article->lang).'</td>
 				<td>'.$article->created_at.'</td>
-				<td style="text-align:right"><button type="button" class="btn btn-default btn-xs delete-article" user-id="'.$article->id.'"><span class="glyphicon glyphicon-remove"></span></button></td>
+				<td style="text-align:right">
+				<button type="button" class="btn btn-default btn-xs delete-article" article-id="'.$article->id.'" title="delete"><span class="glyphicon glyphicon-remove"></span></button>
+				</td>
 			</tr>';
 		endforeach;
 
@@ -194,11 +206,28 @@ class APIController extends BaseController
 
 	public function putArticleStatus($id)
 	{
-		$article = Article::findOrFail($id);
+		$article = Article::withTrashed()->find($id);
 		$article->status = ($article->status == 1)?0:1;
-		$article->save();
+		if($article->save())
 		return Response::json($article->status);
 
+
+		return Response::json('error');
+	}
+
+	public function deleteArticle($id)
+	{
+		$art = Article::withTrashed()->find($id);
+		if($art->deleted_at == null)
+		{
+			if($art->delete())
+			return Response::json('success');
+		}
+		else
+		{
+			$art->forceDelete();
+			return Response::json('success');
+		}
 
 		return Response::json('error');
 	}
@@ -220,7 +249,7 @@ class APIController extends BaseController
 	{
 		$image = Image::findOrFail($id);
 		$image->status = ($image->status == 1)?0:1;
-		$image->save();
+		if($image->save())
 		return Response::json($image->status);
 		
 		return Response::json('error');
@@ -230,7 +259,7 @@ class APIController extends BaseController
 	{
 		$image = Image::findOrFail($id);
 		$image->main = ($image->main == 1)?0:1;
-		$image->save();
+		if($image->save())
 		return Response::json($image->main);
 		
 		return Response::json('error');

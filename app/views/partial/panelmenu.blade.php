@@ -40,13 +40,12 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">ADMIN<b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="{{ route('roles.index') }}">Roles</a></li>
+						<!-- <li><a href="{{ route('roles.index') }}">Roles</a></li> -->
 						<li><a href="{{ route('users.index') }}">Users</a></li>
 						<li><a href="{{ route('pages.index') }}">Pages</a></li>
 						<li><a href="{{ route('sms.index') }}">SMS</a></li>
 						<li><a href="{{ route('groups.index') }}">Groups</a></li>
 						<li><a href="{{ route('categories.index') }}">Categories</a></li>
-						<li><a href="/panel/articles">Articles</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">

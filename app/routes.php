@@ -33,6 +33,7 @@ Route::post('logout', 'AdminController@pLogout');
 Route::get ('api/article/list'       , 'APIController@getArticles');
 Route::get ('api/article/loadmore'   , 'APIController@getLoadmore');
 Route::post('api/article/{id}/status', 'APIController@putArticleStatus');
+Route::post('api/article/{id}/delete', 'APIController@deleteArticle');
 
 Route::post('api/image/{id}/desc'  , 'APIController@putImageDesc');
 Route::post('api/image/{id}/status', 'APIController@putImageStatus');
@@ -53,5 +54,4 @@ Route::get ('api/role/{rid}'                  , 'APIController@getRoleUsers');
 Route::group(array('prefix' => 'panel'), function()
 {
 	Route::get(''        , 'PanelController@Index');
-	Route::get('articles', 'PanelController@Article');
 });

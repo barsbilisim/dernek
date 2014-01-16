@@ -10,9 +10,10 @@
 		<th>email</th>
 		<th>balance</th>
 		<th>phone</th>
-		<th>deleted</th>
-		<th></th>
-		<th></th>
+		<th>roles</th>
+		<th>deleted at</th>
+		<th style="width:70px"></th>
+		<th style="width:70px"></th>
 		</tr>
 	</thead>
 
@@ -21,9 +22,15 @@
 		<td>{{{ $user->email }}}</td>
 		<td>{{{ $user->balance }}}</td>
 		<td>{{{ $user->phone }}}</td>
-		<td>{{{ $user->deleted_at }}}</td>
-		<td><a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">{{ trans('messages.edit') }}</a></td>
 		<td>
+			@foreach($user->roles as $key => $role)
+				@if($key != 0) , @endif
+				{{{ $role->name }}}
+			@endforeach
+		</td>
+		<td>{{{ $user->deleted_at }}}</td>
+		<td style="text-align:center"><a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">{{ trans('messages.edit') }}</a></td>
+		<td style="text-align:center">
 			{{ Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id], 'onsubmit' => 'return confirm("Are you sure?")']) }}
 				<button type="submit" class="btn btn-danger">delete</button>
 			{{ Form::close() }}

@@ -17,13 +17,21 @@
 <div class="form-group">
 	<p class="col-sm-2">
 		<label for="balance">Balance</label>
-		<input type="text" name="balance" class="form-control" value="{{ Input::old('balance', 0) }}" required maxlength="4">
+		<input type="text" name="balance" class="form-control" value="{{ Input::old('balance', 0) }}" required maxlength="6">
 	</p>
 </div>
 <div class="form-group">
 	<p class="col-sm-2">
 		<label for="phone">Phone</label>
 		<input type="text" name="phone" class="form-control" value="{{ Input::old('phone') }}" required maxlength="10">
+	</p>
+</div>
+<div class="form-group">
+	<p class="col-sm-4">
+		@foreach($roles as $role)
+			{{ Form::checkbox('roles[]', $role->name, ($role->name == 'user')) }}
+			<label for="roles[]">{{{ $role->name }}}</label> &nbsp;
+		@endforeach
 	</p>
 </div>
 <div class="form-group">

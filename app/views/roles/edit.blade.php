@@ -4,7 +4,7 @@
 {{ Form::model($role, ['method' => 'PATCH', 'route' => ['roles.update', $role->id], 'role' => 'form', 'class' => 'form-horizontal']) }}
 <div class="form-group">
 	<div class="col-sm-12">
-		{{ Form::label('name', 'Group name:') }}
+		{{ Form::label('name', 'Role name:') }}
 		{{ Form::text('name', Input::old('name', $role->name), ['class' => 'form-control', 'maxlength' => 100, 'required' => true]) }}
 	</div>
 </div>
@@ -22,6 +22,8 @@
 	<input type="text" name="min" class="form-control" placeholder="min" maxlength="4">
 	<input type="text" name="max" class="form-control" placeholder="max" maxlength="4">
 	<button type="button" id="user-load" class="btn btn-primary">load</button>
+	<input type="checkbox" name="deleted" style="vertical-align:middle; margin-top:0" value="1">
+	<label for="deleted">deleted</label>
 	<div id="user-list" style="margin-top:30px;"></div>
 </div>
 
@@ -48,7 +50,8 @@
 $('#user-load').on('click', function(){
 	var min = $('input[name="min"]').val(),
 		max = $('input[name="max"]').val();
-	$('#user-list').load('/api/user/list?min='+min+'&max='+max);
+		del = ($('input[name="deleted"]').prop('checked'))?1:0;
+		$('#user-list').load('/api/user/list?min='+min+'&max='+max+'&del='+del);
 });
 
 $('#user-group').load('/api/role/{{{ $role->id }}}');

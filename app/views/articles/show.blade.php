@@ -1,8 +1,25 @@
 @section('content')
+@if(User::inRoles(['admin', 'moder']))
+<div class="tooltip-div" style="margin-top:20px">
+	<div class="pull-left">
+		<button type="submit" class="btn btn-primary btn-sm" form="delete-article" title="@if($article->deleted_at == null) {{ trans('messages.delete') }} @else Delete permanently @endif"><span class="glyphicon glyphicon-trash"></span></button> | 
+		<a href="{{ route('categories.articles.edit', [$cat, $article->id]) }}" class="btn btn-primary btn-sm" title="{{ trans('messages.edit') }}"><span class="glyphicon glyphicon-pencil"></span></a> |
+		<a href="{{ route('articles.images.index', $article->id) }}" class="btn btn-primary btn-sm" title="{{ trans('messages.image-upload') }}"><span class="glyphicon glyphicon-camera"></span></a> |
+		<a href="{{ route('categories.articles.create', $cat) }}" class="btn btn-primary btn-sm" title="{{ trans('messages.add-translation') }}"><span class="glyphicon glyphicon-plus"></span></a> |
+		<button type="button" class="btn btn-primary btn-sm" id="article-status" title="@if($article->status == 1) {{ trans('messages.unpublish') }} @else {{ trans('messages.publish') }} @endif"><span class="glyphicon @if($article->status == 1) glyphicon-eye-open @else glyphicon-eye-close @endif"></span></button> 
 
-<div>
+		{{ Form::open(["route" => ["categories.articles.destroy", $cat, $article->id], "method" => "delete", "id" => "delete-article", "onsubmit" => "return confirm('".trans('messages.Are you sure?')."')"]) }}
+		{{ Form::close() }}
+	</div>
+	<a href="{{ route('categories.show', $cat) }}" class="btn btn-primary btn-sm pull-right" data-placement="left" title="return"><span class="glyphicon glyphicon-new-window"></span></a>
+</div>
+<div style="clear:both"></div>
+@endif
+
+<div style="margin-top:30px">
 	<h2>{{{ $article->title }}}</h2>
 	<p>{{ $article->content }}</p>
+	<p>{{{ $article->created_at }}}</p>
 </div>
 
 <div class="row">
@@ -12,19 +29,6 @@
 	</a>
 	@endforeach
 </div>
-
-@if(User::inRoles(['admin']))
-<div class="tooltip-div" style="margin-bottom: 40px">
-	<button type="submit" class="btn btn-primary btn-sm" form="delete-article" title="{{ trans('messages.delete') }}"><span class="glyphicon glyphicon-trash"></span></button> | 
-	<a href="{{ route('categories.articles.edit', [$cat, $article->id]) }}" class="btn btn-primary btn-sm" title="{{ trans('messages.edit') }}"><span class="glyphicon glyphicon-pencil"></span></a> |
-	<a href="{{ route('articles.images.index', $article->id) }}" class="btn btn-primary btn-sm" title="{{ trans('messages.image-upload') }}"><span class="glyphicon glyphicon-camera"></span></a> |
-	<a href="{{ route('categories.articles.create', $cat) }}" class="btn btn-primary btn-sm" title="{{ trans('messages.add-translation') }}"><span class="glyphicon glyphicon-plus"></span></a> |
-	<button type="button" class="btn btn-primary btn-sm" id="article-status" title="@if($article->status == 1) {{ trans('messages.unpublish') }} @else {{ trans('messages.publish') }} @endif"><span class="glyphicon @if($article->status == 1) glyphicon-eye-open @else glyphicon-eye-close @endif"></span></button> 
-
-	{{ Form::open(["route" => ["categories.articles.destroy", $cat, $article->id], "method" => "delete", "id" => "delete-article", "onsubmit" => "return confirm('".trans('messages.Are you sure?')."')"]) }}
-	{{ Form::close() }}
-</div>
-@endif
 
 <div class="fb-like" data-href="{{ Request::url() }}" data-layout="standard" data-action="like" data-show-faces="true" data-share="true" style="width:100%;"></div>
 <div class="fb-comments" data-href="{{ Request::url() }}" data-numposts="10" data-colorscheme="light"></div>
@@ -65,7 +69,16 @@ $("#article-status").on("click", function(e){
 		headers:	{'X-CSRF-Token': '{{ Session::token() }}'},
 		error:		function () { console.log("error"); },
 		success:	function (response) {
-						(response == 1)? btn.attr("title", '{{ trans("messages.unpublish") }}').attr("data-original-title", btn.attr("title")).children("span").removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open") : btn.attr("title", '{{ trans("messages.publish") }}').attr("data-original-title", btn.attr("title")).children("span").removeClass("glyphicon-eye-open").addClass("glyphicon-eye-close");
+						if(response == 1)
+						{
+							btn.attr("title", '{{ trans("messages.unpublish") }}').attr("data-original-title", btn.attr("title"));
+							btn.children("span").removeClass("glyphicon-eye-close").addClass("glyphicon-eye-open");
+						}
+						else
+						{
+							btn.attr("title", '{{ trans("messages.publish") }}').attr("data-original-title", btn.attr("title"));
+							btn.children("span").removeClass("glyphicon-eye-open").addClass("glyphicon-eye-close");
+						}
 					},
 		complete:	function(){ btn.prop("disabled", false); }
 	});

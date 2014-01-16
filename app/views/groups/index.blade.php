@@ -18,7 +18,7 @@
 			@foreach ($groups as $group)
 			<tr>
 				<td><a href="{{ route('groups.show', $group->id) }}">{{{ $group->name }}}</a></td>
-				<td>{{{ $group->users->count() }}}</td>
+				<td>{{{ $group->users()->withTrashed()->count() }}}</td>
 				<td style="text-align:center"><a href="{{ route('groups.edit', $group->id) }}" class="btn btn-primary">edit</a></td>
 				<td style="text-align:center">
 					{{ Form::open(['method' => 'DELETE', 'route' => ['groups.destroy', $group->id], 'onsubmit' => 'return confirm("Are you sure?")']) }}

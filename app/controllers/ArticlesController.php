@@ -24,7 +24,7 @@ class ArticlesController extends BaseController
 
 		$this->beforeFilter(function()
 		{
-			if(!User::inRoles(['admin']))
+			if(!User::inRoles(['admin', 'moder']))
 				return Redirect::guest('login');
 		}, ['except' => ['index', 'show']]);
 
@@ -56,15 +56,13 @@ class ArticlesController extends BaseController
 	{
 		$lang = ['kg' => trans('messages.kg'), 'tr' => trans('messages.tr')];
 
-		$catid = 0;
 		foreach ($this->category->all() as $c)
 		{
-			$category[$c->id] = trans('messages.'.$c->name);
-			if($c->name == $cat) $catid = $c->id;
+			$category[$c->name] = trans('messages.'.$c->name);
 		}
 
 		$this->layout->title   = trans('messages.'.$cat);
-		$this->layout->content = View::make('articles.create', compact('cat', 'lang', 'category', 'catid'));
+		$this->layout->content = View::make('articles.create', compact('cat', 'lang', 'category'));
 	}
 
 	/**
@@ -81,9 +79,11 @@ class ArticlesController extends BaseController
 		{
 			$id = uniqid();
 
+			$c = $this->category->where('name', Input::get('category', 'news'))->first();
+
 			$this->article->create([
 								'id'       => $id,
-								'cat_id'   => Input::get('category', 1),
+								'cat_id'   => $c->id,
 								'slider'   => Input::get('slider', 0),
 								'anounce'  => Input::get('anounce', 0),
 								'ended_at' => Input::get('alt_date').' '.date('23:59:59')]);
@@ -98,7 +98,7 @@ class ArticlesController extends BaseController
 
 			
 
-			return Redirect::route('categories.articles.index', [$this->category->find(Input::get('category', 1))->name]);
+			return Redirect::route('categories.articles.show', [Input::get('category', 'news'), $id]);
 		}
 
 		return Redirect::route('categories.articles.create', $cat)
@@ -114,10 +114,13 @@ class ArticlesController extends BaseController
 	 */
 	public function show($cat, $id)
 	{
-		$article = $this->artjoin->where('category', $cat)->where('lang', $this->lang)->where('id', $id)->first();
+		$article = $this->artjoin->withTrashed()->where('category', $cat)->where('lang', $this->lang)->where('id', $id)->first();
 
-		if(count($article) == 0) 
-			return Redirect::route('categories.articles.index', $cat);
+		if(count($article) == 0)
+		{	$article = $this->artjoin->withTrashed()->where('category', $cat)->where('id', $id)->first();
+			if(count($article) == 0)
+				return Redirect::route('categories.articles.index', $cat);
+		}
 
 		$this->layout->title   = trans('messages.'.$cat);
 		$this->layout->content = View::make('articles.show', compact('cat', 'article'));
@@ -131,10 +134,10 @@ class ArticlesController extends BaseController
 	 */
 	public function edit($cat, $id)
 	{
-		$article = $this->artjoin->where('category', $cat)->where('lang', $this->lang)->where('id', $id)->first();
+		$article = $this->artjoin->withTrashed()->where('category', $cat)->where('lang', $this->lang)->where('id', $id)->first();
 		
 		foreach ($this->category->all() as $c)
-		$category[$c->id] = trans('messages.'.$c->name);
+		$category[$c->name] = trans('messages.'.$c->name);
 
 		if (is_null($article))
 		{
@@ -158,12 +161,15 @@ class ArticlesController extends BaseController
 
 		if ($validation->passes())
 		{
-			$this->article->find($id)
+			$c = $this->category->where('name', Input::get('category', 'news'))->first();
+
+			$this->article->withTrashed()->find($id)
 							->update([
-								'cat_id'   => Input::get('category', 1),
+								'cat_id'   => $c->id,
 								'slider'   => Input::get('slider', 0),
 								'anounce'  => Input::get('anounce', 0),
-								'ended_at' => Input::get('alt_date').' '.date('23:59:59')]);
+								'deleted_at'  => (Input::get('deleted'))?date('Y-m-d H:t:s'):null,
+								'ended_at'    => Input::get('alt_date').' '.date('23:59:59')]);
 
 			$this->artdetail->where('article_id', $id)
 							->where('lang', $this->lang)
@@ -173,7 +179,7 @@ class ArticlesController extends BaseController
 								'content' => Input::get('content'),
 								'desc'    => Input::get('desc')]);
 
-			return Redirect::route('categories.articles.show', [$this->category->find(Input::get('category', 1))->name, $id]);
+			return Redirect::route('categories.articles.show', [Input::get('category', 'news'), $id]);
 		}
 
 		return Redirect::route('categories.articles.edit', [$cat, $id])
@@ -189,7 +195,8 @@ class ArticlesController extends BaseController
 	 */
 	public function destroy($cat, $id)
 	{
-		$this->article->find($id)->delete();
+		$art = $this->article->withTrashed()->find($id);
+		($art->deleted_at == null)?$art->delete():$art->forceDelete();
 
 		return Redirect::route('categories.articles.index', $cat);
 	}

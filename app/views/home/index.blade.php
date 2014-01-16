@@ -25,7 +25,7 @@
 		<div class="col-sm-12 padding00" style="margin-bottom:12px;">
 		<div class="news-box-block small-event">
 			<p class="timer blackop" id="defaultCountdown2">{{$anounce->days}} {{ trans('messages.days') }}</p>
-			<a href="{{ $img->thumb }}" class="news-box-link " rel="prettyPhoto[front-page]" title="{{ $img->desc }}">
+			<a href="{{ $img->big }}" class="news-box-link " rel="prettyPhoto[front-page]" title="{{ $img->desc }}">
 				 <img class="events-image-small" src="{{ $img->thumb }}">
 			</a>
 			<p class="text-box blackop">{{ $anounce->title }}</p>
@@ -39,7 +39,7 @@
 		<div class="col-md-12 padding00" style=" padding-left:12px !important;margin-bottom:12px;">
 		<div class="news-box-block small-event">
 			<p class="timer blackop" id="defaultCountdown2">{{$ev->days}} {{ trans('messages.days') }}</p>
-			<a href="{{ $img->thumb }}" class="news-box-link" rel="prettyPhoto[front-page]" title="{{ $img->desc }}">
+			<a href="{{ $img->big }}" class="news-box-link" rel="prettyPhoto[front-page]" title="{{ $img->desc }}">
 				 <img class="events-image-small" src="{{ $img->thumb }}">
 			</a>
 			<p class="text-box blackop">{{ $ev->title }}</p>
@@ -49,7 +49,7 @@
 		<div class="col-sm-6 padding00" style="padding-left:12px;">
 		<div class="news-box-block small-event">
 			<p class="timer blackop" id="defaultCountdown2">{{$ev->days}} {{ trans('messages.days') }}</p>
-			<a href="{{ $img->thumb }}" class="news-box-link" rel="prettyPhoto[front-page]" title="{{ $img->desc }}">
+			<a href="{{ $img->big }}" class="news-box-link" rel="prettyPhoto[front-page]" title="{{ $img->desc }}">
 				 <img class="events-image-small" src="{{ $img->thumb }}">
 			</a>
 			<p class="text-box blackop">{{ $ev->title }}</p>

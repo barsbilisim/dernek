@@ -8,16 +8,16 @@
 			{{ Form::select('lang', $lang, Input::old('lang'), ['class' => 'form-control']) }}
 		</p>
 		<p class="col-sm-2">
-			{{ Form::select('category', $category, Input::old('category', $catid), ['class' => 'form-control']) }}
+			{{ Form::select('category', $category, Input::old('category', $cat), ['class' => 'form-control']) }}
 		</p>
 	
 		<p class="col-sm-2">
-			{{ Form::checkbox('slider', 1, Input::old('slider')) }}
+			{{ Form::checkbox('slider', 1, Input::old('slider'), ["style" => "vertical-align:middle; margin-top:0" ]) }}
 			{{ Form::label('slider', 'slider', ['class' => 'control-label']) }}
 		</p>
 		
 		<p class="col-sm-2">
-			{{ Form::checkbox('anounce', 1, Input::old('anounce')) }}
+			{{ Form::checkbox('anounce', 1, Input::old('anounce'), ["style" => "vertical-align:middle; margin-top:0" ]) }}
 			{{ Form::label('anounce', 'anounce', ['class' => 'control-label']) }}
 		</p>
 

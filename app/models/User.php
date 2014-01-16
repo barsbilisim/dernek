@@ -65,7 +65,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
 	public function hasRole($role)
 	{
-		return (in_array($role, array_fetch($this->roles->toArray(), 'name')))? true:false;
+		return ($this->roles()->where('name', $role)->first())? true:false;
 	}
 
 	public static function inRoles($roles)
@@ -73,7 +73,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 		if(Auth::check())
 		foreach ($roles as $role)
 		{
-			if(in_array($role, array_fetch(Auth::user()->roles->toArray(), 'name')))
+			if(Auth::user()->roles()->where('name', $role)->first())
 				return true;
 		}
 
