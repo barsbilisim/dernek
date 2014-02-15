@@ -233,7 +233,7 @@ font-size: 18px;
 .kdmk-user.thumbnail{padding:10px;}
 .kdmk-user .thumb_text{font-weight: bold; color:#333; margin-top:15px; margin-bottom:20px; font-size:16px;text-align: center;}
 .kdmk-user .thumb_date {color: #4AB3EA; font-size:11px;border-bottom: 1px solid #ECECEC;padding-bottom:5px;margin-top:15px;margin-bottom:5px;text-align: center;}
-.kdmk-user .thumb_article{margin-bottom:0px;font-size:13px; color:#888;text-align: justify;}
+.kdmk-user .thumb_article{margin-bottom:0px;font-size:13px; color:#888;text-align: center;}
 .kdmk-user.thumbnail img{width:100%;}
 
 /*kdmk-bullhorn = annonce*/

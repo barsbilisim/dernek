@@ -15,6 +15,7 @@ class HomeController extends BaseController
 		$this->layout = (User::inRoles(['admin']))?'layouts.panel':'layouts.default';
 		$this->lang   = Config::get('app.locale');
 		$this->art = $art; 
+		$this->beforeFilter('auth', ['on' => 'get']);
 	}
 
 	
