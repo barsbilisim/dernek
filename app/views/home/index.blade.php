@@ -1,5 +1,6 @@
 @section('content')
-<div id="myCarousel" class="carousel carousel-fade slide hidden-xs col-sm-8 padding00">
+<div id="myCarousel" data-ride="carousel" class="carousel carousel-fade slide hidden-xs col-sm-8 padding00">
+
 @if($slider->count() > 0)
 	<div class="carousel-inner">
 	@foreach($slider as $key => $s)

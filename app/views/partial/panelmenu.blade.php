@@ -51,7 +51,7 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">PAYMENTS</a>
 					<ul class="dropdown-menu">
-						<li><a href="#">payments</a></li>
+						<li><a href="/panel">payments</a></li>
 					</ul>
 				</li>
 			</ul>

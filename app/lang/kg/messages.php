@@ -57,6 +57,7 @@ return array(
 	'regulation'       => 'Регламент',
 	'activate'         => 'Activate',
 	'deactivate'       => 'Deactivate',
+	'donation'         => 'Donation',
 	'membership'	   => 'Мүчөлүк',
 	'firstname'   	   => 'Аты',
 	'lastname'   	   => 'Фамилиясы',

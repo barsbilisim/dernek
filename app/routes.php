@@ -56,5 +56,16 @@ Route::get ('api/role/{rid}'                  , 'APIController@getRoleUsers');
 
 Route::group(array('prefix' => 'panel'), function()
 {
-	Route::get(''        , 'PanelController@Index');
+	Route::get('/', 'PanelController@Index');
+
+	//panel API
+	Route::get ('/api/payments/list'   , 'PanelController@listPayments');
+	Route::post('/api/payments/update' , 'PanelController@updatePayments');
+	Route::post('/api/payments/create' , 'PanelController@createPayments');
+	Route::post('/api/payments/destroy', 'PanelController@destroyPayments');
+
+	Route::get ('/api/payment/types/list', 'PanelController@listPaymentTypes');
+
+	Route::get ('/api/user/list', 'PanelController@listUsers');
+
 });

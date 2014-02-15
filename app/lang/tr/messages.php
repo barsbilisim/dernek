@@ -53,6 +53,7 @@ return array(
 	'regulation'       => 'Tüzük',
 	'activate'         => 'Activate',
 	'deactivate'       => 'Deactivate',
+	'donation'         => 'Bağış',
 	'membership'	   => 'Üyelik',
 	'firstname'   	   => 'Ad',
 	'lastname'   	   => 'Soyad',

@@ -53,6 +53,7 @@ return array(
 	'regulation'       => 'Regulation',
 	'activate'         => 'Activate',
 	'deactivate'       => 'Deactivate',
+	'donation'         => 'Donation',
 	'membership'	   => 'Membership',
 	'firstname'   	   => 'Firstname',
 	'lastname'   	   => 'Lastname',
