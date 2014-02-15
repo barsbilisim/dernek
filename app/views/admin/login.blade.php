@@ -1,5 +1,5 @@
 @section('content')
-<div class="login">
+<div class="loginP">
 	<a href="/" class="logo"><img src="/img/logo.png"></a>
 	<form method="post" action="/login" role="form">
 		{{ Form::token() }}
@@ -28,10 +28,10 @@
 @stop
 @section('style')
 <style type="text/css">
-.login {width: 400px; margin: 10px auto; text-align: center}
-.login .logo img { width: 150px; margin-bottom:15px}
-.login .input-group, .login .btn {margin-bottom: 10px}
-.login input {text-align: center; color: #999; font-weight: bold}
-.login .alert-danger {list-style: none; font-weight: bold; padding-left: 40px}
+.loginP {width: 400px; margin: 10px auto; text-align: center;background-color:transparent; box-shadow:none !important;}
+.loginP .logo img { width: 150px; margin-bottom:15px}
+.loginP .input-group, .loginP .btn {margin-bottom: 10px}
+.loginP input {text-align: center; color: #999; font-weight: bold}
+.loginP .alert-danger {list-style: none; font-weight: bold; padding-left: 40px}
 </style>
 @stop

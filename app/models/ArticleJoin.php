@@ -59,4 +59,36 @@ class ArticleJoin extends Eloquent
 	{
 		return $this->images()->where("status", 1)->where('main', 1)->get();
 	}
+
+	public function getCategoryIcon($news = "book", $events = "gift",$ints = "user",$announces="bullhorn",$slides="file",$gallery="picture")
+	{
+		$category = $this->category;
+
+		switch ($category) {
+			case 'news':
+				return $news;
+				break;
+			
+			case 'events':
+				return $events;
+				break;
+			case 'ints':
+				return $ints;
+				break;
+			case 'announces':
+				return $announces;
+				break;
+			case 'slides':
+				return $slides;
+				break;
+			case 'gallery':
+				return $gallery;
+				break;
+			default:
+				return 'user';
+				break;
+		}
+
+	}
 }
+

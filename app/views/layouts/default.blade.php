@@ -9,12 +9,18 @@
 <title>{{ $title }}</title>
 <link rel="stylesheet" href="/css/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/default.css">
+<link href="css/bootstrap.icon-large.min.css" rel="stylesheet">
 @yield('style')
 </head>
 <body>
+<div class="topKdmk"></div>
 <div class="container">
+<div class="row">
 @include('partial.menu')
+</div>
+<div class="row">
 @yield('content')
+</div>
 </div>
 <script src="/js/jquery/2.0.3/jquery.min.js"></script>
 <script src="/js/bootstrap/3.0.3/bootstrap.min.js"></script>

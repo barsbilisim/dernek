@@ -1,0 +1,588 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"min-",
+				"min-height"
+			],
+			[
+				"widt",
+				"width"
+			],
+			[
+				"paddi",
+				"padding-right"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"marg",
+				"margin-top"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"re",
+				"repeat"
+			],
+			[
+				"bak",
+				"background-color"
+			],
+			[
+				"bac",
+				"background-image"
+			],
+			[
+				"po",
+				"position"
+			],
+			[
+				"backgr",
+				"background-color"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"lis",
+				"list-style"
+			],
+			[
+				"img",
+				"background-image"
+			],
+			[
+				"padd",
+				"padding-bottom"
+			],
+			[
+				"border-r",
+				"border-right"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "public/css/default.css",
+			"settings":
+			{
+				"buffer_size": 5540,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/controllers/HomeController.php",
+			"settings":
+			{
+				"buffer_size": 1621,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/views/partial/menu.blade.php",
+			"settings":
+			{
+				"buffer_size": 4263,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/views/home/index.blade.php",
+			"settings":
+			{
+				"buffer_size": 6160,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/lang/kg/messages.php",
+			"settings":
+			{
+				"buffer_size": 3595,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/views/home/sidebarView/sidebar.blade.php",
+			"settings":
+			{
+				"buffer_size": 2212,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/views/home/sidebarView/sidebar2.blade.php",
+			"settings":
+			{
+				"buffer_size": 1265,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/views/articles/show.blade.php",
+			"settings":
+			{
+				"buffer_size": 4193,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/views/layouts/default.blade.php",
+			"settings":
+			{
+				"buffer_size": 1497,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/wamp/www/dernek/app/views/home/categoryView/announces.blade.php",
+		"/D/wamp/www/dernek/app/views/home/categoryView/events.blade.php",
+		"/D/wamp/www/dernek/app/views/home/sidebarView/sidebar.blade.php",
+		"/D/wamp/www/dernek/app/views/home/categoryView/ints.blade.php",
+		"/D/wamp/www/dernek/app/views/home/categoryView/news.blade.php",
+		"/D/wamp/www/dernek/app/lang/kg/messages.php",
+		"/D/wamp/www/dernek/app/controllers/APIController.php",
+		"/D/wamp/www/dernek/app/controllers/HomeController.php",
+		"/D/wamp/www/dernek/app/models/ArticleJoin.php",
+		"/D/wamp/www/dernek/app/views/layouts/default.blade.php",
+		"/D/wamp/www/dernek/app/views/partial/footer.blade.php",
+		"/D/wamp/www/dernek/app/views/partial/menu2.php",
+		"/D/wamp/www/dernek/app/views/partial/footerBottom.blade.php",
+		"/D/wamp/www/dernek/public/css/bootstrap/3.0.3/css/bootstrap.min.css",
+		"/D/wamp/www/dernek/readme.md",
+		"/D/wamp/www/dernek/vendor/predis/predis/lib/Predis/ResponseObjectInterface.php",
+		"/D/wamp/www/dernek/vendor/monolog/monolog/README.mdown"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"100px",
+			"thumb_article",
+			"sidebar",
+			"class",
+			"slide",
+			"login",
+			"kdmk",
+			"logo",
+			"thumb_article",
+			"news-box-image",
+			"title",
+			"media",
+			"1170",
+			"media"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "public/css/default.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5540,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								208,
+								208
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/controllers/HomeController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1621,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								481,
+								481
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 360.0,
+						"translation.y": 32.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/views/partial/menu.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4263,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2772,
+								2772
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 405.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/views/home/index.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6160,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3115,
+								3115
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 888.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/lang/kg/messages.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3595,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								494,
+								494
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/views/home/sidebarView/sidebar.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2212,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								574,
+								574
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/views/home/sidebarView/sidebar2.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1265,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								710,
+								710
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/views/articles/show.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4193,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2580,
+								2580
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 360.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "app/views/layouts/default.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1497,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								654,
+								654
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 45.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "proje.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 271.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -184,7 +184,7 @@ class APIController extends BaseController
 
 	public function getLoadmore()
 	{
-		$articles = ArticleJoin::orderBy('created_at', 'desc')->where('lang', $this->lang)->where('category', Input::get('cat', 'news'))->skip(Input::get('next', 6)*3)->take(3)->get();
+		$articles = ArticleJoin::orderBy('created_at', 'desc')->where('lang', $this->lang)->skip(Input::get('next', 6)*3)->take(3)->get();
 
 		$content = '';
 		foreach($articles as $article):

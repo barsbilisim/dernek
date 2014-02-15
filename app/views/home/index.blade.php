@@ -1,6 +1,5 @@
 @section('content')
-<div id="myCarousel" data-ride="carousel" class="carousel carousel-fade slide hidden-xs col-sm-8 padding00">
-
+<div id="myCarousel" data-ride="carousel" class="carousel carousel-fade slide hidden-xs col-sm-12 padding00">
 @if($slider->count() > 0)
 	<div class="carousel-inner">
 	@foreach($slider as $key => $s)
@@ -9,9 +8,10 @@
 			<img src="{{ $img->big }}">
 				<div class="container">
 					<div class="carousel-caption">
-						<h2><a href="{{ route('categories.articles.show', [$s->category, $s->id]) }}">{{ $img->desc }}</a></h2>
+					<h2>{{ $img->desc }}</h2>
+						<p><a href="{{ route('categories.articles.show', [$s->category, $s->id]) }}">{{ $s->title }}</a></p>
 					</div>
-			</div>
+				</div>
 		</div>
 	@endforeach
 	</div>
@@ -22,7 +22,7 @@
 @endif
 </div>
 
-<div class="col-sm-4  padding00">
+<!-- <div class="col-sm-4  padding00">
 
 @foreach($anev as $key => $ev)
 	@if($img = $ev->link())@endif
@@ -48,10 +48,11 @@
 		</div>
 	@endif
 @endforeach
-</div>
+</div> -->
 
-<div class="col-sm-8 ds padding00 article">
-	@if(count($news) > 0)
+<div class="col-sm-9 ds padding00 article">
+
+	@if(count($all) > 0)
 	<a href="{{ route('categories.articles.index', 'news')}}">
 		<div class="panel panel-primary ">
 			<div class="panel-heading header_text">
@@ -59,75 +60,29 @@
 			</div>
 		</div>
 	</a>
-	<div class="row news-box " id="news-box-block">
-			@foreach($news as $n)
+	<div id="time-line"></div>
+	<div class="news-box " id="news-box-block">
+			@foreach($all as $n)
 				@if($img = $n->link())@endif
-						<div class="col-sm-4 col-lg-4 news-box-block" style="position:relative;">
-							<div class="thumbnail">
-							<a href="{{ $img->big }}" class="news-box-link " rel="prettyPhoto[news]" title="{{ $img->desc }}">
-								<img class="news-box-image" src="{{ $img->thumb }}">
-							</a>
-							<a href="{{ route('categories.articles.show', [$n->category, $n->id]) }}"><p>{{{ $n->title }}}</p></a>
-							<p class="thumb_date">{{ BaseController::localDate($n->created_at) }}</p>
-							</div>
-						</div>
+				@if($n->category =='news') @include('home.categoryView.news') @endif
+				@if($n->category =='ints') @include('home.categoryView.ints') @endif
+				@if($n->category =='events') @include('home.categoryView.events') @endif
+				@if($n->category =='announces') @include('home.categoryView.announces') @endif
 			@endforeach
 	</div>
 	<div class="btn btn-primary btn-xs pull-right" id="load-more-news" title="{{ Lang::get('messages.load-more') }}"><span class="glyphicon glyphicon-plus"></span></div>
 	<br>
 	@endif
-
-	@if(count($ints) > 0)
-	<a href="{{ route('categories.articles.index', 'ints')}}">
-		<div class="panel panel-primary ">
-			<div class="panel-heading header_text">
-				<p>{{ trans("messages.interviews") }}</p>
-			</div>
-		</div>
-	</a>
-	<div class="row news-box" id="interviews-box-block">
-		@foreach($ints as $n)
-			@if($img = $n->link())@endif
-			<div class="col-sm-4 col-lg-4 news-box-block">
-				<div class="thumbnail">
-					<a href="{{ $img->big }}" class="news-box-link" rel="prettyPhoto[news]" title="{{ $img->desc }}">
-						<img class="news-box-image" src="{{ $img->thumb }}">
-					</a>
-					<a href="{{ route('categories.articles.show', [$n->category, $n->id]) }}"><p>{{{ $n->title }}}</p></a>
-					<p class="thumb_date">{{ BaseController::localDate($n->created_at) }}</p>
-				</div>
-			</div>
-		@endforeach
-	</div>
-	<div class="btn btn-primary btn-xs pull-right" id="load-more-ints" title="{{ Lang::get('messages.load-more') }}"><span class="glyphicon glyphicon-plus"></span></div>
-	<br>
-	@endif
-
 </div>
 
-<div class="col-sm-4 padding-left-12 ds padding00">
-		
-			<div class="panel panel-primary ">
-				<div class="panel-heading header_text">
-						<p>{{ Lang::get("messages.video") }}</p>
-				</div>
-			</div>
-		<iframe  src="//www.youtube.com/embed/zDlC70xX8y8?wmode=transparent" wmode="Opaque" frameborder="0" allowfullscreen style="border:none; overflow:hidden; width:368px; height:258px;"></iframe>
-
-		<div class="panel panel-primary ">
-			<div class="panel-heading header_text">
-					<p>{{ Lang::get("messages.facebook") }}</p>
-			</div>
-		</div>
-
-		<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FKyrgyzstan.Dostuk.jana.Madaniyat.Koomu&amp;width=368&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:368px; height:258px;" allowTransparency="true"></iframe>
+<div class="col-sm-3 padding-left-12 ds sidebar">
+@include('home.sidebarView.sidebar2')
 </div>
 @stop
 
 @section('style')
 {{ HTML::style("css/prettyPhoto/3.1.15/css/prettyPhoto.css") }}
 <style type="text/css">
-.thumb_date {position:absolute; background: rgba(255,255,255, 0.85); padding:2px 5px; top:8px; right:8px; font-style:italic; color: #666; font-size:12px;}
 /* CUSTOMIZE THE CAROUSEL Daniiar*/
 .events-image-big{width:100%;}
 .events-image-small{width:100%;}
@@ -154,8 +109,9 @@
 
 /* Declare heights because of positioning of img element */
 .carousel .item {
-	height: 400px;
+	height: 300px;
 }
+
 .carousel-inner > .item > img {
 	position: absolute;
 	top: 0;

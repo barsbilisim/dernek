@@ -38,7 +38,7 @@
 @section('style')
 {{ HTML::style("css/prettyPhoto/3.1.15/css/prettyPhoto.css") }}
 <style type="text/css">
-.row {margin-top: 30px; margin-bottom: 30px}
+.row { margin-bottom: 30px}
 @media (max-width: 767px) {
 	.article-details img {margin-bottom: 10px}
 }
