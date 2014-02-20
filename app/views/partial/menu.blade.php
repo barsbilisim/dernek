@@ -26,10 +26,6 @@
             <li><a href="{{ route('categories.articles.index', 'news') }}">{{ trans('messages.news') }}</a></li>
             <li><a href="{{ route('categories.articles.index', 'ints') }}">{{ trans('messages.interviews') }}</a></li>
             <li><a href="{{ route('categories.articles.index', 'events') }}">{{ trans('messages.events') }}</a></li>
-            @if(User::inRoles(['moder', 'admin']))
-              <li><a href="{{ route('categories.articles.create', 'news') }}">ADD ARTICLE</a></li>
-              <li><a href="{{ route('categories.index') }}">CATEGORIES</a></li>
-            @endif
           </ul>
         </li>
         <li class="dropdown">
@@ -38,10 +34,16 @@
             <li><a href="{{ route('pages.show', 'projects') }}">{{ trans('messages.projects') }}</a></li>
             <li><a href="{{ route('pages.show', 'business') }}">{{ trans('messages.business') }}</a></li>
             <li><a href="{{ route('pages.show', 'help') }}">{{ trans('messages.help') }}</a></li>
-            <li><a href="{{ route('pages.show', 'associates') }}">{{ trans('messages.associates') }}</a></li>
+            <!-- <li><a href="{{ route('pages.show', 'associates') }}">{{ trans('messages.associates') }}</a></li> -->
           </ul>
         </li>
-        <li><a href="{{ route('pages.show', 'contacts') }}">{{ trans('messages.media') }}</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ trans('messages.media')}}<b class="caret" style="margin-top:-4px"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{ route('categories.articles.index', 'photos') }}">{{ trans('messages.photos') }}</a></li>
+            <li><a href="{{ route('categories.articles.index', 'videos') }}">{{ trans('messages.videos') }}</a></li>
+          </ul>
+        </li>
         <li><a href="{{ route('pages.show', 'contacts') }}">{{ trans('messages.contacts') }}</a></li>
       </ul>
     </div>
@@ -50,8 +52,8 @@
 
 <div class="row rowMarginNo login col-sm-12">
 		<ul class="navbar-right kdmk-user">
-		 <li><a href="http://facebook.com"><span class="glyphicon glyphicon-user"></span> Facebook</a></li>
-		 <li><a href="http://facebook.com"><span class="glyphicon glyphicon-user"></span> Twitter</a></li>
+		 <li><a href="https://www.facebook.com/Kyrgyzstan.Dostuk.jana.Madaniyat.Koomu"><img src="img/fb.png" style="width:20px;" /> Facebook</a></li>
+		 <li><a href="https://twitter.com/KDMKIST"><img src="img/twitt.png" style="width:20px;" />  Twitter</a></li>
         @if(Auth::check())
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{{ Auth::user()->firstname }}} {{{ Auth::user()->lastname }}}<b class="caret" style="margin-top:-4px"></b></a>

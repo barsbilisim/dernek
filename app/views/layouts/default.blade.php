@@ -9,7 +9,6 @@
 <title>{{ $title }}</title>
 <link rel="stylesheet" href="/css/bootstrap/3.0.3/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/css/default.css">
-<link href="css/bootstrap.icon-large.min.css" rel="stylesheet">
 @yield('style')
 </head>
 <body>

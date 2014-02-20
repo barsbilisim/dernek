@@ -16,8 +16,12 @@
 </head>
 <body>
 <div class="container">
+<div class="row">
 @include('partial.panelmenu')
+</div>
+<div class="row">
 @yield('content')
+</div>
 </div>
 <script src="/js/jquery/2.0.3/jquery.min.js"></script>
 <script src="/js/bootstrap/3.0.3/bootstrap.min.js"></script>

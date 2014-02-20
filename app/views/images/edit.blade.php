@@ -32,7 +32,7 @@
 {{ HTML::script("js/jcrop/0.9.12/jquery.Jcrop.min.js") }}
 <script type="text/javascript">
 $('.cropbox').Jcrop({
-	aspectRatio: 3 / 2,
+	//aspectRatio: 3 / 2,
 	minSize: [75,50],
 	boxHeight: 300,
 	onSelect: updateCoords

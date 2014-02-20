@@ -77,15 +77,17 @@ class ImagesController extends BaseController
 			$crop   = json_decode($crop, true);	
 
 			$orig   = imagecreatefromstring($file);
-			$big    = ImageCreateTrueColor(1200, 800);
-			$thumb  = ImageCreateTrueColor(300, 200);
+			$big    = ImageCreateTrueColor($crop['w'], $crop['h']);
+			$new_thumbx=$crop['w'] * 0.4;
+			$new_thumby=$crop['h'] * 0.4;
+			$thumb  = ImageCreateTrueColor($new_thumbx, $new_thumby);
 
 			$b_path = $path.'/'.uniqid().'.jpg';
-			imagecopyresampled($big, $orig, 0, 0, $crop['x'], $crop['y'], 1200, 800, $crop['w'], $crop['h']);
+			imagecopyresampled($big, $orig, 0, 0, $crop['x'], $crop['y'], $crop['w'], $crop['h'], $crop['w'], $crop['h']);
 			imagejpeg($big, $b_path, 80);
 
 			$t_path = $path.'/'.uniqid().'.jpg';
-			imagecopyresampled($thumb, $big, 0, 0, 0, 0, 300, 200, 1200, 800);
+			imagecopyresampled($thumb, $big, 0, 0, 0, 0, $new_thumbx, $new_thumby, $crop['w'], $crop['h']);
 			imagejpeg($thumb, $t_path, 40);
 
 			imagedestroy($big); // release from memory

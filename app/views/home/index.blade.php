@@ -68,6 +68,8 @@
 				@if($n->category =='ints') @include('home.categoryView.ints') @endif
 				@if($n->category =='events') @include('home.categoryView.events') @endif
 				@if($n->category =='announces') @include('home.categoryView.announces') @endif
+				@if($n->category =='videos') @include('home.categoryView.videos') @endif
+				@if($n->category =='photos') @include('home.categoryView.photos') @endif
 			@endforeach
 	</div>
 	<div class="btn btn-primary btn-xs pull-right" id="load-more-news" title="{{ Lang::get('messages.load-more') }}"><span class="glyphicon glyphicon-plus"></span></div>
@@ -76,7 +78,7 @@
 </div>
 
 <div class="col-sm-3 padding-left-12 ds sidebar">
-@include('home.sidebarView.sidebar2')
+@include('home.sidebarView.sidebar')
 </div>
 @stop
 
@@ -156,6 +158,11 @@
 @section('script')
 {{ HTML::script("js/prettyPhoto/3.1.15/jquery.prettyPhoto.js") }}
 <script type="text/javascript">
+    $(document).ready(function(){
+    $(this).scrollTop(0);
+});
+</script>
+<script type="text/javascript">
 $("[rel^='prettyPhoto']").prettyPhoto({
 	theme: 'facebook',
 	overlay_gallery: false,
@@ -163,15 +170,19 @@ $("[rel^='prettyPhoto']").prettyPhoto({
 });
 
 news = 2;
-$("#load-more-news").on("click", function(){
+$(window).scroll( function(){
+	
+	if($(window).scrollTop() + $(window).height() == $(document).height()) {
 	$.ajax({
 			type:		"get",
 			url:		'/api/article/loadmore?cat=news&next=' + news++,
 			error:		function () { console.log("error"); },
 			success:	function (response) {
 							if(response.length > 10)
-							{
+							{var currentscrollpos = $(window).scrollTop()
 								document.getElementById("news-box-block").innerHTML += response;
+								$("html, body").animate({ scrollTop: currentscrollpos-1 }, 500);
+								// $("html").animate({scrollTop: $("#load-more-news").offset().top}, 0);
 							}
 							else
 							$("#load-more-news").addClass("disabled");
@@ -183,31 +194,35 @@ $("#load-more-news").on("click", function(){
 								social_tools: ''
 							}); 
 						}
-		});
+
+
+		});e.preventDefault();
+}
+return false;
 });
 
-ints = 2;
-$("#load-more-ints").on("click", function(){
-	$.ajax({
-			type:		"get",
-			url:		'/api/article/loadmore?cat=ints&next=' + ints++,
-			error:		function () { console.log("error"); },
-			success:	function (response) {
-							if(response.length > 10)
-							{
-								document.getElementById("interviews-box-block").innerHTML += response;
-							}
-							else
-							$("#load-more-ints").addClass("disabled");
-						},
-			complete:	function() {
-							$("a[rel^='prettyPhoto']").prettyPhoto({
-								theme: 'facebook',
-								overlay_gallery: false,
-								social_tools: ''
-							}); 
-						}
-		});
-});
+// ints = 2;
+// $("#load-more-ints").on("click", function(){
+// 	$.ajax({
+// 			type:		"get",
+// 			url:		'/api/article/loadmore?cat=ints&next=' + ints++,
+// 			error:		function () { console.log("error"); },
+// 			success:	function (response) {
+// 							if(response.length > 10)
+// 							{
+// 								document.getElementById("interviews-box-block").innerHTML += response;
+// 							}
+// 							else
+// 							$("#load-more-ints").addClass("disabled");
+// 						},
+// 			complete:	function() {
+// 							$("a[rel^='prettyPhoto']").prettyPhoto({
+// 								theme: 'facebook',
+// 								overlay_gallery: false,
+// 								social_tools: ''
+// 							}); 
+// 						}
+// 		});
+// });
 </script>
 @stop

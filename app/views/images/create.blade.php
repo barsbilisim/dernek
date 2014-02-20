@@ -59,7 +59,7 @@ $("#file").on("change", function(){
 
 function initJcrop(){
 	$('.cropbox').Jcrop({
-	aspectRatio: 3 / 2,
+	//aspectRatio: 3 / 2,
 	minSize: [75,50],
 	boxHeight: 300,
 	onSelect: updateCoords

@@ -18,11 +18,13 @@
 
 <div style="margin-top:30px">
 	<h2>{{{ $article->title }}}</h2>
-	<p>{{ $article->content }}</p>
+	@if($article->category != 'videos')<p>{{ $article->content }}</p>
+	@else <iframe width="560" height="315" src="//www.youtube.com/embed/{{ $article->getVideo($article->content)}}?wmode=transparent" frameborder="0" allowfullscreen></iframe>
+	@endif
 	<p style="font-style:italic; font-size: 12px">{{{ $date }}}</p>
 </div>
 
-<div class="row">
+<div class="row imageInArtice">
 	@foreach($article->getImages() as $image)
 	<a href="{{{ $image->big() }}}" rel="prettyPhoto[front-page]" title="{{{ $image->desc() }}}" class="col-sm-3">
 		<img class="img-thumbnail" src="{{{ $image->thumb() }}}">

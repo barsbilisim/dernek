@@ -58,7 +58,7 @@ $("#grid").kendoGrid({
 	dataSource: dataSource,
 	pageable: { pageSize: 10, pageSizes: [5, 10, 20, 30], refresh: true },
 	sortable: { mode: "multiple" },
-	resizable: true,
+	resizable: false,
 	filterable: true,
 	selectable: true,
 	// groupable: true,

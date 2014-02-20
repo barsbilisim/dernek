@@ -21,7 +21,7 @@ class HomeController extends BaseController
 	
 	public function Index()
 	{
-		$all      = $this->art->orderBy('created_at', 'DESC')->where('lang'  , $this->lang)->where('status', '1')->take(30)->get();
+		$all      = $this->art->orderBy('created_at', 'DESC')->where('lang'  , $this->lang)->where('status', '1')->take(8)->get();
 		$news     = $this->art->orderBy('created_at', 'DESC')->where('lang'  , $this->lang)->where('status', '1')->where('category', 'news')->take(6)->get();
 		$slider   = $this->art->orderBy('created_at', 'DESC')->where('lang'  , $this->lang)->where('status', '1')->where('category', 'slides')->take(4)->get();
 		$ints     = $this->art->orderBy('created_at', 'DESC')->where('lang'  , $this->lang)->where('status', '1')->where('category', 'ints')->take(6)->get();

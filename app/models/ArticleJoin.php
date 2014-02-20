@@ -50,6 +50,11 @@ class ArticleJoin extends Eloquent
 		return $this->images()->where("status", 1)->get();
 	}
 
+	public function getGallery()
+	{
+		return $this->images()->where("status", 1)->take(4)->get();
+	}
+
 	public function getImage($id)
 	{	
 		return $this->images()->where('id', $id)->first();
@@ -59,8 +64,15 @@ class ArticleJoin extends Eloquent
 	{
 		return $this->images()->where("status", 1)->where('main', 1)->get();
 	}
+	public function getVideo($content)
+	{	
+		$www = strstr($content,"watch?v=");
+		$path_parts=explode('&', $www);
+		$path_parts2=explode('=', $path_parts[0]);
+		return $path_parts2[1];
+	}
 
-	public function getCategoryIcon($news = "book", $events = "gift",$ints = "user",$announces="bullhorn",$slides="file",$gallery="picture")
+	public function getCategoryIcon($news = "book", $events = "gift",$ints = "user",$announces="bullhorn",$slides="file",$gallery="picture",$videos="facetime-video")
 	{
 		$category = $this->category;
 
@@ -81,8 +93,11 @@ class ArticleJoin extends Eloquent
 			case 'slides':
 				return $slides;
 				break;
-			case 'gallery':
+			case 'photos':
 				return $gallery;
+				break;
+			case 'videos':
+				return $videos;
 				break;
 			default:
 				return 'user';

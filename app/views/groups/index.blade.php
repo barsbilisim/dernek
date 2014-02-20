@@ -38,7 +38,6 @@
 @section('style')
 <style type="text/css">
 .panel-heading { cursor: pointer; border-color: transparent;}
-.row {margin-top: 20px;}
 </style>
 @stop
 

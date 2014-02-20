@@ -184,22 +184,18 @@ class APIController extends BaseController
 
 	public function getLoadmore()
 	{
-		$articles = ArticleJoin::orderBy('created_at', 'desc')->where('lang', $this->lang)->skip(Input::get('next', 6)*3)->take(3)->get();
+		$articles = ArticleJoin::orderBy('created_at', 'desc')->where('lang', $this->lang)->skip(Input::get('next', 1)*4)->take(4)->get();
 
 		$content = '';
-		foreach($articles as $article):
-			if($img = $article->link())
-			$content .= '<div class="col-sm-4 col-lg-4 news-box-block" style="position:relative;">
-							<div class="thumbnail">
-							<a href="'.$img->big.'" class="news-box-link " rel="prettyPhoto[news]" title="'.$img->desc.'">
-								<img class="news-box-image" src="'.$img->thumb.'">
-							</a>
-							<a href="'.route('categories.articles.show', [$article->category, $article->id]).'"><p>'.$article->title.'</p></a>
-							<p class="thumb_date">'.static::localDate($article->created_at).'</p>
-							</div>
-						</div>';
-		endforeach;
-
+		foreach($articles as $n){
+				$img = $n->link();
+						if($n->category =='news'){$content .= View::make('home.categoryView.news', compact('n','img'));}
+						if($n->category =='ints'){$content .= View::make('home.categoryView.ints', compact('n','img'));}
+						if($n->category =='events'){$content .= View::make('home.categoryView.events', compact('n','img'));}
+						if($n->category =='announces'){$content .= View::make('home.categoryView.announces', compact('n','img'));}
+						if($n->category =='videos'){$content .= View::make('home.categoryView.videos', compact('n','img'));}
+						if($n->category =='photos'){$content .= View::make('home.categoryView.photos', compact('n','img'));}
+					}	
 		return Response::json($content);
 	}
 

@@ -57,7 +57,7 @@ return array(
 			'host'      => '127.0.0.1',
 			'database'  => 'kyrgyz',
 			'username'  => 'root',
-			'password'  => '20deneme',
+			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
